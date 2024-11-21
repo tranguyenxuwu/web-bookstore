@@ -25,8 +25,8 @@ function fetchData() {
 
   // lưu ý : chỉ sử dụng 1 trong 2 cách lấy dữ liệu dưới đây
 
-  // fetch("../index/product.json") // cách 1: lấy dữ liệu từ file JSON
-  fetch('http://localhost/api/getAllBooks') // cách 2: lấy dữ liệu từ API
+  fetch("../index/product.json") // cách 1: lấy dữ liệu từ file JSON
+  // fetch('http://localhost/api/getAllBooks') // cách 2: lấy dữ liệu từ API
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
