@@ -1,0 +1,102 @@
+{
+    "books": [
+      {
+        "image": "/books/tat-den.webp",
+        "type": "Tiểu thuyết",
+        "bookName": "Tắt đèn",
+        "author": "Ngô Tất Tố",
+        "price": "75.000 VNĐ"
+      },
+      {
+        "image": "",
+        "type": "Truyện ngắn",
+        "bookName": "Vợ nhặt",
+        "author": "Kim Lân",
+        "originPrice": "78.000 VNĐ",
+        "price": "45.000 VNĐ"
+      },
+      {
+        "image": "/books/chi-pheo.webp",
+        "type": "Truyện ngắn",
+        "bookName": "Chí Phèo",
+        "author": "Nam Cao",
+        "price": "38.400 VNĐ"
+      },
+      {
+        "image": "/books/truyen-kieu.jpg",
+        "type": "Truyện thơ",
+        "bookName": "Truyện Kiều",
+        "author": "Nguyễn Du",
+        "price": "47.600 VNĐ"
+      },
+      {
+        "image": "/books/so-do.webp",
+        "type": "Tiểu thuyết",
+        "bookName": "Số đỏ",
+        "author": "Vũ Trọng Phụng",
+        "price": "55.200 VNĐ"
+      },
+      {
+        "image": "/books/canh-dong-bat-tan.jpg",
+        "type": "Tiểu thuyết",
+        "bookName": "Cánh đồng bất tận",
+        "author": "Nguyễn Ngọc Tư",
+        "originPrice": "69.700 VNĐ",
+        "price": "63.000 VNĐ"
+      },
+      {
+        "image": "/books/doi-thua.jpg",
+        "type": "Truyện ngắn",
+        "bookName": "Đời thừa",
+        "author": "Nam Cao",
+        "originPrice": "33.600 VNĐ",
+        "price": "29.400 VNĐ"
+      },
+      {
+        "image": "/books/vang-bong-mot-thoi.webp",
+        "type": "Truyện ngắn",
+        "bookName": "Vang bóng một thời",
+        "author": "Nguyễn Tuân",
+        "price": "58.000 VNĐ"
+      },
+      {
+        "image": "/home/cho-toi-xin-mot-ve-di-tuoi-tho.jpg",
+        "type": "Truyện ngắn",
+        "bookName": "Cho tôi xin một vé đi tuổi thơ",
+        "author": "Nguyễn Nhật Ánh",
+        "price": "73.800 VNĐ"
+      },
+      {
+        "image": "/home/cam-on-nguoi-lon.jpg",
+        "type": "Truyện dài",
+        "bookName": "Cảm ơn người lớn",
+        "author": "Nguyễn Nhật Ánh",
+        "price": "220.000 VNĐ"
+      },
+      {
+        "image": "/home/toi-la-beto.jpg",
+        "type": "Truyện ngắn",
+        "bookName": "Tôi là Bêtô",
+        "author": "Nguyễn Nhật Ánh",
+        "originPrice": "67.000 VNĐ",
+        "price": "65.000 VNĐ"
+      },
+      {
+        "image": "/home/toi-thay-hoa-vang-tren-co-xanh.jpg",
+        "type": "Tiểu thuyết",
+        "bookName": "Tôi thấy hoa vàng trên cỏ xanh",
+        "author": "Nguyễn Nhật Ánh",
+        "originPrice": "93.000 VNĐ",
+        "price": "81.000 VNĐ"
+      },
+      {
+        "image": "",
+        "type": "",
+        "bookName": "",
+        "author": "",
+        "originPrice" : "",
+        "price": ""
+      }
+    ]
+  }
+  
