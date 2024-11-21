@@ -3,11 +3,57 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>View Product</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h2>trang view san pham</h2>
+    <header>
+      <h1>Sản phẩm</h1>
+      <a href="../index/index.html" class="back-button">Trang chủ</a>
+    </header>
+    <div class="content-container">
+      <aside class="sidebar">
+        <div class="search-container">
+          <input type="text" class="search-input" placeholder="Tìm kiếm sách, tác giả" />
+          <button class="search-button">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E"
+                alt="Search"/>
+          </button>
+        </div>
+        <div class="categories">
+          <h2>Thể loại</h2>
+          <ul>
+            <li><a href="#" data-type="Tất cả">Tất cả</a></li>
+            <li><a href="#" data-type="truyện ngắn">Truyện ngắn</a></li>
+            <li><a href="#" data-type="tiểu thuyết">Tiểu thuyết</a></li>
+            
+          </ul>
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="results-info">
+          <p>Showing 1-8 of <span id="total-results">xx</span> results</p>
+          <div class="sort-container">
+            <label for="sort-options">Sắp xếp:</label>
+            <select id="sort-options">
+              <option value="name-asc">A-Z</option>
+              <option value="name-desc">Z-A</option>
+              <option value="price-asc">Giá thấp đến cao</option>
+              <option value="price-desc">Giá cao đến thấp</option>
+            </select>
+          </div>
+        </div>
+        <div class="product-container">
+          <!-- Product details will be dynamically inserted here -->
+        </div>
+        <div class="pagination">
+          <!-- Pagination buttons will be dynamically inserted here -->
+        </div>
+      </main>
+    </div>
+    <footer>
+      <p>&copy; 2023 Book Store. All rights reserved.</p>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>

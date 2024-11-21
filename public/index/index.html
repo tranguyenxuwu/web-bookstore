@@ -19,9 +19,9 @@
               class="search-input"
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
             />
-            <button class="search-button">
+            <button class="search-button" onclick="searchBooks()">
               <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E%3C/svg%3E"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E"
                 alt="Search"
               />
             </button>
@@ -42,7 +42,7 @@
               />
               <span>Giỏ Hàng</span>
             </a>
-            <a href="#" class="nav-icon">
+            <a href="../login/login.html" class="nav-icon">
               <img
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E"
                 alt="Account"
@@ -103,10 +103,16 @@
     <div class="flash-sale-container">
       <div class="timer">
         <span id="timer">01:09:44</span>
-        <a href="#">Xem tất cả</a>
+        <a href="../store/store.html">Xem tất cả</a>
       </div>
       <div class="products"></div>
     </div>
     <script src="script.js"></script>
+    <script>
+      function searchBooks() {
+        const query = document.querySelector('.search-input').value;
+        window.location.href = `../store/store.html?search=${encodeURIComponent(query)}`;
+      }
+    </script>
   </body>
 </html>
