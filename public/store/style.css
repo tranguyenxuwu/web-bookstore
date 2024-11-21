@@ -1,40 +1,84 @@
-/* Import styles from index.css */
-@import url('../index/style.css');
+/* đã chuyển css sang standalone file */
 
-/* Additional styles for the store page */
-body {
-  background-color: #f9f9f9;
-  font-family: Arial, sans-serif;
-  color: #333;
+* {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
-header {
+body {
+  background-color: #f0f0f0;
+}
+
+.navbar {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px 20px;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
   align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-bottom: 1px solid #ddd;
+  justify-content: space-between;
 }
 
-header h1 {
-  margin: 0;
-  font-size: 2em;
-  color: #333;
+.logo {
+  width: 180px;
 }
 
-header .back-button {
+.search-container {
+  flex: 1;
+  max-width: 600px;
+  margin: 0 20px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  padding: 10px 40px 10px 15px;
+  border: 2px solid #e60f1e;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.search-button {
   position: absolute;
-  left: 20px;
-  text-decoration: none;
-  color: #3498db;
-  transition: color 0.3s ease;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 50px;
+  background: #e60f1e;
+  border: none;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
 }
 
-header .back-button:hover {
-  color: #2980b9;
+.search-button img {
+  width: 20px;
+  filter: invert(1);
+}
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.nav-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 12px;
+}
+
+.nav-icon img {
+  width: 24px;
+  height: 24px;
+  margin-bottom: 4px;
 }
 
 .content-container {
@@ -171,45 +215,6 @@ header .back-button:hover {
 
 .categories a:hover {
   color: #2980b9;
-}
-
-.search-container {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-  align-items: center;
-}
-
-.search-input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  
-  outline: none;
-  transition: border-color 0.3s ease;
-  width: calc(100% - 120px); /* Adjust width to make the search input longer */
-}
-
-.search-input:focus {
-  border-color: #3498db;
-}
-
-.search-button {
-  background-color: aqua;
-  border: none;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.search-button img {
-  width: 20px;
-  height: 20px;
-}
-
-.search-button:hover {
-  background-color: #2980b9;
 }
 
 .no-results {

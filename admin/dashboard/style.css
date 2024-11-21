@@ -1,0 +1,208 @@
+/* Tổng thể cho bảng */
+.table-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+    overflow-x: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Bảng và các hàng */
+.bookTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    font-size: 30px;
+}
+
+/* Header của bảng */
+thead th {
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 10px;
+    text-align: left;
+    border-bottom: 2px solid #ddd;
+    position: sticky;  /* Cố định phần tiêu đề */
+    top: 0;            /* Đảm bảo tiêu đề luôn ở trên cùng */
+    z-index: 1;        /* Đảm bảo tiêu đề luôn ở trên các hàng dữ liệu */
+    background-color: #fff; /* Nền của tiêu đề để dễ nhìn */
+    font-size: 20px;
+}
+
+/* Hàng và ô trong bảng */
+tbody td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+/* Căn chỉnh các cột */
+tbody td:nth-child(1) {
+    text-align: center; /* Cột ID */
+    width: 5%;
+}
+
+tbody td:nth-child(2) {
+    text-align: left; /* Cột Tên sách */
+    width: 25%;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+tbody td:nth-child(3),
+tbody td:nth-child(4) {
+    text-align: left; /* Cột Thể loại và Tác giả */
+    width: 20%;
+    word-wrap: break-word;
+    white-space: normal;
+}
+
+tbody td:nth-child(5) {
+    text-align: left; /* Cột Giá */
+    width: 15%;
+    font-weight: bold;
+    color: green;
+}
+
+tbody td:nth-child(6) {
+    text-align: center; /* Cột Hành động */
+    width: 10%;
+}
+tbody td:nth-child(7) {
+    text-align: center; /* Cột Hành động */
+    width: 10%;
+}
+tbody td:nth-child(8) {
+    text-align: center; /* Cột Hành động */
+    width: 10%;
+}
+
+button.edit-btn {
+    padding: 5px 10px;
+    font-size: 14px;
+    color: white;
+    background-color: #007BFF;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Đổi màu hàng khi di chuột */
+tbody tr:hover {
+    background-color: #f9f9f9;
+}
+
+/* Flex container cho các nút hành động */
+td .action-buttons {
+    display: flex;         /* Chuyển đổi thẻ td thành flex container */
+    gap: 10px;             /* Khoảng cách giữa các nút */
+    justify-content: center; /* Căn giữa các nút */
+}
+
+/* Style cho các nút */
+td .action-buttons button {
+    padding: 5px 10px;     /* Thêm khoảng cách bên trong nút */
+    cursor: pointer;       /* Thêm con trỏ khi hover vào nút */
+    border: 1px solid blue; /* Viền nhẹ cho các nút */
+    background-color:brown;
+    border-radius: 5px;     /* Bo tròn góc cho nút */
+}
+
+td .action-buttons button:hover {
+    background-color: #ddd; /* Màu nền thay đổi khi hover */
+}
+
+/* Căn giữa hình ảnh trong cột */
+td img {
+    display: block;             /* Biến hình ảnh thành block để có thể căn giữa */
+    margin-left: auto;          /* Căn trái */
+    margin-right: auto;         /* Căn phải */
+    max-width: 100%;            /* Giới hạn chiều rộng hình ảnh */
+    height: auto;               /* Đảm bảo tỷ lệ hình ảnh không bị méo */
+    object-fit: cover;          /* Đảm bảo hình ảnh được cắt vừa với kích thước mà không bị bóp méo */
+    font-size: 20px;
+    width: 100px;
+}
+
+/* Nút Thêm ở đầu bảng */
+.add-book-button {
+    margin-bottom: 20px;    /* Khoảng cách giữa nút và bảng */
+    text-align: left;     /* Căn giữa nút */
+}
+
+.add-book-button button {
+    padding: 10px 20px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-book-button button:hover {
+    background-color: #45a049;
+}
+
+/* Đảm bảo bảng hiển thị đúng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* Các định dạng khác cho bảng */
+th, td, tr {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+/* Căn giữa tiêu đề cột trong bảng */
+th {
+    text-align: center;
+    padding: 10px;
+}
+
+/* Cố định phần tiêu đề của bảng khi cuộn trang */
+thead {
+    position: sticky;
+    top: 0;                /* Đảm bảo tiêu đề cố định ở trên cùng */
+    background-color: #fff; /* Cố định tiêu đề có nền trắng để dễ nhìn */
+    z-index: 1;            /* Đảm bảo tiêu đề luôn ở trên các hàng dữ liệu */
+}
+
+/* Đảm bảo bảng hiển thị đúng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+/* Tùy chỉnh cho các nút */
+.action-buttons button {
+    padding: 5px 10px;
+    margin: 5px;
+    cursor: pointer;
+}
+/* Nút Xóa */
+.delete-btn {
+    background-color: red;  /* Màu nền đỏ cho nút Xóa */
+    color: white;           /* Chữ màu trắng */
+    padding: 5px 10px;      /* Khoảng cách bên trong nút */
+    border: none;           /* Không có viền */
+    border-radius: 3px;     /* Bo góc cho nút */
+    cursor: pointer;        /* Con trỏ dạng tay khi hover vào nút */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu nền khi hover */
+}
+
+/* Hiệu ứng hover cho nút Xóa */
+button.delete-btn:hover {
+    background-color: darkred;  /* Màu nền thay đổi khi hover (đỏ đậm) */
+}

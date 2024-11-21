@@ -79,19 +79,6 @@ body {
   margin-bottom: 4px;
 }
 
-.language-select {
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.language-select img {
-  width: 24px;
-  height: 16px;
-}
-
 .carousel-container {
   width: 100%;
   max-width: 1200px;

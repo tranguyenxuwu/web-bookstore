@@ -21,34 +21,71 @@ function updateURL() {
 
 // Lấy dữ liệu từ JSON
 function fetchData() {
-  fetch('../index/product.json')
-    .then(response => response.json())
-    .then(data => {
-      filteredBooks = data.books;
-      if (searchQuery) {
-        filteredBooks = filteredBooks.filter(book =>
-          book.bookName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          book.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          (book.publisher && book.publisher.toLowerCase().includes(searchQuery.toLowerCase()))
-        );
-      } else if (currentType && currentType.toLowerCase() !== 'tất cả') {
-        filteredBooks = filteredBooks.filter(book => book.type.toLowerCase() === currentType.toLowerCase());
+  document.querySelector('.product-container').innerHTML = '<p class="loading">Đang tải...</p>';
+
+  // lưu ý : chỉ sử dụng 1 trong 2 cách lấy dữ liệu dưới đây
+
+  // fetch("../index/product.json") // cách 1: lấy dữ liệu từ file JSON
+  fetch('http://localhost/api/getAllBooks') // cách 2: lấy dữ liệu từ API
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
       }
+      return response.json();
+    })
+    .then(response => {
+      // Extract data from response structure
+      const data = response.data || [];
+      filteredBooks = [...data];
+
+      // Apply search filters
+      if (searchQuery) {
+        filteredBooks = filteredBooks.filter(book => {
+          const titleMatch = book.tieu_de?.toLowerCase().includes(searchQuery.toLowerCase());
+          const authorMatch = book.tac_gias?.some(author => 
+            author.ten_tac_gia?.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          const publisherMatch = book.nha_xuat_ban?.ten_nha_xuat_ban?.toLowerCase().includes(searchQuery.toLowerCase());
+          const genreMatch = book.the_loais?.some(genre =>
+            genre.ten_the_loai?.toLowerCase().includes(searchQuery.toLowerCase())
+          );
+          
+          return titleMatch || authorMatch || publisherMatch || genreMatch;
+        });
+      }
+
+      // Apply category filter
+      if (currentType && currentType.toLowerCase() !== 'tất cả') {
+        filteredBooks = filteredBooks.filter(book => 
+          book.the_loais?.some(genre => 
+            genre.ten_the_loai?.toLowerCase() === currentType.toLowerCase()
+          )
+        );
+      }
+
+      // Update pagination
       totalItems = filteredBooks.length;
       totalPages = Math.ceil(totalItems / itemsPerPage);
+      currentPage = Math.min(currentPage, totalPages);
+      
       document.getElementById('total-results').textContent = totalItems;
 
-      // Hiển thị nếu không tìm thấy sản phẩm
       if (totalItems === 0) {
-        document.querySelector('.product-container').innerHTML = '<p class="no-results">Không tìm thấy sản phẩm phù hợp.</p>';
+        document.querySelector('.product-container').innerHTML = 
+          '<p class="no-results">Không tìm thấy sản phẩm.</p>';
         return;
       }
 
       displayPage(filteredBooks);
       updatePagination();
+      updateURL();
     })
-    .catch(error => console.error('Error fetching book data:', error));
-}
+    .catch(error => {
+      console.error('Error:', error);
+      document.querySelector('.product-container').innerHTML = 
+        '<p class="error">Đã xảy ra lỗi khi tải dữ liệu. Vui lòng thử lại sau.</p>';
+    });
+  } 
 
 // Hiển thị trang
 function displayPage(items) {
@@ -63,56 +100,42 @@ function displayPage(items) {
     const productElement = document.createElement('div');
     productElement.classList.add('product');
 
+    // Create book image
     const imageElement = document.createElement('img');
-    imageElement.alt = book.bookName;
-
-    if (book.image) {
-      imageElement.src = book.image;
-    } else {
-      imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
-      imageElement.alt = 'Placeholder image';
-    }
-
+    imageElement.alt = book.tieu_de;
+    // Default placeholder image if no image provided
+    imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
     imageElement.onerror = () => {
       imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
     };
 
-    const productInfoElement = document.createElement('div');
-    productInfoElement.classList.add('product-info');
+    // Create book info container
+    const infoContainer = document.createElement('div');
+    infoContainer.classList.add('product-info');
 
+    // Add title
     const titleElement = document.createElement('h3');
-    titleElement.textContent = book.bookName;
+    titleElement.textContent = book.tieu_de;
+    infoContainer.appendChild(titleElement);
 
-    const typeElement = document.createElement('p');
-    typeElement.textContent = `Thể loại: ${book.type}`;
-
-    const authorElement = document.createElement('p');
-    authorElement.textContent = `Tác giả: ${book.author}`;
-
-    const priceElement = document.createElement('div');
-    priceElement.classList.add('price');
-
-    const saleElement = document.createElement('span');
-    saleElement.classList.add('sale-price');
-    saleElement.textContent = `${book.price} VND`;
-
-    if (book.originPrice) {
-      const originPriceElement = document.createElement('span');
-      originPriceElement.classList.add('original-price');
-      originPriceElement.textContent = `${book.originPrice} VND`;
-      priceElement.appendChild(originPriceElement);
+    // Add price
+    if (book.gia_tien) {
+      const priceElement = document.createElement('p');
+      priceElement.classList.add('price');
+      priceElement.textContent = new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(book.gia_tien);
+      infoContainer.appendChild(priceElement);
     }
 
-    priceElement.appendChild(saleElement);
-
-    productInfoElement.appendChild(titleElement);
-    productInfoElement.appendChild(typeElement);
-    productInfoElement.appendChild(authorElement);
-    productInfoElement.appendChild(priceElement);
-
-    productElement.appendChild(imageElement);
-    productElement.appendChild(productInfoElement);
-
+    // Add book details link
+    const linkElement = document.createElement('a');
+    linkElement.href = `/book-detail.html?id=${book.ma_sach}`;
+    linkElement.appendChild(imageElement);
+    
+    productElement.appendChild(linkElement);
+    productElement.appendChild(infoContainer);
     productContainer.appendChild(productElement);
   });
 }
@@ -122,7 +145,52 @@ function updatePagination() {
   const paginationContainer = document.querySelector('.pagination');
   paginationContainer.innerHTML = '';
 
-  for (let i = 1; i <= totalPages; i++) {
+  // Add previous button
+  const prevButton = document.createElement('button');
+  prevButton.textContent = '←';
+  prevButton.classList.add('page-button', 'nav-button');
+  prevButton.disabled = currentPage === 1;
+  prevButton.addEventListener('click', () => {
+    if (currentPage > 1) {
+      currentPage--;
+      updateURL();
+      displayPage(filteredBooks);
+      updatePagination();
+    }
+  });
+  paginationContainer.appendChild(prevButton);
+
+  // Calculate page range to show
+  const maxVisiblePages = 5;
+  let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+  // Adjust start if end is maxed out
+  startPage = Math.max(1, endPage - maxVisiblePages + 1);
+
+  // Add first page if needed
+  if (startPage > 1) {
+    const firstButton = document.createElement('button');
+    firstButton.textContent = '1';
+    firstButton.classList.add('page-button');
+    firstButton.addEventListener('click', () => {
+      currentPage = 1;
+      updateURL();
+      displayPage(filteredBooks);
+      updatePagination();
+    });
+    paginationContainer.appendChild(firstButton);
+
+    if (startPage > 2) {
+      const ellipsis = document.createElement('span');
+      ellipsis.textContent = '...';
+      ellipsis.classList.add('ellipsis');
+      paginationContainer.appendChild(ellipsis);
+    }
+  }
+
+  // Add page numbers
+  for (let i = startPage; i <= endPage; i++) {
     const pageButton = document.createElement('button');
     pageButton.textContent = i;
     pageButton.classList.add('page-button');
@@ -137,6 +205,42 @@ function updatePagination() {
     });
     paginationContainer.appendChild(pageButton);
   }
+
+  // Add last page if needed
+  if (endPage < totalPages) {
+    if (endPage < totalPages - 1) {
+      const ellipsis = document.createElement('span');
+      ellipsis.textContent = '...';
+      ellipsis.classList.add('ellipsis');
+      paginationContainer.appendChild(ellipsis);
+    }
+
+    const lastButton = document.createElement('button');
+    lastButton.textContent = totalPages;
+    lastButton.classList.add('page-button');
+    lastButton.addEventListener('click', () => {
+      currentPage = totalPages;
+      updateURL();
+      displayPage(filteredBooks);
+      updatePagination();
+    });
+    paginationContainer.appendChild(lastButton);
+  }
+
+  // Add next button
+  const nextButton = document.createElement('button');
+  nextButton.textContent = '→';
+  nextButton.classList.add('page-button', 'nav-button');
+  nextButton.disabled = currentPage === totalPages;
+  nextButton.addEventListener('click', () => {
+    if (currentPage < totalPages) {
+      currentPage++;
+      updateURL();
+      displayPage(filteredBooks);
+      updatePagination();
+    }
+  });
+  paginationContainer.appendChild(nextButton);
 }
 
 // Tìm kiếm
