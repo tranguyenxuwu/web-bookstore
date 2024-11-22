@@ -43,30 +43,122 @@ function addToCart(productId) {
   alert('Đã thêm vào giỏ hàng!');
 }
 
-function fetchRelatedProducts(productId) {
-  fetch('../index/related_products.json')
+function fetchBooksInSeries(bookId) {
+  fetch('./product.json')
     .then(response => response.json())
     .then(data => {
-      const relatedProducts = data.data.filter(item => item.related_to == productId);
-      displayRelatedProducts(relatedProducts);
+      const currentBookSeries = data.bo_sachs.find(series => 
+        series.pivot.ma_sach === bookId
+      );
+      
+      if (!currentBookSeries) {
+        return []; // Book not in any series
+      }
+
+      // Get all books in same series
+      const seriesBooks = data.bo_sachs
+        .filter(series => series.ma_bo_sach === currentBookSeries.ma_bo_sach)
+        .filter(series => series.pivot.ma_sach !== bookId);
+      
+      displaySeriesBooks(seriesBooks);
     })
-    .catch(error => console.error('Error fetching related products:', error));
+    .catch(error => {
+      console.error('Error fetching books in series:', error);
+      const container = document.querySelector('.product-in-series');
+      container.innerHTML = '<div class="error-message">Không thể tải sách cùng bộ</div>';
+    });
 }
 
-function displayRelatedProducts(products) {
-  const relatedProductsContainer = document.getElementById('related-products');
-  relatedProductsContainer.innerHTML = '';
-  products.forEach(product => {
-    const productElement = document.createElement('div');
-    productElement.className = 'related-product';
-    productElement.innerHTML = `
-      <img src="${product.hinh_anh}" alt="${product.tieu_de}">
-      <h3>${product.tieu_de}</h3>
-      <p>${new Intl.NumberFormat('vi-VN', {
-        style: 'currency',
-        currency: 'VND'
-      }).format(product.gia_tien)}</p>
-    `;
-    relatedProductsContainer.appendChild(productElement);
-  });
+function displaySeriesBooks(books) {
+  const container = document.querySelector('.product-in-series');
+  
+  if (!books.length) {
+    container.innerHTML = '<p>Không có sách cùng bộ</p>';
+    return;
+  }
+
+  container.innerHTML = books.map(book => `
+    <div class="product-card">
+      <img src="${book.image || '#'}" alt="${book.ten_bo_sach}" />
+      <h3>${book.ten_bo_sach}</h3>
+      <a href="detail_product.html?id=${book.pivot.ma_sach}" class="view-details">
+        Xem chi tiết
+      </a>
+    </div>
+  `).join('');
 }
+
+function fetchRelatedProducts(bookId) {
+  fetch('./product.json')
+    .then(response => response.json())
+    .then(response => {
+      // Check response structure
+      if (!response.status === 'success' || !Array.isArray(response.data)) {
+        throw new Error('Invalid data structure');
+      }
+
+      // Find current book
+      const currentBook = response.data.find(book => book.ma_sach === bookId);
+      if (!currentBook) {
+        throw new Error('Book not found');
+      }
+
+      // Get current book's category
+      const currentBookCategory = currentBook.the_loais?.[0]?.ma_the_loai;
+      if (!currentBookCategory) {
+        throw new Error('Book category not found');
+      }
+
+      // Get related books from same category
+      const relatedBooks = response.data
+        .filter(book => 
+          book.the_loais?.some(cat => cat.ma_the_loai === currentBookCategory) &&
+          book.ma_sach !== bookId
+        )
+        .slice(0, 4);
+
+      displayRelatedProducts(relatedBooks);
+    })
+    .catch(error => {
+      console.error('Error fetching related products:', error);
+      const container = document.querySelector('.product-in-series');
+      container.innerHTML = '<div class="error-message">Không thể tải sách liên quan</div>';
+    });
+}
+
+// Update event listener to call both functions
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const bookId = parseInt(urlParams.get('id'));
+  if (bookId) {
+    fetchBooksInSeries(bookId);
+    fetchRelatedProducts(bookId);
+  }
+});
+
+// Update display function
+function displayRelatedProducts(products) {
+  const container = document.querySelector('.product-in-series');
+  
+  if (!products.length) {
+    container.innerHTML = '<p>Không tìm thấy sách liên quan</p>';
+    return;
+  }
+
+  container.innerHTML = products.map(product => `
+    <div class="product-series">
+      <a href="detail_product.html?id=${product.ma_sach}">
+        <img 
+          alt="${product.tieu_de}"
+          src="${product.image_url || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg'}"
+        />
+      </a>
+      <div class="product-series-info">
+        <h3>${product.tieu_de}</h3>
+        <p class="price">${Number(product.gia_tien).toLocaleString('vi-VN')}đ</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+

@@ -1,0 +1,2162 @@
+{
+  "status": "success",
+  "data": [
+    {
+      "ma_sach": 6,
+      "tieu_de": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-03-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "12990.00",
+      "so_tap": 1,
+      "gioi_thieu": "“И наменятоже обрати внимание”\n“Hở, gì thế?”\n“Có gì đâu? Tôi nói ‘Cái tên này đúng là đồ ngốc’ ý mà.”\n“Cậu thôi cái trò mắng người ta bằng tiếng Nga đi!?”\n\nArya - cô nàng xinh đẹp tuyệt trần có mái tóc bạch kim ngồi cạnh tôi - đang nở một nụ cười đắc thắng...\n\nNhưng sự thật thì, câu tiếng Nga cô ấy vừa nói có nghĩa là [Hãy để ý đến tôi đi] cơ!\n\nTôi - Kuze Masachika - là người có khả năng nghe hiểu tiếng Nga thông thạo như người bản xứ. Nhưng không hề hay biết điều đó, cô nàng Arya hôm nay vẫn tiếp tục thể hiện những cảm xúc rất ngọt ngào bằng tiếng Nga khiến tôi không thể ngừng cười!?\n\nCâu chuyện tình thanh xuân hài hước của tôi với cô nàng nữ sinh trung học gốc Nga hoàn hảo đã bắt đầu như thế...",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 2,
+          "ten_tac_gia": " Sunsunsun",
+          "pivot": {
+            "ma_sach": 6,
+            "ma_tac_gia": 2
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 6,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 6,
+            "ma_the_loai": 3
+          }
+        },
+        {
+          "ma_the_loai": 4,
+          "ten_the_loai": "Romance",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 6,
+            "ma_the_loai": 4
+          }
+        },
+        {
+          "ma_the_loai": 5,
+          "ten_the_loai": "Comedy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 6,
+            "ma_the_loai": 5
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 2,
+          "ten_bo_sach": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+          "pivot": {
+            "ma_sach": 6,
+            "ma_bo_sach": 2
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 7,
+      "tieu_de": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-06-20T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "13500.00",
+      "so_tap": 2,
+      "gioi_thieu": "“И наменятоже обрати внимание”\n“Th-Thích á? Mình thích cậu ta? Không phải, không phải đâuuuu!”\n“Cái câu ‘Sẽ làm chỗ dựa’ là ý gì chứ? Aaa ~ đau lòng quá đi tôi ơi!”\nCó một bí mật vào buổi hoàng hôn lúc tan học. Cả Arya và Masachika đều đang cảm thấy phiền muộn, nhưng họ đã hứa với nhau là sẽ ghép cặp và cùng chiến đấu đến cùng trong kì bình bầu của Hội học sinh.\nChuẩn bị cho màn đối đầu với Suou Yuki - ứng cử viên có năng lực áp đảo cho chức hội trưởng nhiệm kì tiếp theo - Arya và Masachika bắt đầu hội nghị tác chiến...\n“Nào... giờ bàn chuyện bỏ phiếu bầu hội trưởng thôi.” “...Круто ❤️”\n(Hự!) Cậu đang bị rung động bởi lời thì thầm ngọt ngào bằng tiếng Nga ấy sao!?\nĐây là Tập 2 của bộ truyện thanh xuân lãng mạn và hài hước về cô nàng nữ sinh trung học gốc Nga xinh đẹp thích che giấu sự ngọt ngào của mình sau những lời trêu ghẹo!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 2,
+          "ten_tac_gia": " Sunsunsun",
+          "pivot": {
+            "ma_sach": 7,
+            "ma_tac_gia": 2
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 7,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 4,
+          "ten_the_loai": "Romance",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 7,
+            "ma_the_loai": 4
+          }
+        },
+        {
+          "ma_the_loai": 5,
+          "ten_the_loai": "Comedy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 7,
+            "ma_the_loai": 5
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 2,
+          "ten_bo_sach": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+          "pivot": {
+            "ma_sach": 7,
+            "ma_bo_sach": 2
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 8,
+      "tieu_de": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-09-25T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "14000.00",
+      "so_tap": 3,
+      "gioi_thieu": "“И наменятоже обрати внимание”\nNổi lên sau chiến thắng trong cuộc thi hùng biện, đôi bạn đồng hành Arya và Masachika nhận được vô số lời khen ngợi từ các bạn cùng lớp. Họ đồng tâm quyết chí hướng đến kì bầu cử đang ở phía trước! Cùng lúc đó, Masachika phải nỗ lực học hành để chuẩn bị cho kì thi cuối kì, nhưng duyên nợ không dễ xóa nhòa với gia tộc Suou đã dẫn đến những bước ngoặt không thể ngờ tới...\n“Tôi được Yuki nhờ đến chăm bệnh cho cậu.”\n“...” [Nói dối đó] (Há!)\nKhi Masachika bị ốm, vì lo lắng không yên, Arya đã tới nhà Masachika thăm bệnh!? Sự chăm sóc tận tâm nhưng vụng về của nàng công chúa kiêu ngạo không khỏi khiến cậu phải bật cười.\nĐây là Tập 3 của bộ truyện thanh xuân lãng mạn và hài hước về cô nàng nữ sinh trung học gốc Nga xinh đẹp thích che giấu sự ngọt ngào của mình sau những lời trêu ghẹo!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 2,
+          "ten_tac_gia": " Sunsunsun",
+          "pivot": {
+            "ma_sach": 8,
+            "ma_tac_gia": 2
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 8,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 4,
+          "ten_the_loai": "Romance",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 8,
+            "ma_the_loai": 4
+          }
+        },
+        {
+          "ma_the_loai": 5,
+          "ten_the_loai": "Comedy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 8,
+            "ma_the_loai": 5
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 2,
+          "ten_bo_sach": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+          "pivot": {
+            "ma_sach": 8,
+            "ma_bo_sach": 2
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 9,
+      "tieu_de": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-12-30T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "14500.00",
+      "so_tap": 4,
+      "gioi_thieu": "Sau lễ bế giảng, Masachika và Arya bắt đầu gọi nhau bằng tên. Trong lúc cả hai vẫn đang lúng túng và xấu hổ khi đối diện với nhau, chuyến tập huấn của Hội học sinh mà cả nhóm hằng mong đợi đã bắt đầu! Giờ đây, các thành viên Hội học sinh đang hết mình tận hưởng thanh xuân rực rỡ dưới pháo hoa của đêm hội mùa hè, bãi biển tư nhân và căn biệt thự sang trọng. Trước khung cảnh lãng mạn ở khu nghỉ dưỡng cùng cảm giác hưng phấn khác hẳn ngày thường, Arya nở nụ cười khiêu khích.\n“Thế, Masachika sẽ hôn ở đâu đây?”\nĐây là Tập 4 của bộ truyện thanh xuân lãng mạn và hài hước về cô nàng nữ sinh trung học gốc Nga xinh đẹp thích che giấu sự ngọt ngào của mình sau những lời trêu ghẹo!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 2,
+          "ten_tac_gia": " Sunsunsun",
+          "pivot": {
+            "ma_sach": 9,
+            "ma_tac_gia": 2
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 9,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 4,
+          "ten_the_loai": "Romance",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 9,
+            "ma_the_loai": 4
+          }
+        },
+        {
+          "ma_the_loai": 5,
+          "ten_the_loai": "Comedy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 9,
+            "ma_the_loai": 5
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 2,
+          "ten_bo_sach": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+          "pivot": {
+            "ma_sach": 9,
+            "ma_bo_sach": 2
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 10,
+      "tieu_de": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-03-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "15000.00",
+      "so_tap": 5,
+      "gioi_thieu": "“И наменятоже обрати внимание”\n“… Là chị đây. Saa.”\nCuộc hội ngộ với mối tình đầu cuối cùng cũng đến. Nhận ra Mariya chính là “cô bé năm đó”, Masachika không thể ngừng nghĩ về cô ấy.\nSau kì nghỉ hè đáng nhớ, Học viện Seirei chính thức bước vào học kì hai!\nĐể chuẩn bị cho lễ hội trường vốn có tác động lớn đến cuộc bầu cử, Masachika đã cố gắng giúp đỡ Arya, nhưng trái tim cậu lại bị khuấy động khi thấy cô dần thu hẹp khoảng cách với các bạn cùng lớp.\n“Không lẽ… cậu đang ghen à?”\nNhìn Alisa nở nụ cười tinh nghịch, cậu lại càng thấy rung động hơn...\nBên cạnh những thay đổi trong chuyện tình với cô nữ sinh gốc Nga xinh đẹp, cuộc bầu cử Hội trưởng cũng có những diễn biến mới?!\nĐây là Tập 5 của bộ truyện thanh xuân lãng mạn và hài hước về cô nàng nữ sinh trung học gốc Nga xinh đẹp thích che giấu sự ngọt ngào của mình sau những lời trêu ghẹo!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 2,
+          "ten_tac_gia": " Sunsunsun",
+          "pivot": {
+            "ma_sach": 10,
+            "ma_tac_gia": 2
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 10,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 4,
+          "ten_the_loai": "Romance",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 10,
+            "ma_the_loai": 4
+          }
+        },
+        {
+          "ma_the_loai": 5,
+          "ten_the_loai": "Comedy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 10,
+            "ma_the_loai": 5
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 2,
+          "ten_bo_sach": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+          "pivot": {
+            "ma_sach": 10,
+            "ma_bo_sach": 2
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 11,
+      "tieu_de": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-01-10T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "10000.00",
+      "so_tap": 4.5,
+      "gioi_thieu": "“И наменятоже обрати внимание”\nChuyến tập huấn mùa hè báo hiệu cho sự khởi đầu của một tình yêu mới. Thế nhưng, mùa hè của nhóm Arya vẫn chưa kết thúc! Thuật thôi miên của Yuki đã biến Masachika trở thành một anh chàng đẹp trai rất cưng chiều người yêu? Màn “va chạm” bất ngờ khiến em gái và cô hầu cận suýt thì ngất xỉu! Ở quán ramen nơi Arya đang tu luyện để ăn món cực cay, có một nhân vật bất ngờ xuất hiện? Arya bị cuốn vào đam mê cho em gái mặc đồ bơi dễ thương của cô chị và trở thành búp bê thử đồ!? Ấn bản ngoại truyện xoay quanh mùa hè rực rỡ của các thành viên Hội học sinh đã chính thức ra mắt!\n[Liệu mình có thể gặp lại Saa được không...]\nVà rồi, cảm xúc của cô gái đang chờ đợi chàng trai định mệnh tại nơi hẹn ước càng trở nên rõ ràng vào lúc này.",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 2,
+          "ten_tac_gia": " Sunsunsun",
+          "pivot": {
+            "ma_sach": 11,
+            "ma_tac_gia": 2
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 11,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 4,
+          "ten_the_loai": "Romance",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 11,
+            "ma_the_loai": 4
+          }
+        },
+        {
+          "ma_the_loai": 5,
+          "ten_the_loai": "Comedy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 11,
+            "ma_the_loai": 5
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 2,
+          "ten_bo_sach": "Arya bàn bên thi thoảng trêu ghẹo tôi bằng tiếng Nga",
+          "pivot": {
+            "ma_sach": 11,
+            "ma_bo_sach": 2
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 2,
+      "tieu_de": "Bocchi the Rock!",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-01-23T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "15000.00",
+      "so_tap": 2,
+      "gioi_thieu": "Goto Hitori là một nữ sinh hướng nội. Giao tiếp kém, học cũng kém, tay chân lại vụng về, nên suốt thời cấp 2 chẳng thể kết bạn với ai, chỉ có cây guitar bầu bạn. Khi lên lớp 10, một ngày nọ, cô nàng tình cờ gia nhập Ban nhạc Đoàn Kết, lấy nghệ danh là Bocchi và trở thành một tay guitar khuấy đảo nền nhạc Rock nước Nhật!? Nhưng trước hết, Bocchi phải nhìn được vào mắt các thành viên trong ban nhạc đã!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 1,
+          "ten_tac_gia": "Hamazi Aki",
+          "pivot": {
+            "ma_sach": 2,
+            "ma_tac_gia": 1
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 1,
+          "ten_the_loai": "Âm Nhạc",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 2,
+            "ma_the_loai": 1
+          }
+        },
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 2,
+            "ma_the_loai": 2
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 1,
+          "ten_bo_sach": "Bocchi the Rock!",
+          "pivot": {
+            "ma_sach": 2,
+            "ma_bo_sach": 1
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 3,
+      "tieu_de": "Bocchi the Rock!",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-05-21T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "12800.00",
+      "so_tap": 3,
+      "gioi_thieu": "Goto Hitori là một nữ sinh hướng nội. Giao tiếp kém, học cũng kém, tay chân lại vụng về, nên suốt thời cấp 2 chẳng thể kết bạn với ai, chỉ có cây guitar bầu bạn. Khi lên lớp 10, một ngày nọ, cô nàng tình cờ gia nhập Ban nhạc Đoàn Kết, lấy nghệ danh là Bocchi và trở thành một tay guitar khuấy đảo nền nhạc Rock nước Nhật!? Nhưng trước hết, Bocchi phải nhìn được vào mắt các thành viên trong ban nhạc đã!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 1,
+          "ten_tac_gia": "Hamazi Aki",
+          "pivot": {
+            "ma_sach": 3,
+            "ma_tac_gia": 1
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 1,
+          "ten_the_loai": "Âm Nhạc",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 3,
+            "ma_the_loai": 1
+          }
+        },
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 3,
+            "ma_the_loai": 2
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 1,
+          "ten_bo_sach": "Bocchi the Rock!",
+          "pivot": {
+            "ma_sach": 3,
+            "ma_bo_sach": 1
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 4,
+      "tieu_de": "Bocchi the Rock!",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-08-27T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "13950.00",
+      "so_tap": 4,
+      "gioi_thieu": "Goto Hitori là một nữ sinh hướng nội. Giao tiếp kém, học cũng kém, tay chân lại vụng về, nên suốt thời cấp 2 chẳng thể kết bạn với ai, chỉ có cây guitar bầu bạn. Khi lên lớp 10, một ngày nọ, cô nàng tình cờ gia nhập Ban nhạc Đoàn Kết, lấy nghệ danh là Bocchi và trở thành một tay guitar khuấy đảo nền nhạc Rock nước Nhật!? Nhưng trước hết, Bocchi phải nhìn được vào mắt các thành viên trong ban nhạc đã!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 1,
+          "ten_tac_gia": "Hamazi Aki",
+          "pivot": {
+            "ma_sach": 4,
+            "ma_tac_gia": 1
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 1,
+          "ten_the_loai": "Âm Nhạc",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 4,
+            "ma_the_loai": 1
+          }
+        },
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 4,
+            "ma_the_loai": 2
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 1,
+          "ten_bo_sach": "Bocchi the Rock!",
+          "pivot": {
+            "ma_sach": 4,
+            "ma_bo_sach": 1
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 5,
+      "tieu_de": "Bocchi the Rock!",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-11-19T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "14990.00",
+      "so_tap": 5,
+      "gioi_thieu": "Goto Hitori là một nữ sinh hướng nội. Giao tiếp kém, học cũng kém, tay chân lại vụng về, nên suốt thời cấp 2 chẳng thể kết bạn với ai, chỉ có cây guitar bầu bạn. Khi lên lớp 10, một ngày nọ, cô nàng tình cờ gia nhập Ban nhạc Đoàn Kết, lấy nghệ danh là Bocchi và trở thành một tay guitar khuấy đảo nền nhạc Rock nước Nhật!? Nhưng trước hết, Bocchi phải nhìn được vào mắt các thành viên trong ban nhạc đã!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 1,
+          "ten_tac_gia": "Hamazi Aki",
+          "pivot": {
+            "ma_sach": 5,
+            "ma_tac_gia": 1
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 1,
+          "ten_the_loai": "Âm Nhạc",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 5,
+            "ma_the_loai": 1
+          }
+        },
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 5,
+            "ma_the_loai": 2
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 1,
+          "ten_bo_sach": "Bocchi the Rock!",
+          "pivot": {
+            "ma_sach": 5,
+            "ma_bo_sach": 1
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 1,
+      "tieu_de": "Bocchi the Rock!",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-10-17T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "13950.00",
+      "so_tap": 1,
+      "gioi_thieu": "Goto Hitori là một nữ sinh hướng nội. Giao tiếp kém, học cũng kém, tay chân lại vụng về, nên suốt thời cấp 2 chẳng thể kết bạn với ai, chỉ có cây guitar bầu bạn. Khi lên lớp 10, một ngày nọ, cô nàng tình cờ gia nhập Ban nhạc Đoàn Kết, lấy nghệ danh là Bocchi và trở thành một tay guitar khuấy đảo nền nhạc Rock nước Nhật!? Nhưng trước hết, Bocchi phải nhìn được vào mắt các thành viên trong ban nhạc đã!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 1,
+          "ten_tac_gia": "Hamazi Aki",
+          "pivot": {
+            "ma_sach": 1,
+            "ma_tac_gia": 1
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 1,
+          "ten_the_loai": "Âm Nhạc",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 1,
+            "ma_the_loai": 1
+          }
+        },
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 1,
+            "ma_the_loai": 2
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 1,
+          "ten_bo_sach": "Bocchi the Rock!",
+          "pivot": {
+            "ma_sach": 1,
+            "ma_bo_sach": 1
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 12,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 1",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2021-03-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 1,
+      "gioi_thieu": "Trong chuyến cắm trại một mình đầu tiên, Rin dừng chân tại một sườn đồi kế bên núi Phú Sĩ. Ở khu tiếp tân, Rin thấy một cô bạn ngủ lăn ngủ lóc trên ghế băng. Đó là Nadeshiko, một học sinh mới chuyển đến vùng này. Vì quá thích thú khi biết nơi ở mới gần núi Phú Sĩ nên Nadeshiko đã nhào đi ngắm cảnh, trong lúc vội vã, cô đã cầm nhầm bộ bài Tây thay cho điện thoại di động… Kết quả là đến nơi trời nhiều mây, không ngắm được núi nên Nadeshiko ngủ gật. Đêm xuống, Rin đi vệ sinh thì gặp Nadeshiko vừa đói vừa lạnh lê lết như ma chơi trong rừng. Rin bèn “cứu mạng” cô bạn kì quặc kia bằng mì ly. Đúng lúc ấy, trăng lên cao, trời quang, và núi Phú Sĩ bỗng hiện lên đẹp tuyệt trần...\nVà câu chuyện nói về những chuyến đi \"phượt\" bất tận của chúng ta đã bắt đầu (một cách hết sức dễ thương) như thế...\n\nCác độc giả yêu Manga ở Việt Nam đã có bộ truyện nào về đề tài \"dã ngoại\" và đi \"phượt\" chưa!? Trong thời điểm dịch chuyển còn hạn chế thế này, với YURU CAMP, bạn hoàn toàn có thể \"du lịch qua trang sách\" cùng các cô nàng trong \"Hội mê dã ngoại\" khám phá những vùng đất mới. Không đơn thuần “khuyến khích đi du lịch, trải nghiệm”, bộ truyện còn đưa ra rất nhiều thông tin bổ ích. Chẳng hạn như làm thế nào để cắm trại mà tốt cho môi trường, đốt lửa sao cho an toàn, nên chuẩn bị đồ ăn nào cho tiện… Một \"Cẩm nang cắm trại\" thứ thiệt, và siêu thực tế!\n\nDẫu là đi du lịch một mình hay đi với bạn bè, thì mỗi hình thức đều có thú vui riêng cả. Nhưng sau cùng, “Hãy tận hưởng niềm vui khi được ở bên một ai đó”. Hãy đọc DÃ NGOẠI THẢNH THƠI để cảm nhận rõ thông điệp ấy nhé!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 12,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 12,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 12,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 12,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 21,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 10",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-06-20T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 10,
+      "gioi_thieu": "“Xin chào, tôi là afro ro o\nCảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 10 10 10\nTôi đã lạc trong hang động dưới lòng đất kể ở tập 9 suốt 2 tháng trời trời ời\nGiá mà khi nào trên mặt đất đông đúc quá, ta có thể chui xuống lòng đất cắm trại được thì hay biết mấy mấy ấy\nDưới đó lúc nào cũng tối om, tha hồ tận hưởng không khí ban đêm cùng lửa trại trại ại\nTừ giờ khéo lại rộ lên mốt cắm trại trong hang cũng nên nên ên\nCoong coong coong oong\nGrào grào rào ào\nBô lô ba la la a\nỐi chà, tôi nghe có tiếng gì vọng lại từ sâu trong hang ấy ấy ấy.”\nnbsp;\nnbsp;",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 21,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 21,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 21,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 21,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 22,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 11",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-09-25T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 11,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 11. Kể tiếp câu chuyện lần trước, tôi đang cắm trại trong hang ngầm dưới chân núi Phú Sĩ thì bị mấy ông chú đáng sợ mặc vest đen tóm đi lao động khổ sai để xây một công trình khổng lồ gì đấy dưới lòng đất. Chỗ này rõ\nràng vẫn là Shizuoka nhưng khắp xung quanh đều thấy vẽ biểu tượng của Yamanashi. Nếu dám hỏi chắc tôi sẽ không bao giờ ra ngoài được nữa mất nên tôi sẽ coi như chưa thấy gì.”\nnbsp;",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 22,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 22,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 22,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 22,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 23,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 12",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-12-30T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 12,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 12. Lần trước, tôi đã giả vờ không nhìn thấy Yamanashi đang xây dựng một công trình ngầm ở núi Phú Sĩ, nhưng coi bộ cơ sở này quá nguy hiểm khi tính đến chuyện chi phối địa phương liền kề từ dưới lòng đất. Và chẳng biết từ bao giờ tôi đã bị tóm mất tiêu. Hiện tại tôi đang bị bắt phải đi qua một chiếc cầu treo không có tay vịn bắc trên đỉnh Yasaburotake trong khi một đám nhà giàu thừa của đang vừa ăn hoto còn dư từ bữa trước vừa la ó ầm ĩ.”",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 23,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 23,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 23,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 23,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 13,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 2",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2021-06-20T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 2,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 2.\n\nTập truyện này lấy bối cảnh vùng phụ cận Yamanashi nên để tăng tính chân thực, tôi đã đi thu thập tư liệu về sản vật nơi đây. Toàn món  ngon “tuyệt vời ông mặt trời” luôn, như là bánh bao đặc sản Munobu, mì Hoto đặc sản Kofu, rượu vang đặc sản Koshu.\n\nTiện thể, do không kịp tập này nên câu chuyện vừa rồi hoàn toàn không được nhắc đến.”",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 13,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 13,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 13,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 13,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 14,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 3",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2021-09-25T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 3,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua cuốn truyện “Dã ngoại thảnh thơi\" này. Tôi ăn dầm nằm đề tại khu cắm trại Fujinomiya cũng phải 2 năm rồi, hộ khẩu cũng đã chuyển, dụng cụ càng ngày càng nhiều và cũng quen dần với cuộc sống đã ngoại.\n\nSắp sang mùa đông nên tôi phải tích trữ đồ ăn và đi đào hố đây.”",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 14,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 14,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 14,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 14,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 15,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 4",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2021-12-30T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 4,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 4.\n\nMùa đông năm ngoái, tôi đã tích trữ đồ ăn và bắt đầu đào hố ở khu cắm trại để ngủ đông nhưng giữa chừng tôi lại đi ra một không gian trông giống hang động rồi lạc mất tiêu. Hiện tại, tôi đang vừa dùng máy phát điện quay tay vừa làm bản thảo trên máy tính bảng. Chắc là tôi đang ở một cái hang gió nào đấy. Ai đó làm ơn đến cứu tôi!”",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 15,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 15,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 15,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 15,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 16,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 5",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2022-03-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 5,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 5. 5 tháng sau tai nạn ở hang động dưới chân núi Phú Sĩ, tôi cứ tưởng cuối cùng mình cũng được ra ngoài thì lại gặp Enoshima. Xem ra tin đồn toàn bộ hang động ở chân núi Phú Sĩ đều thông đến Enoshima là thật. Trước mắt cứ phải ra ngoài đã, tôi sẽ đi ăn Shirasu-don rồi về vậy.” - afro",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 16,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 16,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 16,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 16,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 17,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 6",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2022-06-20T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 6,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 6.\nLần trước, cuối cùng tôi đã thoát ra khỏi hang động và đi đánh chén Shirasu-don ở Enoshima rồi mới về. Nhưng dọc đường tôi lại ghé vào suối nước nóng Yugawara rồi bị trượt chân ở bồn ngâm chân, chìm cả người vào bồn tắm và không tài nào thoát ra được. Hiện tại tôi đang ngậm ống thở và hoàn thiện nốt bản thảo. Giá mà tôi ra ngoài được trước khi phát hành tập 7 nhờ.”",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 17,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 17,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 17,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 17,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 18,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 7",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2022-09-25T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 7,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 7. Tôi đã đi tàu điện và xe bus từ Yugawara về khu cắm trại sau 3 tập vắng bóng, về đến nơi thì ngôi nhà (lều) đã bị dỡ mất tiêu rồi. Cắm trại kiểu này khắc nghiệt ghê!” - afro",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 18,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 18,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 18,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 18,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 19,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 8",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2022-12-30T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 8,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 8. Dạo này đang có trào lưu dã ngoại thì phải, ngay giữa mùa đông mà đi đâu cũng đông như kiến. Tôi cứ phải tìm bãi cắm trại trống suốt rồi tình cờ lại phát hiện ra một chỗ mới ở phía Đông núi Phú Sĩ. Địa điểm cực đỉnh, rộng rãi lại còn ngắm được núi Phú Sĩ, mà chẳng hiểu sao không có mống phượt thủ nào nên tôi bao trọn cả khu luôn. Tìm được chỗ độc thật đấy! Ủa? Sao lắm ô tô xanh lục trông rõ kì cục trong này thế??” - afro",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 19,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 19,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 19,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 19,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 20,
+      "tieu_de": "Dã Ngoại Thảnh Thơi - Yurucamp - Tập 9",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2023-03-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "30000.00",
+      "so_tap": 9,
+      "gioi_thieu": "“Xin chào, tôi là afro. Cảm ơn các bạn đã mua “Dã ngoại thảnh thơi” tập 9. Lần trước tôi đã vô tình lạc vào một bãi diễn tập ở núi Phú Sĩ vì tưởng nhầm đó là khu cắm trại và bị bao vây giữa một đống xe cộ màu xanh lục đặc thù. Tôi đã tính đào hố để thoát thân nhưng giữa đường lại đi ra một không gian trông như hang động và hoàn toàn lạc lối. Lại thế rồi!!!!!!”",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 3,
+          "ten_tac_gia": " Afro",
+          "pivot": {
+            "ma_sach": 20,
+            "ma_tac_gia": 3
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 2,
+          "ten_the_loai": "School Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 20,
+            "ma_the_loai": 2
+          }
+        },
+        {
+          "ma_the_loai": 3,
+          "ten_the_loai": "Slice of Life",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 20,
+            "ma_the_loai": 3
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 3,
+          "ten_bo_sach": "Dã Ngoại Thảnh Thơi - Yurucamp",
+          "pivot": {
+            "ma_sach": 20,
+            "ma_bo_sach": 3
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 24,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-01-29T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 1,
+      "gioi_thieu": "Sau khi đánh bại Quỷ vương, những người hùng đã sống ra sao? Là một yêu tinh nên cuộc sống của nàng pháp sư Frieren cũng khác so với 3 người bạn của mình, cô cảm nhận được điều gì trong thế giới ấy? Những người ở lại đã trải qua những gì trong chuyến đi để hoàn thành tâm nguyện của người đã khuất? Tất cả đều được bắt đầu từ “Hồi kết của cuộc phiêu lưu”, một câu chuyện hậu phiêu lưu về “lẽ sống” của những anh hùng!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 24,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 24,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 24,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 24,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 24,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 25,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-04-08T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 2,
+      "gioi_thieu": "Frieren là một pháp sư yêu tinh trường thọ. Cùng với Fern - học trò của mình, họ lại một lần nữa hướng mục tiêu về lâu đài Quỷ vương, nơi được coi là vùng đất mà linh hồn của các dũng sĩ an nghỉ và cũng là để tìm lại những dấu tích trong chuyến phiêu lưu cùng Himmel và mọi người. Trên đường đi, họ đã gặp Stark, học trò của chiến binh Eisen. Câu chuyện chuyển sang chương mới đầy ắp những kỉ niệm. Mời các bạn thưởng thức tác phẩm hậu phiêu lưu kết nối những thế hệ của các anh hùng!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 25,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 25,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 25,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 25,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 25,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 26,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-06-22T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 3,
+      "gioi_thieu": "Frieren, pháp sư thuộc đội anh hùng đã đụng độ với một trong Bảy pháp sư hủy diệt - Aura Máy chém, tàn dư của binh đoàn Quỷ vương. Cùng lúc đó, quá khứ của Frieren cũng dần được hé lộ. Tình cảm cô vẫn luôn ấp ủ bao lâu nay là thế nào? Câu chuyện tiếp tục đan xen hiện tại và quá khứ. Đừng bỏ lỡ tác phẩm hậu phiêu lưu kết nối “sự thật” về các anh hùng này nhé!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 26,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 26,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 26,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 26,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 26,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 27,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-08-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 4,
+      "gioi_thieu": "Sau khi các anh hùng qua đời, cuộc sống của pháp sư yêu tinh Frieren vẫn tiếp diễn. Cô lại một lần nữa bước lên chuyến hành trình mà các anh hùng đã từng đi. Dù là quá khứ hay hiện tại, thứ tô điểm cho chuyến đi luôn là những sự kiện và các cuộc gặp gỡ. Tập truyện tiếp theo kể về các anh hùng và cuộc sống thường nhật của họ. Mời các bạn đón đọc tác phẩm hậu phiêu lưu gắn kết “kí ức” của những anh hùng!\n",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 27,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 27,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 27,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 27,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 27,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 28,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-10-08T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 5,
+      "gioi_thieu": "Để tiếp tục cuộc hành trình đến Aureole, Frieren – vị pháp sư đánh bại Quỷ vương và lưu danh sử sách, đã tham gia vào cuộc thi dành cho pháp sư. Những cuộc gặp gỡ mới, những pháp sư với năng lực đáng gờm.\nNiềm tin và quyết tâm của từng người là gì? Đừng bỏ lỡ tác phẩm hậu phiêu lưu tiết lộ “lịch sử” của những anh hùng!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 28,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 28,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 28,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 28,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 28,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 29,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2024-12-22T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 6,
+      "gioi_thieu": "Sang vòng 2 của cuộc thi pháp sư, Frieren – pháp sư của tổ đội anh hùng đã đánh bại Quỷ vương, phải chinh phục mê cung bí ẩn. Khi xung quanh là các pháp sư đa tài đa nghệ, năng lực thật sự của Frieren bị “lộ tẩy”! Tình cảm thầy trò của các pháp sư lại càng thêm bền chặt. Mời các bạn thưởng thức tác phẩm hậu phiêu lưu hé mở “suy nghĩ thật sự” của những anh hùng!\n",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 29,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 29,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 29,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 29,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 29,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 30,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2025-02-17T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 7,
+      "gioi_thieu": "Cuộc thi pháp sư kết thúc. Frieren – vị pháp sư mang trên vai câu chuyện xưa về những anh hùng, lại tiếp tục hành trình đến Aureole. Gặp gỡ và chia li khơi gợi lên trong cô kí ức về lời nói của các vị anh hùng. Câu chuyện dần hé mở về thế giới sau khi Quỷ vương bị tiêu diệt. Đừng bỏ lỡ tác phẩm hậu phiêu lưu giãi bày “tấm lòng” của các anh hùng nhé!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 30,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 30,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 30,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 30,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 30,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 31,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2025-04-20T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 8,
+      "gioi_thieu": "Trên con đường mà các anh hùng quá cố đã từng đi, pháp sư Frieren tiếp tục cuộc hành trình hướng về cao nguyên phía Bắc khắc nghiệt – nơi chỉ pháp sư cấp 1 mới đủ sức đến đích. Dọc đường, họ gặp được cả pháp sư lẫn quỷ… Liệu hương vị bánh mì dở tệ ngày nào có còn đọng lại trong kí ức? Mời các bạn đón đọc tác phẩm hậu phiêu lưu thấm đẫm “nỗi nhớ nhung” của những anh hùng!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 31,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 31,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 31,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 31,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 31,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 32,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2025-06-15T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 9,
+      "gioi_thieu": "Sau khi Himmel qua đời, pháp sư Frieren đã bắt đầu hành trình “tìm hiểu về nhân loại” của mình. Đích đến của chuyến đi chính là Aureole, nơi lâu đài Quỷ vương tọa lạc. Trên đường hướng về cao nguyên phía Bắc, họ đã chạm trán Macht xứ hoàng kim - một trong Bảy pháp sư hủy diệt. Liệu trong “xứ hoàng kim” ấy còn cất chứa kỉ niệm nào không? Đừng bỏ lỡ tác phẩm hậu phiêu lưu vẽ ra “khung cảnh ngày xưa” của những anh hùng nhé!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 32,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 32,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 32,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 32,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 32,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 33,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2025-08-17T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 10,
+      "gioi_thieu": "Pháp sư Frieren của đội anh hùng trứ danh đang thực hiện chuyến đi đến Aureole - nơi linh hồn ngủ yên. Trong quá khứ “tìm hiểu về con người” của Macht, nhân loại và tộc quỷ dường như có một mối quan hệ đặc biệt. Liệu lớp vàng ròng lấy đi sắc màu của thị trấn có thể bị tan chảy? Mời các bạn đón đọc tác phẩm hậu phiêu lưu soi rọi “ác ý” của những anh hùng!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 33,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 33,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 33,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 33,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 33,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 34,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2025-10-22T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 11,
+      "gioi_thieu": "Frieren - pháp sư tiễn táng nhiều tên quỷ nhất trong lịch sử. Hành trình “tìm hiểu về con người” của nhân loại và quỷ tộc đã giao nhau tại xứ hoàng kim nơi cực Bắc lục địa. Những số mệnh đan xen dần dần được gỡ bỏ.\nĐừng bỏ lỡ tác phẩm hậu phiêu lưu phản ánh “tiếng lòng” của những anh hùng nhé!\n",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 34,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 34,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 34,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 34,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 34,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 35,
+      "tieu_de": "Frieren - Pháp sư tiễn táng",
+      "tong_so_trang": null,
+      "danh_gia": null,
+      "ngay_xuat_ban": "2025-12-30T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "45000.00",
+      "so_tap": 12,
+      "gioi_thieu": "Sau khi đánh bại Quỷ Vương, pháp sư yêu tinh Frieren của tổ đội anh hùng tiếp tục cuộc đời tưởng chừng như bất tận của mình. Vừa chạm tay vào bia đá Nữ thần, ý thức của cô đã ngược dòng thời gian về những ngày xưa cũ.\nHọ cũng rất trân trọng quá khứ, đồng thời gửi gắm nhiều kì vọng vào tương lai phải không? Mời các bạn đón đọc tác phẩm hậu phiêu lưu đưa chúng ta khám phá những “điều chưa biết” của các anh hùng!",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 4,
+          "ten_tac_gia": "Yamada Kanehito",
+          "pivot": {
+            "ma_sach": 35,
+            "ma_tac_gia": 4
+          }
+        },
+        {
+          "ma_tac_gia": 5,
+          "ten_tac_gia": "Abe Tsukasa",
+          "pivot": {
+            "ma_sach": 35,
+            "ma_tac_gia": 5
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 8,
+          "ten_the_loai": "Fantasy",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 35,
+            "ma_the_loai": 8
+          }
+        },
+        {
+          "ma_the_loai": 9,
+          "ten_the_loai": "Adventure",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 35,
+            "ma_the_loai": 9
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": [
+        {
+          "ma_bo_sach": 4,
+          "ten_bo_sach": "Frieren - Pháp sư tiễn táng",
+          "pivot": {
+            "ma_sach": 35,
+            "ma_bo_sach": 4
+          }
+        }
+      ]
+    },
+    {
+      "ma_sach": 36,
+      "tieu_de": "Test Book Title",
+      "tong_so_trang": 200,
+      "danh_gia": "4.50",
+      "ngay_xuat_ban": "2024-03-20T00:00:00.000000Z",
+      "ma_nha_xuat_ban": 1,
+      "gia_tien": "150000.00",
+      "so_tap": 1,
+      "gioi_thieu": "This is a test book description",
+      "tac_gias": [
+        {
+          "ma_tac_gia": 1,
+          "ten_tac_gia": "Hamazi Aki",
+          "pivot": {
+            "ma_sach": 36,
+            "ma_tac_gia": 1
+          }
+        }
+      ],
+      "the_loais": [
+        {
+          "ma_the_loai": 1,
+          "ten_the_loai": "Âm Nhạc",
+          "ma_the_loai_cha": null,
+          "pivot": {
+            "ma_sach": 36,
+            "ma_the_loai": 1
+          }
+        }
+      ],
+      "nha_xuat_ban": {
+        "ma_nha_xuat_ban": 1,
+        "ten_nha_xuat_ban": "Wings Book - Kim Đồng"
+      },
+      "kieu_sachs": [],
+      "bo_sachs": []
+    }
+  ]
+}
