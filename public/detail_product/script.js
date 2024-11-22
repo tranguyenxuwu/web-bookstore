@@ -161,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
-
+// slider control
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.product-in-series');
   const prevBtn = document.querySelector('.prev-button');
@@ -169,15 +169,6 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const scrollAmount = 300;
   let startX, isDown = false;
-
-  // // Mouse wheel horizontal scroll
-  // container.addEventListener('wheel', (e) => {
-  //   e.preventDefault();
-  //   container.scrollBy({
-  //     left: e.deltaY,
-  //     behavior: 'smooth'
-  //   });
-  // });
 
   // Touch and mouse drag scrolling
   container.addEventListener('mousedown', (e) => {

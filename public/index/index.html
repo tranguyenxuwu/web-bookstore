@@ -102,16 +102,30 @@
     <!-- flash sale container -->
     <div class="flash-sale-container">
       <div class="timer">
-        <span id="timer">01:09:44</span>
+        <span id="timer">00:00:00</span>
         <a href="../store/store.html">Xem tất cả</a>
       </div>
-      <div class="products"></div>
+      <div class="product-series-container">
+        <div class="slider-wrapper">
+          <button class="slider-button prev-button" aria-label="Previous">
+            <img src="./arrow_back.png" alt="Previous" class="arrow-icon" />
+          </button>
+          <div class="product-in-series">
+            <!-- Products here -->
+          </div>
+          <button class="slider-button next-button" aria-label="Next">
+            <img src="./right-arrow.png" alt="Next" class="arrow-icon" />
+          </button>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
     <script>
       function searchBooks() {
-        const query = document.querySelector('.search-input').value;
-        window.location.href = `../store/store.html?search=${encodeURIComponent(query)}`;
+        const query = document.querySelector(".search-input").value;
+        window.location.href = `../store/store.html?search=${encodeURIComponent(
+          query
+        )}`;
       }
     </script>
     <footer>
@@ -125,10 +139,18 @@
         <div class="footer-social">
           <h3>Kết nối với chúng tôi</h3>
           <a href="https://twitter.com/yourprofile" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733579.png" alt="Twitter" class="social-icon" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
+              alt="Twitter"
+              class="social-icon"
+            />
           </a>
           <a href="https://facebook.com/yourprofile" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook" class="social-icon" />
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
+              alt="Facebook"
+              class="social-icon"
+            />
           </a>
         </div>
       </div>

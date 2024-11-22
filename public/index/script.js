@@ -39,80 +39,105 @@ const carousel = document.querySelector('.carousel');
         setInterval(nextSlide, 5000);
 
 
-// Fetch the product data from a JSON file
-fetch('./product.json')
-    .then(response => response.json())
-    .then(data => {
-        const productContainer = document.querySelector('.products');
+// Function to fetch and display books
+const fetchAndDisplayBooks = async () => {
+  try {
+      // Replace with your actual API endpoint
+      const response = await fetch('./product.json');
+      const result = await response.json();
 
-        data.books.forEach(book => {
-            const productElement = document.createElement('div');
-            productElement.classList.add('product');
+      if (result.status === 'success' && result.data) {
+          const container = document.querySelector('.product-in-series');
+          
+          // Clear existing content
+          container.innerHTML = '';
+          
+          // Map data to HTML structure
+          container.innerHTML = result.data.map(product => `
+              <div class="product-series">
+                  <a href="../detail_product/detail_product.html?id=${product.ma_sach}">
+                      <img 
+                          alt="${product.tieu_de}"
+                          src="${product.image_url || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg'}"
+                      />
+                  </a>
+                  <div class="product-series-info">
+                      <h3>${product.tieu_de}</h3>
+                      <p class="price">${Number(product.gia_tien).toLocaleString('vi-VN')}đ</p>
+                  </div>
+              </div>
+          `).join('');
+      }
+  } catch (error) {
+      console.error('Error fetching books:', error);
+  }
+};
 
-            const imageElement = document.createElement('img');
-            imageElement.alt = book.bookName;
+// Call the function when the page loads
+document.addEventListener('DOMContentLoaded', fetchAndDisplayBooks);
 
-            if (book.image) {
-                imageElement.src = book.image;
-            } else {
-                imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
-                imageElement.alt = 'Placeholder image';
-            }
+ // slider control
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.product-in-series');
+  const prevBtn = document.querySelector('.prev-button');
+  const nextBtn = document.querySelector('.next-button');
+  
+  const scrollAmount = 300;
+  let startX, isDown = false;
 
-            imageElement.onerror = () => {
-                console.error(`Error loading image: ${imageElement.src}`);
-                imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
-                imageElement.alt = 'Placeholder image';
-            };
+  // Touch and mouse drag scrolling
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - container.offsetLeft;
+    container.style.cursor = 'grabbing';
+  });
 
-            const productInfoElement = document.createElement('div');
-            productInfoElement.classList.add('product-info');
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+    container.style.cursor = 'grab';
+  });
 
-            const titleElement = document.createElement('h3');
-            titleElement.textContent = book.bookName;
+  container.addEventListener('mouseup', () => {
+    isDown = false;
+    container.style.cursor = 'grab';
+  });
 
-            const typeElement = document.createElement('p');
-            typeElement.textContent = `Type: ${book.type}`;
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 2;
+    container.scrollLeft = container.scrollLeft - walk;
+  });
 
-            const authorElement = document.createElement('p');
-            authorElement.textContent = `by ${book.author}`;
+  // Button controls
+  nextBtn.addEventListener('click', () => {
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  });
 
-            const priceElement = document.createElement('div');
-            priceElement.classList.add('price');
+  prevBtn.addEventListener('click', () => {
+    container.scrollBy({
+      left: -scrollAmount,
+      behavior: 'smooth'
+    });
+  });
 
-            const saleElement = document.createElement('span');
-            saleElement.classList.add('sale-price');
-            saleElement.textContent = book.price;
-            
-            // nut them vao gio hang
-            // const addToCartButton = document.createElement('button');
-            // addToCartButton.classList.add('add-to-cart');
-            // addToCartButton.textContent = 'Add to Cart';
-            // addToCartButton.addEventListener('click', () => {
-            //     // You'll need to implement cart functionality here
-            //     console.log(`Added ${book.bookName} to cart`);
-            // });
-            // productInfoElement.appendChild(addToCartButton);
+  // Show/hide buttons with fade effect
+  const toggleButtons = () => {
+    const isAtStart = container.scrollLeft <= 0;
+    const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth;
+    
+    prevBtn.style.opacity = isAtStart ? '0' : '1';
+    prevBtn.style.visibility = isAtStart ? 'hidden' : 'visible';
+    
+    nextBtn.style.opacity = isAtEnd ? '0' : '1';
+    nextBtn.style.visibility = isAtEnd ? 'hidden' : 'visible';
+  };
 
-            if (book.originPrice) {
-                const originPriceElement = document.createElement('span');
-                originPriceElement.classList.add('original-price');
-                originPriceElement.textContent = book.originPrice;
-                priceElement.appendChild(originPriceElement);
-            }
-
-            priceElement.appendChild(saleElement);
-
-            productInfoElement.appendChild(titleElement);
-            productInfoElement.appendChild(typeElement);
-            productInfoElement.appendChild(authorElement);
-            productInfoElement.appendChild(priceElement);
-
-            productElement.appendChild(imageElement);
-            productElement.appendChild(productInfoElement);
-
-            productContainer.appendChild(productElement);
-        });
-    })
-    .catch(error => console.error('Error fetching book data:', error));
- 
+  container.addEventListener('scroll', toggleButtons);
+  window.addEventListener('resize', toggleButtons);
+  toggleButtons();
+});
