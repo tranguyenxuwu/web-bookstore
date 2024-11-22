@@ -10,6 +10,10 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('add-to-cart').addEventListener('click', () => {
     addToCart(productId);
   });
+
+  document.getElementById('buy-now').addEventListener('click', () => {
+    addToCart(productId, true);
+  });
 });
 
 function fetchProductDetails(productId) {
@@ -38,9 +42,36 @@ function displayProductDetails(product) {
   document.getElementById('product-description').querySelector('span').textContent = product.gioi_thieu;
 }
 
-function addToCart(productId) {
-  // Add product to cart logic here
-  alert('Đã thêm vào giỏ hàng!');
+function addToCart(productId, redirectToCart = false) {
+  fetch('../index/product.json')
+    .then(response => response.json())
+    .then(data => {
+      const product = data.data.find(item => item.ma_sach == productId);
+      if (product) {
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const existingItem = cartItems.find(item => item.id == productId);
+
+        if (existingItem) {
+          existingItem.quantity += 1;
+        } else {
+          cartItems.push({
+            id: productId,
+            title: product.tieu_de,
+            price: product.gia_tien,
+            quantity: 1
+          });
+        }
+
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+        alert('Đã thêm vào giỏ hàng!');
+        if (redirectToCart) {
+          window.location.href = '../cart/cart.html'; // Redirect to cart page
+        }
+      } else {
+        console.error('Product not found');
+      }
+    })
+    .catch(error => console.error('Error adding to cart:', error));
 }
 
 function fetchBooksInSeries(bookId) {

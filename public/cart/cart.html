@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Detail</title>
+    <title>Giỏ Hàng</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -51,40 +51,27 @@
       </nav>
     </div>
 
-    <!-- product detail -->
-    <div class="product-detail-container">
-      <div class="product-image">
-        <img id="product-img" src="#" alt="Product Image" />
-      </div>
-      <div class="product-info">
-        <h1 id="product-title">Tiêu đề sản phẩm</h1>
-        <p id="product-author">Tác giả: <span></span></p>
-        <p id="product-publisher">Nhà xuất bản: <span></span></p>
-        <p id="product-price">Giá: <span id="price"></span></p>
-        <button id="add-to-cart">Thêm vào giỏ hàng</button>
-        <button id="buy-now">Mua ngay</button>
-      </div>
-    </div>
-
-    <!-- phần mô tả của sách -->
-    <div class="product-description-container">
-      <h2>Mô tả sản phẩm</h2>
-      <p id="product-description">Mô tả: <span></span></p>
-    </div>
-
-    <!-- sách cùng bộ -->
-    <div class="product-series-container">
-      <h2>Xem thêm</h2>
-      <div class="slider-wrapper">
-        <button class="slider-button prev-button" aria-label="Previous">
-          <img src="./arrow_back.png" alt="Previous" class="arrow-icon" />
-        </button>
-        <div class="product-in-series">
-          <!-- Products here -->
-        </div>
-        <button class="slider-button next-button" aria-label="Next">
-          <img src="./right-arrow.png" alt="Next" class="arrow-icon" />
-        </button>
+    <!-- cart items -->
+    <div class="cart-container">
+      <h1>Giỏ Hàng</h1>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Giá</th>
+            <th>Số lượng</th>
+            <th>Tổng</th>
+            <th>Hành động</th>
+          </tr>
+        </thead>
+        <tbody id="cart-items">
+          <!-- Cart items will be dynamically added here -->
+        </tbody>
+      </table>
+      <div class="cart-summary">
+        <h2>Tổng cộng</h2>
+        <p id="cart-total">0 VND</p>
+        <button id="checkout-button">Thanh Toán</button>
       </div>
     </div>
 
