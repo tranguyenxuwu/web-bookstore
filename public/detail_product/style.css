@@ -76,21 +76,76 @@ body {
   padding: 20px;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
+
+.slider-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 0 40px; /* Make room for buttons */
+}
+
 .product-in-series {
   display: flex;
-  flex-wrap: wrap;
   gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding: 20px 0;
+  /* Prevent vertical scroll */
+  overflow-y: hidden;
+  /* Enable touch scrolling */
+  -webkit-overflow-scrolling: touch;
+}
+
+.product-in-series::-webkit-scrollbar {
+  display: none;
+}
+
+.slider-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid #eee;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   justify-content: center;
-  width: 100%;
+  transition: all 0.3s ease;
+  padding: 0;
+}
+
+.slider-button:hover {
+  background: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-button {
+  left: 0;
+}
+
+.next-button {
+  right: 0;
+}
+
+/* New styles for arrow images */
+.slider-button img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
 }
 
 .product-in-series > * {
-  flex: 1;
-  /* min-width: 200px;
-  max-width: calc(
-    (100% - 60px) / 3
-  ); */
+  flex: 0 0 auto; /* Changed to prevent flex growing */
+  width: calc((100% - 60px) / 5); /* 5 items per row with 15px gap */
+  min-width: 160px; /* Smaller minimum width */
 }
 
 .product-series {
@@ -99,7 +154,7 @@ body {
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  width: 220px;
+  max-width: 180px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

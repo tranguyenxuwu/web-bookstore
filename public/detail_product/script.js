@@ -115,7 +115,7 @@ function fetchRelatedProducts(bookId) {
           book.the_loais?.some(cat => cat.ma_the_loai === currentBookCategory) &&
           book.ma_sach !== bookId
         )
-        .slice(0, 4);
+        .slice(0, 8); // gia tri nay de gioi han so luong sach lien quan
 
       displayRelatedProducts(relatedBooks);
     })
@@ -125,16 +125,6 @@ function fetchRelatedProducts(bookId) {
       container.innerHTML = '<div class="error-message">Không thể tải sách liên quan</div>';
     });
 }
-
-// Update event listener to call both functions
-document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const bookId = parseInt(urlParams.get('id'));
-  if (bookId) {
-    fetchBooksInSeries(bookId);
-    fetchRelatedProducts(bookId);
-  }
-});
 
 // Update display function
 function displayRelatedProducts(products) {
@@ -161,4 +151,87 @@ function displayRelatedProducts(products) {
   `).join('');
 }
 
+// Update event listener to call both functions
+document.addEventListener('DOMContentLoaded', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const bookId = parseInt(urlParams.get('id'));
+  if (bookId) {
+    fetchBooksInSeries(bookId);
+    fetchRelatedProducts(bookId);
+  }
+});
 
+
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.product-in-series');
+  const prevBtn = document.querySelector('.prev-button');
+  const nextBtn = document.querySelector('.next-button');
+  
+  const scrollAmount = 300;
+  let startX, isDown = false;
+
+  // // Mouse wheel horizontal scroll
+  // container.addEventListener('wheel', (e) => {
+  //   e.preventDefault();
+  //   container.scrollBy({
+  //     left: e.deltaY,
+  //     behavior: 'smooth'
+  //   });
+  // });
+
+  // Touch and mouse drag scrolling
+  container.addEventListener('mousedown', (e) => {
+    isDown = true;
+    startX = e.pageX - container.offsetLeft;
+    container.style.cursor = 'grabbing';
+  });
+
+  container.addEventListener('mouseleave', () => {
+    isDown = false;
+    container.style.cursor = 'grab';
+  });
+
+  container.addEventListener('mouseup', () => {
+    isDown = false;
+    container.style.cursor = 'grab';
+  });
+
+  container.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - container.offsetLeft;
+    const walk = (x - startX) * 2;
+    container.scrollLeft = container.scrollLeft - walk;
+  });
+
+  // Button controls
+  nextBtn.addEventListener('click', () => {
+    container.scrollBy({
+      left: scrollAmount,
+      behavior: 'smooth'
+    });
+  });
+
+  prevBtn.addEventListener('click', () => {
+    container.scrollBy({
+      left: -scrollAmount,
+      behavior: 'smooth'
+    });
+  });
+
+  // Show/hide buttons with fade effect
+  const toggleButtons = () => {
+    const isAtStart = container.scrollLeft <= 0;
+    const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth;
+    
+    prevBtn.style.opacity = isAtStart ? '0' : '1';
+    prevBtn.style.visibility = isAtStart ? 'hidden' : 'visible';
+    
+    nextBtn.style.opacity = isAtEnd ? '0' : '1';
+    nextBtn.style.visibility = isAtEnd ? 'hidden' : 'visible';
+  };
+
+  container.addEventListener('scroll', toggleButtons);
+  window.addEventListener('resize', toggleButtons);
+  toggleButtons();
+});
