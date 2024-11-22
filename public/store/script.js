@@ -103,8 +103,7 @@ function displayPage(items) {
     // Create book image
     const imageElement = document.createElement('img');
     imageElement.alt = book.tieu_de;
-    // Default placeholder image if no image provided
-    imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
+    imageElement.src = book.hinh_anh || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
     imageElement.onerror = () => {
       imageElement.src = 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
     };
@@ -131,7 +130,7 @@ function displayPage(items) {
 
     // Add book details link
     const linkElement = document.createElement('a');
-    linkElement.href = `/book-detail.html?id=${book.ma_sach}`;
+    linkElement.href = `../detail_product/detail_product.html?id=${book.ma_sach}`;
     linkElement.appendChild(imageElement);
     
     productElement.appendChild(linkElement);

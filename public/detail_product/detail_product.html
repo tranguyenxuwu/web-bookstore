@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fahasa.com Navbar</title>
+    <title>Product Detail</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -11,8 +11,9 @@
     <div class="navbar-container">
       <nav class="navbar">
         <div class="nav-container">
-          <img src="/api/placeholder/180/40" alt="ReadOn" class="logo" />
-
+          <a href="../index/">
+            <img src="#" alt="ReadOn" class="logo" />
+          </a>
           <div class="search-container">
             <input
               type="text"
@@ -20,13 +21,9 @@
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
             />
             <button class="search-button" onclick="searchBooks()">
-              <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'%3E%3C/circle%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'%3E%3C/line%3E"
-                alt="Search"
-              />
+              <img src="../store/search.png" alt="Search" />
             </button>
           </div>
-
           <div class="nav-icons">
             <a href="#" class="nav-icon">
               <img
@@ -37,7 +34,7 @@
             </a>
             <a href="#" class="nav-icon">
               <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6'%3E%3C/path%3E%3C/svg%3E"
                 alt="Cart"
               />
               <span>Giỏ Hàng</span>
@@ -49,71 +46,25 @@
               />
               <span>Tài khoản</span>
             </a>
-            <!-- <div class="language-select">
-              <img src="/api/placeholder/24/16" alt="Vietnamese flag" />
-            </div> -->
           </div>
         </div>
       </nav>
     </div>
 
-    <!-- image slider -->
-    <div class="header-banner-container">
-      <div class="carousel-container">
-        <div class="carousel">
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/NotebookcollectionT1024_Slidebanner_840x320_v2.png"
-              alt="Banner 1"
-            />
-          </div>
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/TrangCTT11_1124_Mainbanner_840x320.jpg"
-              alt="Banner 2"
-            />
-          </div>
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/Diamond_1124_MCBooks_Resize_Slide_840x320.jpg"
-              alt="Banner 3"
-            />
-          </div>
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/Partnership_T11_840x320.jpg"
-              alt="Banner 4"
-            />
-          </div>
-        </div>
-
-        <button class="carousel-btn prev">←</button>
-        <button class="carousel-btn next">→</button>
-
-        <div class="dots">
-          <div class="dot active"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
+    <div class="product-detail-container">
+      <div class="product-image">
+        <img id="product-img" src="#" alt="Product Image" />
+      </div>
+      <div class="product-info">
+        <h1 id="product-title">Tiêu đề sản phẩm</h1>
+        <p id="product-author">Tác giả: <span></span></p>
+        <p id="product-publisher">Nhà xuất bản: <span></span></p>
+        <p id="product-price">Giá: <span></span></p>
+        <p id="product-description">Mô tả: <span></span></p>
+        <button id="add-to-cart">Thêm vào giỏ hàng</button>
       </div>
     </div>
 
-    <!-- flash sale container -->
-    <div class="flash-sale-container">
-      <div class="timer">
-        <span id="timer">01:09:44</span>
-        <a href="../store/store.html">Xem tất cả</a>
-      </div>
-      <div class="products"></div>
-    </div>
-    <script src="script.js"></script>
-    <script>
-      function searchBooks() {
-        const query = document.querySelector('.search-input').value;
-        window.location.href = `../store/store.html?search=${encodeURIComponent(query)}`;
-      }
-    </script>
     <footer>
       <div class="footer-container">
         <div class="footer-info">
@@ -134,5 +85,6 @@
       </div>
       <p>&copy; 2023 Book Store. All rights reserved.</p>
     </footer>
+    <script src="script.js"></script>
   </body>
 </html>
