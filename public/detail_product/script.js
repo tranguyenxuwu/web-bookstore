@@ -120,7 +120,7 @@ function displaySeriesBooks(books) {
 }
 
 function fetchRelatedProducts(bookId) {
-  fetch('./product.json')
+  fetch('http://13.210.243.191:8000/api/getAllBooks')
     .then(response => response.json())
     .then(response => {
       // Check response structure

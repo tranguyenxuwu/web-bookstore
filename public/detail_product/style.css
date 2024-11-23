@@ -207,6 +207,21 @@ body {
   background-color: #c00d17;
 }
 
+#buy-now {
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #e60f1e;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#buy-now:hover {
+  background-color: #c00d17;
+}
+
 .navbar {
   background: white;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
