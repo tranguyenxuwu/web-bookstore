@@ -1,43 +1,42 @@
 const carousel = document.querySelector('.carousel');
-        const slides = document.querySelectorAll('.slide');
-        const dots = document.querySelectorAll('.dot');
-        const prevBtn = document.querySelector('.prev');
-        const nextBtn = document.querySelector('.next');
-        
-        let currentSlide = 0;
-        const slideCount = slides.length;
+const slides = document.querySelectorAll('.slide');
+const dots = document.querySelectorAll('.dot');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
-        function updateCarousel() {
-            carousel.style.transform = `translateX(-${currentSlide * 25}%)`;
-            dots.forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
-            });
-        }
+let currentSlide = 0;
+const slideCount = slides.length;
 
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slideCount;
-            updateCarousel();
-        }
+function updateCarousel() {
+    carousel.style.transform = `translateX(-${currentSlide * 25}%)`;
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
+}
 
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
-            updateCarousel();
-        }
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slideCount;
+    updateCarousel();
+}
 
-        // Event listeners
-        nextBtn.addEventListener('click', nextSlide);
-        prevBtn.addEventListener('click', prevSlide);
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+    updateCarousel();
+}
 
-        dots.forEach((dot, index) => {
-            dot.addEventListener('click', () => {
-                currentSlide = index;
-                updateCarousel();
-            });
-        });
+// Event listeners
+nextBtn.addEventListener('click', nextSlide);
+prevBtn.addEventListener('click', prevSlide);
 
-        // Auto-advance slides every 5 seconds
-        setInterval(nextSlide, 5000);
+dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+        currentSlide = index;
+        updateCarousel();
+    });
+});
 
+// Auto-advance slides every 5 seconds
+setInterval(nextSlide, 5000);
 
 // Function to fetch and display books
 const fetchAndDisplayBooks = async () => {
@@ -140,4 +139,39 @@ document.addEventListener('DOMContentLoaded', () => {
   container.addEventListener('scroll', toggleButtons);
   window.addEventListener('resize', toggleButtons);
   toggleButtons();
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var accountDropdown = document.getElementById('accountDropdown');
+    var logoutButton = document.getElementById('logoutButton');
+
+    accountDropdown.addEventListener('click', function(event) {
+        event.preventDefault();
+        var dropdownMenu = this.nextElementSibling;
+        dropdownMenu.classList.toggle('show');
+    });
+
+    logoutButton.addEventListener('click', function(event) {
+        event.preventDefault();
+        localStorage.removeItem('user');
+        localStorage.removeItem('token');
+        window.location.href = '../index/index.html';
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const accountIcon = document.querySelector('.nav-icon img[alt="Account"]');
+  const accountPopup = document.getElementById('accountPopup');
+
+  accountIcon.addEventListener('click', (event) => {
+    event.preventDefault();
+    accountPopup.style.display = accountPopup.style.display === 'block' ? 'none' : 'block';
+  });
+
+  // Ẩn pop-up khi click ra ngoài
+  window.addEventListener('click', (event) => {
+    if (!accountIcon.contains(event.target) && !accountPopup.contains(event.target)) {
+      accountPopup.style.display = 'none';
+    }
+  });
 });
