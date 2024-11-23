@@ -71,12 +71,44 @@ body {
   text-decoration: none;
   color: #333;
   font-size: 12px;
+  position: relative;
+  cursor: pointer;
 }
 
 .nav-icon img {
   width: 24px;
   height: 24px;
   margin-bottom: 4px;
+}
+
+.nav-icon .dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 150px;
+}
+
+.nav-icon:hover .dropdown-menu {
+  display: block;
+}
+
+.nav-icon .dropdown-item {
+  padding: 8px 16px;
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.nav-icon .dropdown-item:hover {
+  background-color: #f1f1f1;
+}
+
+.nav-icon.show .dropdown-menu {
+  display: block;
 }
 
 .carousel-container {
@@ -388,4 +420,28 @@ footer p {
 .product-series-info p {
   margin: 5px 0;
   color: #666;
+}
+
+.popup {
+  display: none;
+  position: absolute;
+  top: 50px; /* Adjust based on your layout */
+  right: 10px; /* Adjust based on your layout */
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  min-width: 150px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.popup-item {
+  padding: 10px 15px;
+  text-decoration: none;
+  display: block;
+  color: black;
+}
+
+.popup-item:hover {
+  background-color: #f1f1f1;
 }
