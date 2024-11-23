@@ -141,3 +141,29 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('resize', toggleButtons);
   toggleButtons();
 });
+
+
+// tim kiem
+
+function setupSearch() {
+  const searchInput = document.querySelector('.search-input');
+
+  searchInput.addEventListener('keypress', async (event) => {
+    if (event.key === 'Enter') {
+      const keyword = encodeURIComponent(searchInput.value.trim());
+      
+      try {
+        const response = await fetch(`http://13.210.243.191:8000/api/search?query=${keyword}`);
+        const data = await response.json();
+        
+        // Store search results in sessionStorage
+        sessionStorage.setItem('searchResults', JSON.stringify(data));
+        
+        // Navigate to search page
+        window.location.href = `../search/index.html?query=${keyword}`;
+      } catch (error) {
+        console.error('Error performing search:', error);
+      }
+    }
+  });
+}
