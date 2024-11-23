@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchProductDetails(productId) {
-  fetch('../index/product.json')
+  fetch('http://localhost/api/getAllBooks')
     .then(response => response.json())
     .then(data => {
       const product = data.data.find(item => item.ma_sach == productId);
@@ -43,7 +43,7 @@ function displayProductDetails(product) {
 }
 
 function addToCart(productId, redirectToCart = false) {
-  fetch('../index/product.json')
+  fetch('http://localhost/api/getAllBooks')
     .then(response => response.json())
     .then(data => {
       const product = data.data.find(item => item.ma_sach == productId);
@@ -120,7 +120,7 @@ function displaySeriesBooks(books) {
 }
 
 function fetchRelatedProducts(bookId) {
-  fetch('http://13.210.243.191:8000/api/getAllBooks')
+  fetch('http://localhost/api/getAllBooks')
     .then(response => response.json())
     .then(response => {
       // Check response structure

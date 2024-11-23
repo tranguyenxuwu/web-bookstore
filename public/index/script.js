@@ -42,7 +42,7 @@ setInterval(nextSlide, 5000);
 const fetchAndDisplayBooks = async () => {
   try {
       // Replace with your actual API endpoint
-      const response = await fetch('http://13.210.243.191:8000/api/getAllBooks');
+      const response = await fetch('http://localhost/api/getAllBooks');
       const result = await response.json();
 
       if (result.status === 'success' && result.data) {
@@ -152,7 +152,7 @@ function setupSearch() {
       const keyword = encodeURIComponent(searchInput.value.trim());
       
       try {
-        const response = await fetch(`http://13.210.243.191:8000/api/search?query=${keyword}`);
+        const response = await fetch(`http://localhost/api/search?query=${keyword}`);
         const data = await response.json();
         
         // Store search results in sessionStorage
