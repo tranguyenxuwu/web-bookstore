@@ -25,8 +25,8 @@ function fetchData() {
 
   // lưu ý : chỉ sử dụng 1 trong 2 cách lấy dữ liệu dưới đây
 
-  fetch("../index/product.json") // cách 1: lấy dữ liệu từ file JSON
-  // fetch('http://localhost/api/getAllBooks') // cách 2: lấy dữ liệu từ API
+  // fetch("../index/product.json") // cách 1: lấy dữ liệu từ file JSON
+  fetch('http://13.210.243.191:8000/api/getAllBooks') // cách 2: lấy dữ liệu từ API
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -300,3 +300,41 @@ function sortProducts(option) {
 
 // Khởi động
 fetchData();
+
+
+// Remove the old search button click listener and replace with this unified search function:
+function setupSearch() {
+  const searchInput = document.querySelector('.search-input');
+  const searchButton = document.querySelector('.search-button');
+
+  async function performSearch() {
+    const keyword = searchInput.value.trim();
+    if (!keyword) return;
+    
+    try {
+      const response = await fetch(`http://13.210.243.191:8000/api/search?query=${encodeURIComponent(keyword)}`);
+      const data = await response.json();
+      
+      // Store search results
+      sessionStorage.setItem('searchResults', JSON.stringify(data));
+      
+      // Navigate to search page
+      window.location.href = `../search/index.html?query=${encodeURIComponent(keyword)}`;
+    } catch (error) {
+      console.error('Error performing search:', error);
+    }
+  }
+
+  // Handle Enter key
+  searchInput.addEventListener('keypress', (event) => {
+    if (event.key === 'Enter') {
+      performSearch();
+    }
+  });
+
+  // Handle button click
+  searchButton.addEventListener('click', performSearch);
+}
+
+// Initialize search when document loads
+document.addEventListener('DOMContentLoaded', setupSearch);

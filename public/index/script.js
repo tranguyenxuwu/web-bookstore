@@ -42,7 +42,7 @@ setInterval(nextSlide, 5000);
 const fetchAndDisplayBooks = async () => {
   try {
       // Replace with your actual API endpoint
-      const response = await fetch('./product.json');
+      const response = await fetch('http://13.210.243.191:8000/api/getAllBooks');
       const result = await response.json();
 
       if (result.status === 'success' && result.data) {
