@@ -1,3 +1,5 @@
+import { APP_ENV } from '../../env.js';
+
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
@@ -17,36 +19,127 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchProductDetails(productId) {
-  fetch('http://localhost/api/getAllBooks')
+  fetch(APP_ENV.MASTER_URL)
     .then(response => response.json())
     .then(data => {
-      const product = data.data.find(item => item.ma_sach == productId);
+      console.log("Fetched data:", data); // Log the response to see its structure
+      
+      // Check various possible data structures
+      let products = [];
+      if (Array.isArray(data)) {
+        products = data;
+      } else if (data && Array.isArray(data.data)) {
+        products = data.data;
+      } else if (data && typeof data === 'object') {
+        // If it's a single product object
+        products = [data];
+      }
+
+      const product = products.find(item => item.ma_sach == productId);
       if (product) {
         displayProductDetails(product);
       } else {
-        console.error('Product not found');
+        console.error('Product not found in response');
+        displayNotFoundMessage();
       }
     })
-    .catch(error => console.error('Error fetching product details:', error));
+    .catch(error => {
+      console.error('Error fetching product details:', error);
+      displayNotFoundMessage();
+    });
 }
 
 function displayProductDetails(product) {
+  // Set product image with fallback
   document.getElementById('product-img').src = product.hinh_anh || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
-  document.getElementById('product-title').textContent = product.tieu_de;
-  document.getElementById('product-author').querySelector('span').textContent = product.tac_gias.map(author => author.ten_tac_gia).join(', ');
-  document.getElementById('product-publisher').querySelector('span').textContent = product.nha_xuat_ban.ten_nha_xuat_ban;
-  document.getElementById('product-price').querySelector('span').textContent = new Intl.NumberFormat('vi-VN', {
-    style: 'currency',
-    currency: 'VND'
-  }).format(product.gia_tien);
-  document.getElementById('product-description').querySelector('span').textContent = product.gioi_thieu;
+  
+  // Set product title or not found message
+  const titleElement = document.getElementById('product-title');
+  if (titleElement) {
+    if (product.tieu_de) {
+      titleElement.textContent = product.tieu_de;
+    } else {
+      titleElement.innerHTML = '<p>Tiêu đề không có sẵn</p>';
+    }
+  }
+  
+  // Set product authors if element exists
+  const authorElement = document.getElementById('product-author');
+  if (authorElement) {
+    const authorSpan = authorElement.querySelector('span');
+    if (authorSpan) {
+      if (product.tac_gias && Array.isArray(product.tac_gias) && product.tac_gias.length > 0) {
+        authorSpan.textContent = product.tac_gias.map(author => author.ten_tac_gia).join(', ');
+      } else {
+        authorSpan.textContent = 'Không có thông tin tác giả';
+      }
+    }
+  }
+  
+  // Set publisher if element exists
+  const publisherElement = document.getElementById('product-publisher');
+  if (publisherElement) {
+    const publisherSpan = publisherElement.querySelector('span');
+    if (publisherSpan) {
+      if (product.nha_xuat_ban && product.nha_xuat_ban.ten_nha_xuat_ban) {
+        publisherSpan.textContent = product.nha_xuat_ban.ten_nha_xuat_ban;
+      } else {
+        publisherSpan.textContent = 'Không có thông tin nhà xuất bản';
+      }
+    }
+  }
+  
+  // Set price
+  const priceElement = document.getElementById('product-price');
+  if (priceElement) {
+    const priceSpan = priceElement.querySelector('span');
+    if (priceSpan) {
+      if (product.gia_tien) {
+        priceSpan.textContent = new Intl.NumberFormat('vi-VN', {
+          style: 'currency',
+          currency: 'VND'
+        }).format(product.gia_tien);
+      } else {
+        priceSpan.textContent = 'Không có thông tin giá';
+      }
+    }
+  }
+  
+  // Set description
+  const descriptionElement = document.getElementById('product-description');
+  if (descriptionElement) {
+    const descSpan = descriptionElement.querySelector('span');
+    if (descSpan) {
+      if (product.gioi_thieu) {
+        descSpan.textContent = product.gioi_thieu;
+      } else {
+        descSpan.textContent = 'Không có thông tin mô tả sản phẩm';
+      }
+    }
+  }
+}
+
+function displayNotFoundMessage() {
+  const container = document.querySelector('.product-details-container') || document.body;
+  container.innerHTML = '<div class="error-message"><h2>Không tìm thấy sản phẩm</h2><p>Sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p></div>';
 }
 
 function addToCart(productId, redirectToCart = false) {
-  fetch('http://localhost/api/getAllBooks')
+  fetch(APP_ENV.MASTER_URL)
     .then(response => response.json())
     .then(data => {
-      const product = data.data.find(item => item.ma_sach == productId);
+      // Check various possible data structures
+      let products = [];
+      if (Array.isArray(data)) {
+        products = data;
+      } else if (data && Array.isArray(data.data)) {
+        products = data.data;
+      } else if (data && typeof data === 'object') {
+        // If it's a single product object
+        products = [data];
+      }
+      
+      const product = products.find(item => item.ma_sach == productId);
       if (product) {
         const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
         const existingItem = cartItems.find(item => item.id == productId);
@@ -56,8 +149,8 @@ function addToCart(productId, redirectToCart = false) {
         } else {
           cartItems.push({
             id: productId,
-            title: product.tieu_de,
-            price: product.gia_tien,
+            title: product.tieu_de || 'Sản phẩm không tên',
+            price: product.gia_tien || 0,
             quantity: 1
           });
         }
@@ -69,99 +162,77 @@ function addToCart(productId, redirectToCart = false) {
         }
       } else {
         console.error('Product not found');
+        alert('Không thể thêm vào giỏ hàng: Sản phẩm không tồn tại');
       }
-    })
-    .catch(error => console.error('Error adding to cart:', error));
-}
-
-function fetchBooksInSeries(bookId) {
-  fetch('./product.json')
-    .then(response => response.json())
-    .then(data => {
-      const currentBookSeries = data.bo_sachs.find(series => 
-        series.pivot.ma_sach === bookId
-      );
-      
-      if (!currentBookSeries) {
-        return []; // Book not in any series
-      }
-
-      // Get all books in same series
-      const seriesBooks = data.bo_sachs
-        .filter(series => series.ma_bo_sach === currentBookSeries.ma_bo_sach)
-        .filter(series => series.pivot.ma_sach !== bookId);
-      
-      displaySeriesBooks(seriesBooks);
     })
     .catch(error => {
-      console.error('Error fetching books in series:', error);
-      const container = document.querySelector('.product-in-series');
-      container.innerHTML = '<div class="error-message">Không thể tải sách cùng bộ</div>';
+      console.error('Error adding to cart:', error);
+      alert('Không thể thêm vào giỏ hàng: Lỗi kết nối');
     });
 }
 
-function displaySeriesBooks(books) {
-  const container = document.querySelector('.product-in-series');
-  
-  if (!books.length) {
-    container.innerHTML = '<p>Không có sách cùng bộ</p>';
-    return;
-  }
-
-  container.innerHTML = books.map(book => `
-    <div class="product-card">
-      <img src="${book.image || '#'}" alt="${book.ten_bo_sach}" />
-      <h3>${book.ten_bo_sach}</h3>
-      <a href="detail_product.html?id=${book.pivot.ma_sach}" class="view-details">
-        Xem chi tiết
-      </a>
-    </div>
-  `).join('');
-}
-
-function fetchRelatedProducts(bookId) {
-  fetch('http://localhost/api/getAllBooks')
+function fetchRelatedProducts(productId) {
+  fetch(APP_ENV.MASTER_URL)
     .then(response => response.json())
-    .then(response => {
-      // Check response structure
-      if (!response.status === 'success' || !Array.isArray(response.data)) {
-        throw new Error('Invalid data structure');
+    .then(data => {
+      console.log("Related products data:", data); // Log the response to see its structure
+      
+      // Check various possible data structures
+      let products = [];
+      if (Array.isArray(data)) {
+        products = data;
+      } else if (data && Array.isArray(data.data)) {
+        products = data.data;
+      } else if (data && typeof data === 'object') {
+        // If it's a single product object
+        products = [data];
+      }
+      
+      if (!products || products.length === 0) {
+        throw new Error('No products found in response');
       }
 
-      // Find current book
-      const currentBook = response.data.find(book => book.ma_sach === bookId);
-      if (!currentBook) {
-        throw new Error('Book not found');
+      // Find current product
+      const currentProduct = products.find(item => item.ma_sach == productId);
+      if (!currentProduct) {
+        throw new Error('Current product not found');
       }
 
-      // Get current book's category
-      const currentBookCategory = currentBook.the_loais?.[0]?.ma_the_loai;
-      if (!currentBookCategory) {
-        throw new Error('Book category not found');
+      // Get current product's category if it exists
+      let currentCategory = null;
+      if (currentProduct.the_loais && Array.isArray(currentProduct.the_loais) && currentProduct.the_loais.length > 0) {
+        currentCategory = currentProduct.the_loais[0].ma_the_loai;
       }
 
-      // Get related books from same category
-      const relatedBooks = response.data
-        .filter(book => 
-          book.the_loais?.some(cat => cat.ma_the_loai === currentBookCategory) &&
-          book.ma_sach !== bookId
-        )
-        .slice(0, 8); // gia tri nay de gioi han so luong sach lien quan
+      let relatedProducts = [];
+      if (currentCategory) {
+        // Get related products from same category
+        relatedProducts = products
+          .filter(product => 
+            product.ma_sach != productId && 
+            product.the_loais && 
+            Array.isArray(product.the_loais) && 
+            product.the_loais.some(cat => cat.ma_the_loai === currentCategory)
+          )
+          .slice(0, 8); // Limit to 8 related products
+      }
 
-      displayRelatedProducts(relatedBooks);
+      displayRelatedProducts(relatedProducts);
     })
     .catch(error => {
       console.error('Error fetching related products:', error);
       const container = document.querySelector('.product-in-series');
-      container.innerHTML = '<div class="error-message">Không thể tải sách liên quan</div>';
+      if (container) {
+        container.innerHTML = '<div class="error-message">Không thể tải sách liên quan</div>';
+      }
     });
 }
 
-// Update display function
 function displayRelatedProducts(products) {
   const container = document.querySelector('.product-in-series');
+  if (!container) return;
   
-  if (!products.length) {
+  if (!products || !products.length) {
     container.innerHTML = '<p>Không tìm thấy sách liên quan</p>';
     return;
   }
@@ -170,33 +241,25 @@ function displayRelatedProducts(products) {
     <div class="product-series">
       <a href="detail_product.html?id=${product.ma_sach}">
         <img 
-          alt="${product.tieu_de}"
-          src="${product.image_url || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg'}"
+          alt="${product.tieu_de || 'Sản phẩm'}"
+          src="${product.hinh_anh || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg'}"
         />
       </a>
       <div class="product-series-info">
-        <h3>${product.tieu_de}</h3>
-        <p class="price">${Number(product.gia_tien).toLocaleString('vi-VN')}đ</p>
+        <h3>${product.tieu_de || 'Không có tiêu đề'}</h3>
+        <p class="price">${product.gia_tien ? Number(product.gia_tien).toLocaleString('vi-VN') + 'đ' : 'Không có giá'}</p>
       </div>
     </div>
   `).join('');
 }
 
-// Update event listener to call both functions
-document.addEventListener('DOMContentLoaded', () => {
-  const urlParams = new URLSearchParams(window.location.search);
-  const bookId = parseInt(urlParams.get('id'));
-  if (bookId) {
-    fetchBooksInSeries(bookId);
-    fetchRelatedProducts(bookId);
-  }
-});
-
-// slider control
+// Slider control
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.product-in-series');
   const prevBtn = document.querySelector('.prev-button');
   const nextBtn = document.querySelector('.next-button');
+  
+  if (!container || !prevBtn || !nextBtn) return;
   
   const scrollAmount = 300;
   let startX, isDown = false;
