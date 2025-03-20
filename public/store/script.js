@@ -26,7 +26,7 @@ async function fetchData() {
   try {
     document.querySelector('.product-container').innerHTML = '<p class="loading">Đang tải...</p>';
     
-    const response = await fetch(APP_ENV.FETCH_STORE_URL);
+    const response = await fetch(APP_ENV.MASTER_URL);
     if (!response.ok) throw new Error('Network error');
     
     const responseData = await response.json();
