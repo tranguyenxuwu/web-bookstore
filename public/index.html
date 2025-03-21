@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReadOn - Trang chủ</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="./assets/style/index_style.css" />
   </head>
   <body>
     <!-- navigation bar -->
@@ -20,7 +20,7 @@
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
             />
             <button class="search-button" onclick="searchBooks()">
-              <img src="./search.png" alt="Search" />
+              <img src="./assets/image/search.png" alt="Search" />
             </button>
           </div>
 
@@ -108,18 +108,26 @@
       <div class="product-series-container">
         <div class="slider-wrapper">
           <button class="slider-button prev-button" aria-label="Previous">
-            <img src="./arrow_back.png" alt="Previous" class="arrow-icon" />
+            <img
+              src="./assets/image/arrow_back.png"
+              alt="Previous"
+              class="arrow-icon"
+            />
           </button>
           <div class="product-in-series">
             <!-- Products here -->
           </div>
           <button class="slider-button next-button" aria-label="Next">
-            <img src="./right-arrow.png" alt="Next" class="arrow-icon" />
+            <img
+              src="./assets/image/right-arrow.png"
+              alt="Next"
+              class="arrow-icon"
+            />
           </button>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
+    <script src="./assets/script/script_index.js"></script>
     <script>
       function searchBooks() {
         const query = document.querySelector(".search-input").value;

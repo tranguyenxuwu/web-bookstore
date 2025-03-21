@@ -1,4 +1,4 @@
-import { APP_ENV } from '../../env.js';
+import { APP_ENV } from './env.js';
 
 let currentPage = 1;
 const itemsPerPage = 8;
@@ -175,7 +175,7 @@ async function performSearch() {
     const results = await response.json();
     
     sessionStorage.setItem('searchResults', JSON.stringify(results));
-    window.location.href = `../search/index.html?title=${encodeURIComponent(query)}`;
+    window.location.href = `../search.html?title=${encodeURIComponent(query)}`;
   } catch (error) {
     console.error('Search failed:', error);
   }
