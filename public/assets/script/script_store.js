@@ -98,9 +98,9 @@ function displayPage(items) {
       
       productElement.innerHTML = `
         <a href="../detail_product/detail_product.html?id=${book.ma_sach}">
-          <img src="${book.hinh_anh || '../../placeholder.jpg'}" 
+          <img src="${book.hinh_anh || '../image/placeholder.jpg'}" 
                alt="${book.tieu_de}"
-               onerror="this.src='../../placeholder.jpg'">
+               onerror="this.src='../image/placeholder.jpg'">
         </a>
         <div class="product-info">
           <h3>${book.tieu_de}</h3>
