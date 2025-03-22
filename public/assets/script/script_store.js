@@ -97,10 +97,10 @@ function displayPage(items) {
       productElement.className = 'product';
       
       productElement.innerHTML = `
-        <a href="../detail_product/detail_product.html?id=${book.ma_sach}">
-          <img src="${book.hinh_anh || '../image/placeholder.jpg'}" 
+        <a href="./detail_product.html?id=${book.ma_sach}">
+          <img src="${book.hinh_anh || 'https://pub-4ed4f2ae73e945259f0a743a6c5e9cb4.r2.dev/placeholder.jpg'}" 
                alt="${book.tieu_de}"
-               onerror="this.src='../image/placeholder.jpg'">
+               onerror="this.src='https://pub-4ed4f2ae73e945259f0a743a6c5e9cb4.r2.dev/placeholder.jpg'">
         </a>
         <div class="product-info">
           <h3>${book.tieu_de}</h3>
