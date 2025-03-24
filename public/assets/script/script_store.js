@@ -98,9 +98,9 @@ function displayPage(items) {
       
       productElement.innerHTML = `
         <a href="./detail_product.html?id=${book.ma_sach}">
-          <img src="${book.hinh_anh || 'https://pub-4ed4f2ae73e945259f0a743a6c5e9cb4.r2.dev/placeholder.jpg'}" 
+          <img src="${book.hinh_anh || 'https://cdn.elysia-app.live/placeholder.jpg'}" 
                alt="${book.tieu_de}"
-               onerror="this.src='https://pub-4ed4f2ae73e945259f0a743a6c5e9cb4.r2.dev/placeholder.jpg'">
+               onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg'">
         </a>
         <div class="product-info">
           <h3>${book.tieu_de}</h3>

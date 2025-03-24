@@ -1,4 +1,4 @@
-import { APP_ENV } from '../../env.js';
+import { APP_ENV } from './env.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const urlParams = new URLSearchParams(window.location.search);
@@ -19,29 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function fetchProductDetails(productId) {
-  fetch(APP_ENV.MASTER_URL)
-    .then(response => response.json())
-    .then(data => {
-      console.log("Fetched data:", data); // Log the response to see its structure
-      
-      // Check various possible data structures
-      let products = [];
-      if (Array.isArray(data)) {
-        products = data;
-      } else if (data && Array.isArray(data.data)) {
-        products = data.data;
-      } else if (data && typeof data === 'object') {
-        // If it's a single product object
-        products = [data];
-      }
-
-      const product = products.find(item => item.ma_sach == productId);
-      if (product) {
-        displayProductDetails(product);
-      } else {
-        console.error('Product not found in response');
-        displayNotFoundMessage();
-      }
+  fetch(`${APP_ENV.FETCH_BY_ID_URL}${productId}`)
+    .then(response => {
+      if (!response.ok) throw new Error('Product not found');
+      return response.json();
+    })
+    .then(product => {
+      displayProductDetails(product);
     })
     .catch(error => {
       console.error('Error fetching product details:', error);
@@ -49,9 +33,43 @@ function fetchProductDetails(productId) {
     });
 }
 
+function addToCart(productId, redirectToCart = false) {
+  fetch(`${APP_ENV.FETCH_BY_ID_URL}${productId}`)
+    .then(response => {
+      if (!response.ok) throw new Error('Product not found');
+      return response.json();
+    })
+    .then(product => {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const existingItem = cartItems.find(item => item.id == productId);
+
+      if (existingItem) {
+        existingItem.quantity += 1;
+      } else {
+        cartItems.push({
+          id: productId,
+          title: product.tieu_de || 'Sản phẩm không tên',
+          price: product.gia_tien || 0,
+          quantity: 1
+        });
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cartItems));
+      alert('Đã thêm vào giỏ hàng!');
+      if (redirectToCart) {
+        window.location.href = '../cart/cart.html';
+      }
+    })
+    .catch(error => {
+      console.error('Error adding to cart:', error);
+      alert('Không thể thêm vào giỏ hàng: Lỗi kết nối');
+    });
+}
+
+
 function displayProductDetails(product) {
   // Set product image with fallback
-  document.getElementById('product-img').src = product.hinh_anh || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg';
+  document.getElementById('product-img').src = product.hinh_anh || APP_ENV.PLACEHOLDER_IMAGE;
   
   // Set product title or not found message
   const titleElement = document.getElementById('product-title');
@@ -124,52 +142,7 @@ function displayNotFoundMessage() {
   container.innerHTML = '<div class="error-message"><h2>Không tìm thấy sản phẩm</h2><p>Sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.</p></div>';
 }
 
-function addToCart(productId, redirectToCart = false) {
-  fetch(APP_ENV.MASTER_URL)
-    .then(response => response.json())
-    .then(data => {
-      // Check various possible data structures
-      let products = [];
-      if (Array.isArray(data)) {
-        products = data;
-      } else if (data && Array.isArray(data.data)) {
-        products = data.data;
-      } else if (data && typeof data === 'object') {
-        // If it's a single product object
-        products = [data];
-      }
-      
-      const product = products.find(item => item.ma_sach == productId);
-      if (product) {
-        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-        const existingItem = cartItems.find(item => item.id == productId);
 
-        if (existingItem) {
-          existingItem.quantity += 1;
-        } else {
-          cartItems.push({
-            id: productId,
-            title: product.tieu_de || 'Sản phẩm không tên',
-            price: product.gia_tien || 0,
-            quantity: 1
-          });
-        }
-
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-        alert('Đã thêm vào giỏ hàng!');
-        if (redirectToCart) {
-          window.location.href = '../cart/cart.html'; // Redirect to cart page
-        }
-      } else {
-        console.error('Product not found');
-        alert('Không thể thêm vào giỏ hàng: Sản phẩm không tồn tại');
-      }
-    })
-    .catch(error => {
-      console.error('Error adding to cart:', error);
-      alert('Không thể thêm vào giỏ hàng: Lỗi kết nối');
-    });
-}
 
 function fetchRelatedProducts(productId) {
   fetch(APP_ENV.MASTER_URL)

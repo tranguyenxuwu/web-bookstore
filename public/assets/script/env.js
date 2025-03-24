@@ -5,9 +5,15 @@ export const APP_ENV = {
     FETCH_STORE_URL: 'https://api.elysia-app.live/book/randomStoreIndex',
     SEARCH_URL: 'https://api.elysia-app.live/book/search',
     MASTER_URL: 'https://api.elysia-app.live/book/all',
+    FETCH_BY_ID_URL: 'https://api.elysia-app.live/book/id/',
   
  // POST ENDPOINTS   
     IMAGE_PRESIGNED_URL: 'https://api.elysia-app.live/upload/presigned',
     UPLOAD_BOOK_URL: 'https://api.elysia-app.live/upload/book',  
-    DEBUG_MODE: true
+
+ // placehoder image
+   PLACEHOLDER_IMAGE: 'https://cdn.elysia-app.live/placeholder.jpg',
+
+   DEBUG_MODE: true
+      
   };
