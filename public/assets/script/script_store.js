@@ -26,7 +26,16 @@ async function fetchData() {
   try {
     document.querySelector('.product-container').innerHTML = '<p class="loading">Đang tải...</p>';
     
-    const response = await fetch(APP_ENV.MASTER_URL);
+    // Thêm timeout để tránh treo trang
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    
+    const response = await fetch(APP_ENV.MASTER_URL, {
+      signal: controller.signal
+    });
+    
+    clearTimeout(timeoutId);
+    
     if (!response.ok) throw new Error('Network error');
     
     const responseData = await response.json();
@@ -34,16 +43,12 @@ async function fetchData() {
     // Handle different response formats
     let bookData;
     if (Array.isArray(responseData)) {
-      // If the response is directly an array
       bookData = responseData;
     } else if (responseData.data && Array.isArray(responseData.data)) {
-      // If the response has a data property that's an array
       bookData = responseData.data;
     } else if (responseData.books && Array.isArray(responseData.books)) {
-      // Alternative property name
       bookData = responseData.books;
     } else {
-      // If we can't find an array, create one from the single object if applicable
       bookData = responseData && typeof responseData === 'object' ? [responseData] : [];
       console.warn('Unexpected API response format:', responseData);
     }

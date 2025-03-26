@@ -1,3 +1,13 @@
+// Đầu file, thêm:
+import { APP_ENV } from './env.js';
+
+// Hoặc nếu không dùng ES6 modules, tạo biến APP_ENV trực tiếp:
+const APP_ENV = {
+  MASTER_URL: './assets/data/books.json',
+  LOGO_IMAGE: './assets/image/logo.png',
+  PLACEHOLDER_IMAGE: 'https://cdn.elysia-app.live/placeholder.jpg'
+};
+
 const carousel = document.querySelector('.carousel');
 const slides = document.querySelectorAll('.slide');
 const dots = document.querySelectorAll('.dot');
@@ -39,38 +49,34 @@ dots.forEach((dot, index) => {
 setInterval(nextSlide, 5000);
 
 // Function to fetch and display books
-const fetchAndDisplayBooks = async () => {
+async function fetchAndDisplayBooks() {
   try {
-      // Replace with your actual API endpoint
-      const response = await fetch('http://localhost/api/getAllBooks');
-      const result = await response.json();
-
-      if (result.status === 'success' && result.data) {
-          const container = document.querySelector('.product-in-series');
-          
-          // Clear existing content
-          container.innerHTML = '';
-          
-          // Fix product detail links in carousel/featured products
-          container.innerHTML = result.data.map(product => `
-              <div class="product-series">
-                  <a href="detail_product.html?id=${product.ma_sach}">
-                      <img 
-                          alt="${product.tieu_de}"
-                          src="${product.image_url || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg'}"
-                      />
-                  </a>
-                  <div class="product-series-info">
-                      <h3>${product.tieu_de}</h3>
-                      <p class="price">${Number(product.gia_tien).toLocaleString('vi-VN')}đ</p>
-                  </div>
-              </div>
-          `).join('');
-      }
+    const response = await fetch(APP_ENV.MASTER_URL);
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+    const data = await response.json();
+    
+    // Kiểm tra cấu trúc dữ liệu
+    const books = data.data || data.books || (Array.isArray(data) ? data : []);
+    
+    if (books.length === 0) {
+      console.warn('No books found in data');
+      // Hiển thị thông báo không có sách
+      document.querySelector('.featured-products-container').innerHTML = 
+        '<p>Không tìm thấy sách nào.</p>';
+      return;
+    }
+    
+    // Hiển thị sách
+    displayFeaturedBooks(books);
   } catch (error) {
-      console.error('Error fetching books:', error);
+    console.error('Error fetching books:', error);
+    // Hiển thị thông báo lỗi
+    document.querySelector('.featured-products-container').innerHTML = 
+      '<p>Đã xảy ra lỗi khi tải sách. Vui lòng thử lại sau.</p>';
   }
-};
+}
 
 // Call the function when the page loads
 document.addEventListener('DOMContentLoaded', fetchAndDisplayBooks);

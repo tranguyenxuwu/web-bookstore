@@ -52,7 +52,7 @@ function searchBooks() {
 function performSearch(searchTerm) {
   // This is where you would fetch search results from your API or data source
   // For now, just a placeholder implementation
-  fetch(?q=${encodeURIComponent(searchTerm)}`)
+  fetch(`/api/books/search?q=${encodeURIComponent(searchTerm)}`)
     .then(response => response.json())
     .then(results => {
       sessionStorage.setItem('searchResults', JSON.stringify(results));
