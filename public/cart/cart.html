@@ -11,7 +11,7 @@
     <div class="navbar-container">
       <nav class="navbar">
         <div class="nav-container">
-          <a href="../index/">
+          <a href="../index.html">
             <img src="#" alt="ReadOn" class="logo" />
           </a>
           <div class="search-container">
@@ -21,7 +21,7 @@
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
             />
             <button class="search-button" onclick="searchBooks()">
-              <img src="../store/search.png" alt="Search" />
+              <img src="../assets/image/search.png" alt="Search" />
             </button>
           </div>
           <div class="nav-icons">
@@ -68,6 +68,10 @@
           <!-- Cart items will be dynamically added here -->
         </tbody>
       </table>
+      <div id="empty-cart-message" style="display: none;">
+        <p>Giỏ hàng của bạn đang trống.</p>
+        <a href="../index.html" class="continue-shopping">Tiếp tục mua sắm</a>
+      </div>
       <div class="cart-summary">
         <h2>Tổng cộng</h2>
         <p id="cart-total">0 VND</p>
@@ -105,5 +109,11 @@
       <p>&copy; 2023 Book Store. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
+    <script>
+      function searchBooks() {
+        const query = document.querySelector(".search-input").value;
+        window.location.href = `../search.html?query=${encodeURIComponent(query)}`;
+      }
+    </script>
   </body>
 </html>

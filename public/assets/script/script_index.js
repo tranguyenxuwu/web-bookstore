@@ -51,10 +51,10 @@ const fetchAndDisplayBooks = async () => {
           // Clear existing content
           container.innerHTML = '';
           
-          // Map data to HTML structure
+          // Fix product detail links in carousel/featured products
           container.innerHTML = result.data.map(product => `
               <div class="product-series">
-                  <a href="../detail_product/detail_product.html?id=${product.ma_sach}">
+                  <a href="detail_product.html?id=${product.ma_sach}">
                       <img 
                           alt="${product.tieu_de}"
                           src="${product.image_url || 'https://www.genius100visions.com/wp-content/uploads/2017/09/placeholder-vertical.jpg'}"

@@ -1,3 +1,19 @@
+// Add this at the beginning of the file
+let books = [
+  {
+    image: "https://cdn.elysia-app.live/placeholder.jpg",
+    title: "Mẫu sách 1",
+    price: 150000,
+    publisher: "NXB Kim Đồng"
+  },
+  {
+    image: "https://cdn.elysia-app.live/placeholder.jpg",
+    title: "Mẫu sách 2",
+    price: 120000,
+    publisher: "NXB Trẻ"
+  }
+];
+
 // Cập nhật hàm renderBooks
 function renderBooks() {
     const bookList = document.getElementById("bookList");
@@ -73,6 +89,13 @@ function renderBooks() {
   async function fetchBooks() {
     // Giả lập gọi API
     renderBooks();
+  }
+
+  // Add missing showDashboard function
+  function showDashboard() {
+    document.getElementById("dashboardSection").style.display = "block";
+    document.getElementById("booksSection").style.display = "none";
+    closeSidePanel();
   }
 
   // Hàm khởi tạo ban đầu

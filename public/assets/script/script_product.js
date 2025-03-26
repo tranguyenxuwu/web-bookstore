@@ -1,22 +1,64 @@
 import { APP_ENV } from './env.js';
+import { ApiService } from './api-service.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('id');
+  
+  // Set logo
+  document.querySelectorAll('.logo').forEach(logo => {
+    logo.src = APP_ENV.LOGO_IMAGE;
+  });
 
   if (productId) {
-    fetchProductDetails(productId);
-    fetchRelatedProducts(productId);
+    try {
+      const product = await ApiService.getBookById(productId);
+      displayProductDetails(product);
+      fetchRelatedProducts(productId);
+      
+      // Setup buttons
+      document.getElementById('add-to-cart').addEventListener('click', () => {
+        addToCart(productId);
+      });
+      
+      document.getElementById('buy-now').addEventListener('click', () => {
+        addToCart(productId, true);
+      });
+    } catch (error) {
+      console.error('Error:', error);
+      displayNotFoundMessage();
+    }
+  } else {
+    displayNotFoundMessage('Không tìm thấy mã sản phẩm');
   }
-
-  document.getElementById('add-to-cart').addEventListener('click', () => {
-    addToCart(productId);
-  });
-
-  document.getElementById('buy-now').addEventListener('click', () => {
-    addToCart(productId, true);
-  });
+  
+  // Setup search functionality
+  setupSearch();
 });
+
+function setupSearch() {
+  const searchInput = document.querySelector('.search-input');
+  const searchButton = document.querySelector('.search-button');
+  
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') performSearch();
+  });
+  
+  searchButton.addEventListener('click', performSearch);
+}
+
+async function performSearch() {
+  const query = document.querySelector('.search-input').value.trim();
+  if (!query) return;
+  
+  try {
+    const results = await ApiService.searchBooks(query);
+    sessionStorage.setItem('searchResults', JSON.stringify(results));
+    window.location.href = `../search.html?query=${encodeURIComponent(query)}`;
+  } catch (error) {
+    console.error('Search failed:', error);
+  }
+}
 
 function fetchProductDetails(productId) {
   fetch(`${APP_ENV.FETCH_BY_ID_URL}${productId}`)
@@ -56,6 +98,7 @@ function addToCart(productId, redirectToCart = false) {
 
       localStorage.setItem('cart', JSON.stringify(cartItems));
       alert('Đã thêm vào giỏ hàng!');
+      // Fix the redirect to cart path
       if (redirectToCart) {
         window.location.href = '../cart/cart.html';
       }

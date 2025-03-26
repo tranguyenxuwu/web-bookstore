@@ -102,12 +102,7 @@ function displayPage(items) {
                alt="${book.tieu_de}"
                onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg'">
         </a>
-        <div class="product-info">
-          <h3>${book.tieu_de}</h3>
-          ${book.gia_tien ? `<p class="price">${new Intl.NumberFormat('vi-VN', 
-            { style: 'currency', currency: 'VND' }).format(book.gia_tien)}</p>` : ''}
-          ${book.so_tap ? `<p class="volume">Tập: ${book.so_tap}</p>` : ''}
-        </div>
+        <!-- rest of content -->
       `;
       
       productContainer.appendChild(productElement);
@@ -175,7 +170,7 @@ async function performSearch() {
     const results = await response.json();
     
     sessionStorage.setItem('searchResults', JSON.stringify(results));
-    window.location.href = `../search.html?title=${encodeURIComponent(query)}`;
+    window.location.href = `search.html?title=${encodeURIComponent(query)}`;
   } catch (error) {
     console.error('Search failed:', error);
   }
