@@ -102,7 +102,12 @@ function displayPage(items) {
                alt="${book.tieu_de}"
                onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg'">
         </a>
-        <!-- rest of content -->
+        <div class="product-info">
+          <h3>${book.tieu_de}</h3>
+          ${book.gia_tien ? `<p class="price">${new Intl.NumberFormat('vi-VN', 
+            { style: 'currency', currency: 'VND' }).format(book.gia_tien)}</p>` : ''}
+          ${book.so_tap ? `<p class="volume">Tập: ${book.so_tap}</p>` : ''}
+        </div>
       `;
       
       productContainer.appendChild(productElement);
