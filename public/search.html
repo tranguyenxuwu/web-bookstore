@@ -15,16 +15,18 @@
             <img src="#" alt="ReadOn" class="logo" />
           </a>
 
-          <div class="search-container">
+          <!-- Replace the search-container div with this form -->
+          <form id="search-form" class="search-container">
             <input
               type="text"
+              id="search-input"
               class="search-input"
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
             />
-            <button class="search-button" onclick="searchBooks()">
+            <button type="submit" class="search-button">
               <img src="./assets/image/search.png" alt="Search" />
             </button>
-          </div>
+          </form>
 
           <div class="nav-icons">
             <a href="#" class="nav-icon">
@@ -108,6 +110,6 @@
       </div>
       <p>&copy; 2023 Book Store. All rights reserved.</p>
     </footer>
-    <script src="./assets/script/script_seach.js"></script>
+    <script src="./assets/script/script_search.js"></script>
   </body>
 </html>
