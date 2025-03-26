@@ -67,15 +67,19 @@ function createBookElement(book) {
   productElement.innerHTML = `
     <a href="/public/product.html?id=${book.ma_sach}" class="product-link">
       <div class="product-image">
-        <img src="/public/assets/images/books/${book.ma_sach}.jpg" 
-             alt="${book.tieu_de}" 
+        <img src="${
+          book.sach_bia_sach?.url_bia_chinh || APP_ENV.PLACEHOLDER_IMAGE
+        }" 
+             alt="${book.tieu_de || "Sản phẩm"}" 
              onerror="this.src='${APP_ENV.PLACEHOLDER_IMAGE}'">
       </div>
       <div class="product-info">
-        <h3>${book.tieu_de}</h3>
-        <p class="author">Tập ${book.so_tap}</p>
+        <h3>${book.tieu_de || "Không có tiêu đề"}</h3>
+        <p class="author">${book.so_tap ? `Tập ${book.so_tap}` : ""}</p>
         <div class="price">
-          <span class="sale-price">${formattedPrice}₫</span>
+          <span class="sale-price">${
+            book.gia_tien ? formattedPrice + "₫" : "Liên hệ"
+          }</span>
         </div>
       </div>
     </a>
