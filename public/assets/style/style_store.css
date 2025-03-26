@@ -508,3 +508,40 @@ footer > p {
 .product:nth-child(n + 5) {
   animation-delay: 0.4s;
 }
+/* Thêm vào cuối file */
+
+/* Tùy chỉnh chung cho cả 2 trang */
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.product-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Đảm bảo nhất quán font chữ */
+.product-info h3 {
+  font-family: inherit;
+}
+
+/* Điều chỉnh khoảng cách cho volume */
+.author {
+  margin-bottom: 8px !important;
+}
+
+/* Responsive hình ảnh */
+@media (max-width: 768px) {
+  .product img {
+    height: 200px !important;
+  }
+}
+
+/* Loại bỏ padding thừa */
+.product-info {
+  padding: 18px !important;
+}

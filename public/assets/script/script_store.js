@@ -97,7 +97,7 @@ function displayPage(items) {
       productElement.className = 'product';
       
       productElement.innerHTML = `
-        <a href="./detail_product.html?id=${book.ma_sach}">
+        <a href="./product.html?id=${book.ma_sach}">
           <img src="${book.hinh_anh || 'https://cdn.elysia-app.live/placeholder.jpg'}" 
                alt="${book.tieu_de}"
                onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg'">
