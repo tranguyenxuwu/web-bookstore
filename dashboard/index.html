@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Sách</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Phần cấu trúc HTML giữ nguyên -->
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="logo">Control Panel</div>
+      <nav>
+        <ul>
+          <li onclick="showDashboard()">Dashboard</li>
+          <li onclick="showBooks()">Tất cả sách</li>
+          <li onclick="openSidePanel()">Thêm sách mới</li>
+        </ul>
+      </nav>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-content">
+      <!-- TOPBAR -->
+      <div class="topbar">
+        <div class="search">
+          <input type="text" placeholder="Search here..." />
+        </div>
+        <div class="user-area">
+          <div class="notification">🔔</div>
+          <div class="avatar"></div>
+        </div>
+      </div>
+
+      <!-- PHẦN DASHBOARD (stats + chart) -->
+      <div id="dashboardSection">
+        <div class="cards">
+          <div class="card">
+            <h3>Total Income</h3>
+            <div class="value">$ 579,000</div>
+            <small>Saved 22%</small>
+          </div>
+          <div class="card">
+            <h3>Total Expenses</h3>
+            <div class="value">$ 79,000</div>
+            <small>Saved 20%</small>
+          </div>
+          <div class="card">
+            <h3>Cash on Hand</h3>
+            <div class="value">$ 92,000</div>
+            <small>Saved 25%</small>
+          </div>
+          <div class="card">
+            <h3>Net Profit Margin</h3>
+            <div class="value">$ 179,000</div>
+            <small>Saved 18%</small>
+          </div>
+        </div>
+        <div class="chart-area">
+          <div class="chart-placeholder">[Biểu đồ doanh thu / chi phí]</div>
+        </div>
+      </div>
+
+      <!-- PHẦN DANH SÁCH SÁCH -->
+      <div id="booksSection" style="display: none">
+        <div class="table-area">
+          <table>
+            <thead>
+              <tr>
+                <th>Ảnh</th>
+                <th>Tiêu đề</th>
+                <th>Giá</th>
+                <th>NXB</th>
+              </tr>
+            </thead>
+            <tbody id="bookList"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- SIDE PANEL: FORM THÊM SÁCH -->
+    <div id="sidePanel" class="side-panel">
+      <h2>Thêm Sách Mới</h2>
+      <button class="close-btn" onclick="closeSidePanel()">Đóng</button>
+      <form id="bookForm">
+        <input type="file" id="fileInput" />
+        <input type="text" id="title" placeholder="Tiêu đề" required />
+        <input type="number" id="price" placeholder="Giá tiền" required />
+        <input type="text" id="publisher" placeholder="Nhà xuất bản" />
+        <button type="button" onclick="submitBook()">Lưu</button>
+      </form>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

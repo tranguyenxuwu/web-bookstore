@@ -237,9 +237,9 @@ body {
 /* Products */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, minmax(220px, 1fr));
   gap: 25px;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .product {
@@ -438,6 +438,12 @@ footer > p {
 }
 
 /* Responsive styles */
+@media (max-width: 1200px) {
+  .product-container {
+    grid-template-columns: repeat(3, minmax(220px, 1fr));
+  }
+}
+
 @media (max-width: 992px) {
   .content-container {
     flex-direction: column;
@@ -449,7 +455,7 @@ footer > p {
   }
 
   .product-container {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
   }
 }
 
@@ -471,7 +477,7 @@ footer > p {
   }
 
   .product-container {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: 1fr;
     gap: 15px;
   }
 
@@ -507,4 +513,41 @@ footer > p {
 }
 .product:nth-child(n + 5) {
   animation-delay: 0.4s;
+}
+/* Thêm vào cuối file */
+
+/* Tùy chỉnh chung cho cả 2 trang */
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  height: 100%;
+}
+
+.product-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+}
+
+/* Đảm bảo nhất quán font chữ */
+.product-info h3 {
+  font-family: inherit;
+}
+
+/* Điều chỉnh khoảng cách cho volume */
+.author {
+  margin-bottom: 8px !important;
+}
+
+/* Responsive hình ảnh */
+@media (max-width: 768px) {
+  .product img {
+    height: 200px !important;
+  }
+}
+
+/* Loại bỏ padding thừa */
+.product-info {
+  padding: 18px !important;
 }
