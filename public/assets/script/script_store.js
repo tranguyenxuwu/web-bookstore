@@ -6,6 +6,7 @@ let totalItems = 0;
 let totalPages = 0;
 let currentType = "";
 let filteredBooks = [];
+let currentSort = "name-asc"; // Default sort order
 
 // Lấy thông tin từ URL
 const urlParams = new URLSearchParams(window.location.search);
@@ -16,7 +17,11 @@ const searchQuery = urlParams.get("search") || "";
 // Cập nhật URL
 function updateURL() {
   const url = new URL(window.location.href);
-  url.searchParams.set("type", currentType);
+  if (currentType) {
+    url.searchParams.set("type", currentType);
+  } else {
+    url.searchParams.delete("type");
+  }
   url.searchParams.set("page", currentPage);
   history.replaceState({}, "", url);
 }
@@ -57,7 +62,7 @@ async function fetchData() {
 
     filteredBooks = [...bookData];
 
-    // Áp dụng bộ lọc
+    // Áp dụng bộ lọc tìm kiếm
     if (searchQuery) {
       filteredBooks = filteredBooks.filter((book) => {
         const searchTerm = searchQuery.toLowerCase();
@@ -68,6 +73,20 @@ async function fetchData() {
         ].some((field) => field?.includes(searchTerm));
       });
     }
+
+    // Áp dụng bộ lọc thể loại
+    if (currentType && currentType !== "Tất cả") {
+      filteredBooks = filteredBooks.filter((book) => {
+        if (!book.the_loais || !Array.isArray(book.the_loais)) return false;
+        
+        return book.the_loais.some(
+          (category) => category.ten_the_loai?.toLowerCase() === currentType.toLowerCase()
+        );
+      });
+    }
+
+    // Áp dụng sắp xếp
+    sortBooks(currentSort);
 
     // Cập nhật phân trang
     totalItems = filteredBooks.length;
@@ -89,6 +108,34 @@ async function fetchData() {
     console.error("Error:", error);
     document.querySelector(".product-container").innerHTML =
       '<p class="error">Đã xảy ra lỗi khi tải dữ liệu.</p>';
+  }
+}
+
+// Sắp xếp sách theo tiêu chí
+function sortBooks(sortCriteria) {
+  currentSort = sortCriteria;
+  
+  switch (sortCriteria) {
+    case "name-asc":
+      filteredBooks.sort((a, b) => 
+        (a.tieu_de || "").localeCompare(b.tieu_de || "")
+      );
+      break;
+    case "name-desc":
+      filteredBooks.sort((a, b) => 
+        (b.tieu_de || "").localeCompare(a.tieu_de || "")
+      );
+      break;
+    case "price-asc":
+      filteredBooks.sort((a, b) => 
+        (parseInt(a.gia_tien) || 0) - (parseInt(b.gia_tien) || 0)
+      );
+      break;
+    case "price-desc":
+      filteredBooks.sort((a, b) => 
+        (parseInt(b.gia_tien) || 0) - (parseInt(a.gia_tien) || 0)
+      );
+      break;
   }
 }
 
@@ -184,18 +231,19 @@ document.querySelector(".search-input").addEventListener("keypress", (e) => {
 
 async function performSearch() {
   const query = document.querySelector(".search-input").value.trim();
-  if (!query) return;
-
+  
   try {
-    // Use the APP_ENV from your env.js file with the title parameter
-    const response = await fetch(
-      `${window.APP_ENV.SEARCH_URL}?title=${encodeURIComponent(query)}`,
-      {
-        headers: {
-          Accept: "application/json",
-        },
-      }
-    );
+    // Cho phép tìm kiếm trống (sẽ hiển thị tất cả sản phẩm)
+    const url = query 
+      ? `${APP_ENV.SEARCH_URL}?title=${encodeURIComponent(query)}`
+      : APP_ENV.MASTER_URL;
+      
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    
     const results = await response.json();
 
     sessionStorage.setItem("searchResults", JSON.stringify(results));
@@ -205,5 +253,30 @@ async function performSearch() {
   }
 }
 
-// Khởi động
-document.addEventListener("DOMContentLoaded", fetchData);
+// Add event listeners for categories
+document.addEventListener("DOMContentLoaded", () => {
+  // Setup category filters
+  document.querySelectorAll(".categories a").forEach((link) => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      currentType = e.target.getAttribute("data-type");
+      currentPage = 1; // Reset to first page
+      fetchData();
+      
+      // Add active class to current category
+      document.querySelectorAll(".categories a").forEach(el => {
+        el.classList.remove("active");
+      });
+      e.target.classList.add("active");
+    });
+  });
+  
+  // Setup sort dropdown
+  document.getElementById("sort-options").addEventListener("change", (e) => {
+    sortBooks(e.target.value);
+    displayPage(filteredBooks);
+  });
+  
+  // Initial load
+  fetchData();
+});
