@@ -98,9 +98,10 @@ function addToCart(productId, redirectToCart = false) {
 
       localStorage.setItem("cart", JSON.stringify(cartItems));
       alert("Đã thêm vào giỏ hàng!");
-      // Fix the redirect to cart path
+      
+      // Thay đổi dòng có vấn đề
       if (redirectToCart) {
-        window.location.href = "../cart/cart.html";
+        window.location.href = "./cart/cart.html"; // Sửa đường dẫn tương đối
       }
     })
     .catch((error) => {
