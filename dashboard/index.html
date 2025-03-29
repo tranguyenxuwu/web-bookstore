@@ -313,41 +313,81 @@
           </div>
         </div>
         
-        <!-- Tab hình ảnh -->
+        <!-- Tab hình ảnh - Thêm khả năng upload trực tiếp -->
         <div class="tab-content" id="images-tab">
           <div class="form-group">
-            <label for="mainCover">Bìa chính (URL)</label>
-            <input type="text" id="url_bia_chinh" name="url_bia_chinh" placeholder="Nhập URL hình ảnh bìa chính">
+            <label for="mainCover">Bìa chính</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input type="text" id="url_bia_chinh" name="url_bia_chinh" placeholder="Nhập URL hình ảnh bìa chính">
+                <button type="button" class="preview-btn" onclick="previewImage('url_bia_chinh', 'mainCoverPreview')">Xem trước</button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input type="file" id="file_bia_chinh" accept="image/*" data-field="url_bia_chinh">
+                <label for="file_bia_chinh" class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label>
+              </div>
+            </div>
             <div class="image-preview">
-              <img id="mainCoverPreview" src="" alt="Preview" style="display: none; max-width: 200px; margin-top: 10px;">
-              <button type="button" class="preview-btn" onclick="previewImage('url_bia_chinh', 'mainCoverPreview')">Xem trước</button>
+              <img id="mainCoverPreview" src="" alt="Preview" style="display: none;">
+              <div class="upload-status" id="status_bia_chinh"></div>
             </div>
           </div>
           
           <div class="form-group">
-            <label for="coverImage">Ảnh bìa cover (URL)</label>
-            <input type="text" id="url_bia_cover" name="url_bia_cover" placeholder="Nhập URL hình ảnh bìa cover">
+            <label for="coverImage">Ảnh bìa cover</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input type="text" id="url_bia_cover" name="url_bia_cover" placeholder="Nhập URL hình ảnh bìa cover">
+                <button type="button" class="preview-btn" onclick="previewImage('url_bia_cover', 'coverImagePreview')">Xem trước</button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input type="file" id="file_bia_cover" accept="image/*" data-field="url_bia_cover">
+                <label for="file_bia_cover" class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label>
+              </div>
+            </div>
             <div class="image-preview">
-              <img id="coverImagePreview" src="" alt="Preview" style="display: none; max-width: 200px; margin-top: 10px;">
-              <button type="button" class="preview-btn" onclick="previewImage('url_bia_cover', 'coverImagePreview')">Xem trước</button>
+              <img id="coverImagePreview" src="" alt="Preview" style="display: none;">
+              <div class="upload-status" id="status_bia_cover"></div>
             </div>
           </div>
           
           <div class="form-group">
-            <label for="backCover">Bìa phụ (URL)</label>
-            <input type="text" id="url_bia_phu" name="url_bia_phu" placeholder="Nhập URL hình ảnh bìa phụ">
+            <label for="backCover">Bìa phụ</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input type="text" id="url_bia_phu" name="url_bia_phu" placeholder="Nhập URL hình ảnh bìa phụ">
+                <button type="button" class="preview-btn" onclick="previewImage('url_bia_phu', 'backCoverPreview')">Xem trước</button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input type="file" id="file_bia_phu" accept="image/*" data-field="url_bia_phu">
+                <label for="file_bia_phu" class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label>
+              </div>
+            </div>
             <div class="image-preview">
-              <img id="backCoverPreview" src="" alt="Preview" style="display: none; max-width: 200px; margin-top: 10px;">
-              <button type="button" class="preview-btn" onclick="previewImage('url_bia_phu', 'backCoverPreview')">Xem trước</button>
+              <img id="backCoverPreview" src="" alt="Preview" style="display: none;">
+              <div class="upload-status" id="status_bia_phu"></div>
             </div>
           </div>
           
           <div class="form-group">
-            <label for="bookmark">Bookmark (URL)</label>
-            <input type="text" id="url_bookmark" name="url_bookmark" placeholder="Nhập URL hình ảnh bookmark">
+            <label for="bookmark">Bookmark</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input type="text" id="url_bookmark" name="url_bookmark" placeholder="Nhập URL hình ảnh bookmark">
+                <button type="button" class="preview-btn" onclick="previewImage('url_bookmark', 'bookmarkPreview')">Xem trước</button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input type="file" id="file_bookmark" accept="image/*" data-field="url_bookmark">
+                <label for="file_bookmark" class="upload-btn"><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label>
+              </div>
+            </div>
             <div class="image-preview">
-              <img id="bookmarkPreview" src="" alt="Preview" style="display: none; max-width: 200px; margin-top: 10px;">
-              <button type="button" class="preview-btn" onclick="previewImage('url_bookmark', 'bookmarkPreview')">Xem trước</button>
+              <img id="bookmarkPreview" src="" alt="Preview" style="display: none;">
+              <div class="upload-status" id="status_bookmark"></div>
             </div>
           </div>
         </div>

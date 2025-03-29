@@ -1,4 +1,16 @@
+// Page loading animation
 document.addEventListener('DOMContentLoaded', () => {
+  const pageTransition = document.querySelector('.page-transition');
+  
+  if (pageTransition) {
+    setTimeout(() => {
+      pageTransition.style.opacity = '0';
+      setTimeout(() => {
+        pageTransition.style.display = 'none';
+      }, 500);
+    }, 500);
+  }
+  
   loadCartItems();
   document.getElementById('checkout-button').addEventListener('click', checkout);
   
@@ -13,26 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
   setupSearch();
 });
 
+// Thêm hàm setupSearch vào script.js
 function setupSearch() {
-  const searchInput = document.querySelector('.search-input');
-  const searchButton = document.querySelector('.search-button');
+  const searchForm = document.getElementById("search-form");
   
-  if (searchInput && searchButton) {
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') performSearch();
+  if (searchForm) {
+    searchForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const searchInput = document.getElementById("search-input");
+      const searchTerm = searchInput ? searchInput.value.trim() : "";
+      
+      // Allow empty searches - this will show all products
+      window.location.href = `../search.html?title=${encodeURIComponent(searchTerm || "")}`;
     });
-    
-    searchButton.addEventListener('click', performSearch);
   }
 }
 
-function performSearch() {
-  const query = document.querySelector('.search-input').value.trim();
-  if (!query) return;
-  
-  window.location.href = `../search.html?query=${encodeURIComponent(query)}`;
-}
-
+// Cập nhật hàm loadCartItems để thêm hình ảnh và hiệu ứng
 function loadCartItems() {
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   const cartTable = document.getElementById('cart-items');
@@ -41,8 +50,8 @@ function loadCartItems() {
   if (cartItems.length === 0) {
     // Display message for empty cart
     if (cartTable) cartTable.innerHTML = '';
-    if (emptyCartMessage) emptyCartMessage.style.display = 'block';
-    document.getElementById('cart-total').textContent = '0 VND';
+    if (emptyCartMessage) emptyCartMessage.style.display = 'flex';
+    document.getElementById('cart-total').textContent = '0 ₫';
     document.getElementById('checkout-button').disabled = true;
     return;
   }
@@ -63,8 +72,22 @@ function loadCartItems() {
     total += itemTotal;
     
     const row = document.createElement('tr');
+    row.className = 'cart-item';
+    row.setAttribute('data-id', item.id);
+    
+    // Thêm placeholder ảnh nếu không có
+    const imageUrl = item.image || 'https://cdn.elysia-app.live/placeholder.jpg';
+    
     row.innerHTML = `
-      <td>${item.title}</td>
+      <td>
+        <div class="product-info">
+          <img src="${imageUrl}" alt="${item.title}" class="product-image">
+          <div class="product-details">
+            <div class="product-title">${item.title}</div>
+            <div class="product-author">Mã SP: ${item.id}</div>
+          </div>
+        </div>
+      </td>
       <td>${formatCurrency(item.price)}</td>
       <td>
         <div class="quantity-controls">
@@ -75,7 +98,9 @@ function loadCartItems() {
       </td>
       <td>${formatCurrency(itemTotal)}</td>
       <td>
-        <button class="remove-button" data-id="${item.id}">Xóa</button>
+        <button class="remove-button" data-id="${item.id}">
+          <i class="fas fa-trash-alt"></i> Xóa
+        </button>
       </td>
     `;
     cartTable.appendChild(row);
@@ -122,7 +147,11 @@ function updateQuantity(event) {
   if (item) {
     item.quantity = newQuantity;
     localStorage.setItem('cart', JSON.stringify(cartItems));
-    loadCartItems();
+    
+    // Use a slight delay to give animation effect
+    setTimeout(() => {
+      loadCartItems();
+    }, 300);
   }
 }
 
@@ -138,6 +167,7 @@ function decreaseQuantity(event) {
   }
 }
 
+// Cập nhật hàm increaseQuantity với hiệu ứng
 function increaseQuantity(event) {
   const itemId = event.target.getAttribute('data-id');
   const input = document.querySelector(`.quantity-input[data-id="${itemId}"]`);
@@ -146,15 +176,34 @@ function increaseQuantity(event) {
   input.value = currentValue + 1;
   const changeEvent = new Event('change');
   input.dispatchEvent(changeEvent);
+  
+  // Thêm hiệu ứng highlight
+  const row = document.querySelector(`.cart-item[data-id="${itemId}"]`);
+  row.classList.add('item-added');
+  setTimeout(() => {
+    row.classList.remove('item-added');
+  }, 600);
 }
 
+// Cải thiện hàm removeItem
 function removeItem(event) {
+  if (!confirm('Bạn có chắc chắn muốn xóa sản phẩm này?')) return;
+  
   const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
-  const itemId = event.target.getAttribute('data-id');
+  const itemId = event.target.getAttribute('data-id') || 
+                 event.target.parentElement.getAttribute('data-id');
 
-  const updatedCartItems = cartItems.filter(item => item.id != itemId);
-  localStorage.setItem('cart', JSON.stringify(updatedCartItems));
-  loadCartItems();
+  // Add animation class to the row before removal
+  const row = document.querySelector(`.cart-item[data-id="${itemId}"]`);
+  if (row) {
+    row.classList.add('item-removed');
+  }
+
+  setTimeout(() => {
+    const updatedCartItems = cartItems.filter(item => item.id != itemId);
+    localStorage.setItem('cart', JSON.stringify(updatedCartItems));
+    loadCartItems();
+  }, 500);
 }
 
 function checkout() {
@@ -169,7 +218,11 @@ function checkout() {
   }
   
   // In a real app, this would connect to a payment API
-  alert('Thanh toán thành công!');
-  localStorage.removeItem('cart');
-  loadCartItems();
+  const success = confirm('Xác nhận thanh toán đơn hàng?');
+  
+  if (success) {
+    alert('Thanh toán thành công! Cảm ơn bạn đã mua hàng.');
+    localStorage.removeItem('cart');
+    loadCartItems();
+  }
 }

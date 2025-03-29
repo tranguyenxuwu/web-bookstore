@@ -14,16 +14,17 @@
           <a href="../index.html">
             <img src="#" alt="ReadOn" class="logo" />
           </a>
-          <div class="search-container">
+          <form id="search-form" class="search-container">
             <input
               type="text"
+              id="search-input"
               class="search-input"
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
             />
-            <button class="search-button" onclick="searchBooks()">
+            <button type="submit" class="search-button">
               <img src="../assets/image/search.png" alt="Search" />
             </button>
-          </div>
+          </form>
           <div class="nav-icons">
             <a href="#" class="nav-icon">
               <img
@@ -51,7 +52,12 @@
       </nav>
     </div>
 
-    <!-- cart items -->
+    <!-- page transition -->
+    <div class="page-transition">
+      <div class="loader"></div>
+    </div>
+
+    <!-- cart items với UI cải tiến -->
     <div class="cart-container">
       <h1>Giỏ Hàng</h1>
       <table class="cart-table">
@@ -70,11 +76,12 @@
       </table>
       <div id="empty-cart-message" style="display: none;">
         <p>Giỏ hàng của bạn đang trống.</p>
+        <p>Hãy thêm sản phẩm để tiếp tục mua sắm!</p>
         <a href="../index.html" class="continue-shopping">Tiếp tục mua sắm</a>
       </div>
       <div class="cart-summary">
         <h2>Tổng cộng</h2>
-        <p id="cart-total">0 VND</p>
+        <p id="cart-total">0 ₫</p>
         <button id="checkout-button">Thanh Toán</button>
       </div>
     </div>
@@ -109,11 +116,5 @@
       <p>&copy; 2023 Book Store. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
-    <script>
-      function searchBooks() {
-        const query = document.querySelector(".search-input").value;
-        window.location.href = `../search.html?query=${encodeURIComponent(query)}`;
-      }
-    </script>
   </body>
 </html>

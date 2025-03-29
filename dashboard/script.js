@@ -42,7 +42,7 @@ let books = [
   },
 ];
 
-// Thêm hằng số API URL
+// Thêm hằng số API URL với đường dẫn đúng
 const API_BASE = "https://api.elysia-app.live/upload";
 
 // Biến cho phân trang
@@ -56,22 +56,25 @@ let filteredBooks = [...books];
 function init() {
   // Khởi tạo biểu đồ
   initChart();
-
+  
   // Hiển thị dashboard
   showDashboard();
-
+  
   // Thiết lập tabs cho form
   setupFormTabs();
+  
+  // Thiết lập file inputs cho upload ảnh
+  setupFileUploads();
 
-  // Thêm loading overlay
-  document.body.insertAdjacentHTML(
-    "beforeend",
-    `
-    <div class="loading-overlay">
-      <div class="spinner"></div>
-    </div>
-  `
-  );
+  // Thêm loading overlay nếu chưa có
+  if (!document.querySelector('.loading-overlay')) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="loading-overlay">
+        <div class="spinner"></div>
+      </div>`
+    );
+  }
 }
 
 // Thiết lập xử lý tabs form
@@ -129,23 +132,83 @@ function setupFileInputs() {
   });
 }
 
-// Upload ảnh lên server
+// Thiết lập sự kiện upload ảnh - cải thiện từ test.html
+function setupFileUploads() {
+  document.querySelectorAll('input[type="file"]').forEach(input => {
+    input.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      
+      const fieldName = input.dataset.field;
+      const statusElement = document.getElementById(`status_${fieldName.replace('url_', '')}`);
+      const previewElement = document.getElementById(`${fieldName.replace('url_', '')}Preview`);
+      
+      // Reset status
+      statusElement.innerHTML = 'Đang tải ảnh lên...';
+      statusElement.className = 'upload-status loading';
+      
+      // Hiển thị preview ngay lập tức từ file local
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        previewElement.src = e.target.result;
+        previewElement.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+      
+      try {
+        // Hiển thị loading overlay
+        showLoading(true);
+        
+        // Upload ảnh
+        const publicUrl = await uploadImage(file);
+        
+        // Cập nhật URL vào trường input
+        document.getElementById(fieldName).value = publicUrl;
+        
+        // Cập nhật status
+        statusElement.innerHTML = 'Tải lên thành công!';
+        statusElement.className = 'upload-status success';
+        
+        // Cập nhật preview với URL thật
+        previewElement.src = publicUrl;
+        
+        showLoading(false);
+      } catch (error) {
+        console.error("Upload error:", error);
+        statusElement.innerHTML = `Lỗi: ${error.message || 'Không thể tải lên'}`;
+        statusElement.className = 'upload-status error';
+        showLoading(false);
+      }
+    });
+  });
+}
+
+// Xử lý upload ảnh - cải thiện từ test.html
 async function uploadImage(file) {
   try {
+    console.log("Bắt đầu upload ảnh:", file.name);
+    
     // Bước 1: Lấy presigned URL
     const presignedRes = await fetch(`${API_BASE}/presigned`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { 
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         fileName: file.name,
         mimeType: file.type,
       }),
     });
 
-    if (!presignedRes.ok) throw new Error("Lỗi presigned URL");
+    if (!presignedRes.ok) {
+      const errorText = await presignedRes.text();
+      console.error("Lỗi presigned URL:", errorText);
+      throw new Error("Lỗi lấy presigned URL");
+    }
 
     const { url, publicUrl } = await presignedRes.json();
-
+    console.log("Đã nhận presigned URL:", url);
+    
     // Bước 2: Upload lên R2
     const uploadRes = await fetch(url, {
       method: "PUT",
@@ -153,11 +216,16 @@ async function uploadImage(file) {
       headers: { "Content-Type": file.type },
     });
 
-    if (!uploadRes.ok) throw new Error("Upload ảnh thất bại");
+    if (!uploadRes.ok) {
+      const errorText = await uploadRes.text();
+      console.error("Lỗi upload:", errorText);
+      throw new Error("Upload ảnh thất bại");
+    }
 
+    console.log("Upload thành công:", publicUrl);
     return publicUrl;
   } catch (error) {
-    console.error("Upload error:", error);
+    console.error("Chi tiết lỗi upload:", error);
     throw error;
   }
 }
@@ -283,74 +351,55 @@ function logFormData() {
   alert("Dữ liệu sách đã được ghi vào console. Mở DevTools để xem.");
 }
 
-// Hàm thêm/cập nhật sách với API
+// Hàm thêm/cập nhật sách với API - cập nhật theo test.html
 async function submitBook() {
-  // Lấy dữ liệu từ form
-  const form = document.getElementById("bookForm");
-  const formData = new FormData(form);
-  const bookData = Object.fromEntries(formData.entries());
-
-  // Kiểm tra dữ liệu cơ bản
-  if (!bookData.tieu_de || !bookData.gia_tien || !bookData.gioi_thieu) {
-    alert(
-      "Vui lòng điền đầy đủ thông tin bắt buộc (Tiêu đề, Giá tiền, Giới thiệu)"
-    );
-    return;
-  }
-
-  // Chuyển đổi các trường số sang kiểu Number, trừ gia_tien và danh_gia
-  // vì API yêu cầu chúng ở định dạng string
-  const numericFields = ["ma_nha_xuat_ban", "tong_so_trang", "so_tap"];
-  numericFields.forEach((field) => {
-    if (bookData[field] && bookData[field].trim() !== "") {
-      bookData[field] = Number(bookData[field]);
-    }
-  });
-
-  // Đảm bảo gia_tien và danh_gia là string và đúng định dạng
-  // Giữ nguyên định dạng string nhưng loại bỏ dấu phẩy nếu có
-  if (bookData.gia_tien) {
-    bookData.gia_tien = bookData.gia_tien.toString().replace(/,/g, "");
-  }
-
-  if (bookData.danh_gia) {
-    bookData.danh_gia = bookData.danh_gia.toString();
-  }
-
   try {
+    // Lấy dữ liệu từ form
+    const form = document.getElementById("bookForm");
+    const formData = new FormData(form);
+    const bookData = Object.fromEntries(formData.entries());
+    
+    // Kiểm tra dữ liệu cơ bản
+    if (!bookData.tieu_de || !bookData.gia_tien || !bookData.gioi_thieu) {
+      alert("Vui lòng điền đầy đủ thông tin bắt buộc (Tiêu đề, Giá tiền, Giới thiệu)");
+      return;
+    }
+    
+    // Chuyển đổi các trường số - theo cách làm trong test.html
+    if (bookData.so_tap) bookData.so_tap = parseFloat(bookData.so_tap);
+    if (bookData.tong_so_trang) bookData.tong_so_trang = parseInt(bookData.tong_so_trang);
+    if (bookData.ma_nha_xuat_ban) bookData.ma_nha_xuat_ban = parseInt(bookData.ma_nha_xuat_ban);
+    
+    // Log ra để debug
+    console.log("Dữ liệu sách gửi đi:", bookData);
+    
     showLoading(true);
-
-    // URL đúng của API
-    const apiUrl = `${API_BASE}/book`;
-    console.log("Gửi dữ liệu đến:", apiUrl);
-    console.log("Dữ liệu:", bookData);
-
+    
     // Gọi API để tạo sách
-    const response = await fetch(apiUrl, {
+    const response = await fetch(`${API_BASE}/book`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookData),
     });
-
+    
     const result = await response.json();
-    console.log("Kết quả từ API:", result);
-
+    
+    showLoading(false);
+    
     if (response.ok) {
       // Thêm sách vào danh sách local
       const newBook = {
         id: result.ma_sach || Date.now(),
         title: bookData.tieu_de,
         price: bookData.gia_tien,
-        publisher: bookData.ma_nha_xuat_ban,
+        publisher: bookData.ma_nha_xuat_ban ? bookData.ma_nha_xuat_ban.toString() : "",
         description: bookData.gioi_thieu,
-        image:
-          bookData.url_bia_chinh ||
-          "https://cdn.elysia-app.live/placeholder.jpg",
+        image: bookData.url_bia_chinh || "https://cdn.elysia-app.live/placeholder.jpg"
       };
-
+      
       if (currentEditId !== null) {
         // Cập nhật sách hiện có
-        const index = books.findIndex((book) => book.id === currentEditId);
+        const index = books.findIndex(book => book.id === currentEditId);
         if (index !== -1) {
           books[index] = { ...books[index], ...newBook };
         }
@@ -360,7 +409,7 @@ async function submitBook() {
         books.push(newBook);
         alert("Thêm sách mới thành công!");
       }
-
+      
       // Cập nhật lại danh sách và đóng form
       filteredBooks = [...books];
       renderBooks();
@@ -369,8 +418,6 @@ async function submitBook() {
     } else {
       alert(`Lỗi: ${result.message || "Không thể tạo sách"}`);
     }
-
-    showLoading(false);
   } catch (error) {
     showLoading(false);
     console.error("Error creating book:", error);
@@ -631,23 +678,23 @@ function showLoading(show) {
     : "none";
 }
 
-// Hàm preview ảnh từ URL
+// Hàm xem trước ảnh từ URL
 function previewImage(inputId, previewId) {
   const url = document.getElementById(inputId).value;
   const preview = document.getElementById(previewId);
-
+  
   if (!url) {
-    alert("Vui lòng nhập URL hình ảnh");
+    alert('Vui lòng nhập URL hình ảnh');
     return;
   }
-
+  
   preview.src = url;
-  preview.style.display = "block";
-
+  preview.style.display = 'block';
+  
   // Kiểm tra ảnh có tồn tại không
-  preview.onerror = function () {
-    alert("Không thể tải hình ảnh từ URL này");
-    preview.style.display = "none";
+  preview.onerror = function() {
+    alert('Không thể tải hình ảnh từ URL này');
+    preview.style.display = 'none';
   };
 }
 
