@@ -17,7 +17,7 @@ export const APP_ENV = {
   IMAGE_PRESIGNED_URL: "https://api.elysia-app.live/upload/presigned",
   UPLOAD_BOOK_URL: "https://api.elysia-app.live/upload/book",
   UPLOAD_AUTHOR_URL: "https://api.elysia-app.live/upload/author",
-  UPLOAD_PUBLISHER_URL: "https://api.elysia-app.live/upload/publishers",
+  UPLOAD_PUBLISHER_URL: "https://api.elysia-app.live/upload/publisher",
   UPLOAD_SERIES_URL: "https://api.elysia-app.live/upload/series",
 
   // Auth endpoints
