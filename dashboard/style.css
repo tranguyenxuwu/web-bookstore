@@ -358,14 +358,16 @@ body {
   gap: 20px;
 }
 
-.recent-activity, .top-selling {
+.recent-activity,
+.top-selling {
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   padding: 20px;
 }
 
-.recent-activity h2, .top-selling h2 {
+.recent-activity h2,
+.top-selling h2 {
   font-size: 1.2rem;
   color: #343a40;
   margin-bottom: 15px;
@@ -497,7 +499,8 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
+th,
+td {
   padding: 15px 20px;
   text-align: left;
 }
@@ -522,7 +525,18 @@ tr:hover td {
   gap: 10px;
 }
 
-.edit-btn, .delete-btn {
+/* Center book action buttons in table cells */
+td.book-action {
+  text-align: center;
+}
+
+/* Center the flex container of buttons */
+td.book-action .book-actions {
+  justify-content: center;
+}
+
+.edit-btn,
+.delete-btn {
   background: none;
   border: none;
   cursor: pointer;
@@ -537,7 +551,8 @@ tr:hover td {
   color: #e74c3c;
 }
 
-.edit-btn:hover, .delete-btn:hover {
+.edit-btn:hover,
+.delete-btn:hover {
   transform: scale(1.2);
 }
 
@@ -643,7 +658,7 @@ tr:hover td {
   font-weight: 500;
 }
 
-.form-group input, 
+.form-group input,
 .form-group textarea {
   width: 100%;
   padding: 10px 15px;
@@ -652,7 +667,7 @@ tr:hover td {
   transition: all 0.3s;
 }
 
-.form-group input:focus, 
+.form-group input:focus,
 .form-group textarea:focus {
   border-color: #3498db;
   outline: none;
@@ -724,7 +739,8 @@ input[type="file"] {
   margin-top: 30px;
 }
 
-.cancel-btn, .submit-btn {
+.cancel-btn,
+.submit-btn {
   flex: 1;
   padding: 12px;
   border-radius: 4px;
@@ -826,8 +842,12 @@ input[type="file"] {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* CSS cho upload ảnh */

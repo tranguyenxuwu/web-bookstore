@@ -1,3 +1,5 @@
+import { APP_ENV } from "../public/assets/script/env.js";
+
 // Khởi tạo dữ liệu mẫu
 let books = [
   {
@@ -42,40 +44,16 @@ let books = [
   },
 ];
 
-// Thêm hằng số API URL với đường dẫn đúng
-const API_BASE = "https://api.elysia-app.live/upload";
-
 // Biến cho phân trang
 let currentPage = 1;
 const itemsPerPage = 5;
 let totalPages = Math.ceil(books.length / itemsPerPage);
 let currentEditId = null;
 let filteredBooks = [...books];
-
-// Hàm khởi tạo
-function init() {
-  // Khởi tạo biểu đồ
-  initChart();
-  
-  // Hiển thị dashboard
-  showDashboard();
-  
-  // Thiết lập tabs cho form
-  setupFormTabs();
-  
-  // Thiết lập file inputs cho upload ảnh
-  setupFileUploads();
-
-  // Thêm loading overlay nếu chưa có
-  if (!document.querySelector('.loading-overlay')) {
-    document.body.insertAdjacentHTML(
-      "beforeend",
-      `<div class="loading-overlay">
-        <div class="spinner"></div>
-      </div>`
-    );
-  }
-}
+// Thêm các biến mới
+let publishers = [];
+let authors = []; // Add this line for authors
+let series = []; // Add this line for series
 
 // Thiết lập xử lý tabs form
 function setupFormTabs() {
@@ -95,6 +73,35 @@ function setupFormTabs() {
       document.getElementById(`${tabName}-tab`).classList.add("active");
     });
   });
+}
+// Hàm khởi tạo
+function init() {
+  // Khởi tạo biểu đồ
+  initChart();
+
+  // Hiển thị dashboard
+  showDashboard();
+
+  // Thiết lập tabs cho form
+  setupFormTabs();
+
+  // Thiết lập file inputs cho upload ảnh
+  setupFileUploads();
+
+  // Fetch publishers, authors, and series
+  fetchPublishers();
+  fetchAuthors();
+  fetchSeries();
+
+  // Thêm loading overlay nếu chưa có
+  if (!document.querySelector(".loading-overlay")) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="loading-overlay">
+          <div class="spinner"></div>
+        </div>`
+    );
+  }
 }
 
 // Thiết lập file inputs
@@ -134,49 +141,68 @@ function setupFileInputs() {
 
 // Thiết lập sự kiện upload ảnh - cải thiện từ test.html
 function setupFileUploads() {
-  document.querySelectorAll('input[type="file"]').forEach(input => {
-    input.addEventListener('change', async (e) => {
+  document.querySelectorAll('input[type="file"]').forEach((input) => {
+    input.addEventListener("change", async (e) => {
       const file = e.target.files[0];
       if (!file) return;
-      
+
       const fieldName = input.dataset.field;
-      const statusElement = document.getElementById(`status_${fieldName.replace('url_', '')}`);
-      const previewElement = document.getElementById(`${fieldName.replace('url_', '')}Preview`);
-      
+      const statusElement = document.getElementById(
+        `status_${fieldName.replace("url_", "")}`
+      );
+      const previewElement = document.getElementById(
+        `${fieldName.replace("url_", "")}Preview`
+      );
+
       // Reset status
-      statusElement.innerHTML = 'Đang tải ảnh lên...';
-      statusElement.className = 'upload-status loading';
-      
+      if (statusElement) {
+        statusElement.innerHTML = "Đang tải ảnh lên...";
+        statusElement.className = "upload-status loading";
+      }
+
       // Hiển thị preview ngay lập tức từ file local
       const reader = new FileReader();
-      reader.onload = function(e) {
-        previewElement.src = e.target.result;
-        previewElement.style.display = "block";
+      reader.onload = function (e) {
+        if (previewElement) {
+          previewElement.src = e.target.result;
+          previewElement.style.display = "block";
+        }
       };
       reader.readAsDataURL(file);
-      
+
       try {
         // Hiển thị loading overlay
         showLoading(true);
-        
+
         // Upload ảnh
         const publicUrl = await uploadImage(file);
-        
+
         // Cập nhật URL vào trường input
-        document.getElementById(fieldName).value = publicUrl;
-        
+        const inputField = document.getElementById(fieldName);
+        if (inputField) {
+          inputField.value = publicUrl;
+        }
+
         // Cập nhật status
-        statusElement.innerHTML = 'Tải lên thành công!';
-        statusElement.className = 'upload-status success';
-        
+        if (statusElement) {
+          statusElement.innerHTML = "Tải lên thành công!";
+          statusElement.className = "upload-status success";
+        }
+
         // Cập nhật preview với URL thật
-        previewElement.src = publicUrl;
-        
+        if (previewElement) {
+          previewElement.src = publicUrl;
+        }
+
         showLoading(false);
       } catch (error) {
         console.error("Upload error:", error);
-        statusElement.innerHTML = `Lỗi: ${error.message || 'Không thể tải lên'}`;
-        statusElement.className = 'upload-status error';
+        if (statusElement) {
+          statusElement.innerHTML = `Lỗi: ${
+            error.message || "Không thể tải lên"
+          }`;
+          statusElement.className = "upload-status error";
+        }
         showLoading(false);
       }
     });
@@ -187,12 +213,12 @@ function setupFileUploads() {
 async function uploadImage(file) {
   try {
     console.log("Bắt đầu upload ảnh:", file.name);
-    
+
     // Bước 1: Lấy presigned URL
-    const presignedRes = await fetch(`${API_BASE}/presigned`, {
+    const presignedRes = await fetch(`${APP_ENV.IMAGE_PRESIGNED_URL}`, {
       method: "POST",
-      headers: { 
-        "Content-Type": "application/json"
+      headers: {
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         fileName: file.name,
@@ -208,7 +234,7 @@ async function uploadImage(file) {
 
     const { url, publicUrl } = await presignedRes.json();
     console.log("Đã nhận presigned URL:", url);
-    
+
     // Bước 2: Upload lên R2
     const uploadRes = await fetch(url, {
       method: "PUT",
@@ -227,6 +253,176 @@ async function uploadImage(file) {
   } catch (error) {
     console.error("Chi tiết lỗi upload:", error);
     throw error;
+  }
+}
+
+// Hàm xử lý NXB
+async function fetchPublishers() {
+  try {
+    const res = await fetch(APP_ENV.PUBLISHER_URL);
+    publishers = await res.json();
+    updatePublisherDropdown();
+  } catch (error) {
+    console.error("Lỗi tải NXB:", error);
+    alert("Không thể tải danh sách NXB");
+  }
+}
+
+// Function to fetch authors
+async function fetchAuthors() {
+  try {
+    const res = await fetch(APP_ENV.AUTHOR_URL);
+    authors = await res.json();
+    updateAuthorDropdown();
+  } catch (error) {
+    console.error("Lỗi tải tác giả:", error);
+    alert("Không thể tải danh sách tác giả");
+  }
+}
+
+// Function to fetch series
+async function fetchSeries() {
+  try {
+    const res = await fetch(APP_ENV.FETCH_BY_SERIES_URL);
+    series = await res.json();
+    updateSeriesDropdown();
+  } catch (error) {
+    console.error("Lỗi tải bộ sách:", error);
+    alert("Không thể tải danh sách bộ sách");
+  }
+}
+
+function updatePublisherDropdown() {
+  const select = document.getElementById("publisherId");
+  select.innerHTML = '<option value="">Chọn NXB</option>';
+  publishers.forEach((pub) => {
+    select.innerHTML += `<option value="${pub.ma_nha_xuat_ban}">${pub.ten_nha_xuat_ban}</option>`;
+  });
+}
+
+function updateAuthorDropdown() {
+  const select = document.getElementById("authorId");
+  if (select) {
+    select.innerHTML = '<option value="">Chọn tác giả</option>';
+    authors.forEach((author) => {
+      select.innerHTML += `<option value="${author.ma_tac_gia}">${author.ten_tac_gia}</option>`;
+    });
+  }
+}
+
+function updateSeriesDropdown() {
+  const select = document.getElementById("seriesId");
+  if (select) {
+    select.innerHTML = '<option value="">Chọn bộ sách</option>';
+    series.forEach((s) => {
+      select.innerHTML += `<option value="${s.ma_bo_sach}">${s.ten_bo_sach}</option>`;
+    });
+  }
+}
+
+// Hàm xử lý modal NXB
+function showPublisherForm() {
+  document.getElementById("newPublisherName").value = "";
+  document.getElementById("publisherModal").style.display = "block";
+}
+
+// Function to show author form modal
+function showAuthorForm() {
+  document.getElementById("newAuthorName").value = "";
+  document.getElementById("authorModal").style.display = "block";
+}
+
+// Function to show series form modal
+function showSeriesForm() {
+  document.getElementById("newSeriesName").value = "";
+  document.getElementById("seriesModal").style.display = "block";
+}
+
+function closePublisherModal() {
+  document.getElementById("publisherModal").style.display = "none";
+}
+
+// Function to close author modal
+function closeAuthorModal() {
+  document.getElementById("authorModal").style.display = "none";
+}
+
+// Function to close series modal
+function closeSeriesModal() {
+  document.getElementById("seriesModal").style.display = "none";
+}
+
+async function addNewPublisher() {
+  const name = document.getElementById("newPublisherName").value.trim();
+  if (!name) return alert("Vui lòng nhập tên NXB");
+
+  try {
+    showLoading(true);
+    const res = await fetch(APP_ENV.UPLOAD_PUBLISHER_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ten_nha_xuat_ban: name }),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    await fetchPublishers();
+    closePublisherModal();
+    alert("Thêm NXB thành công!");
+  } catch (error) {
+    alert("Lỗi thêm NXB: " + error.message);
+  } finally {
+    showLoading(false);
+  }
+}
+
+// Function to add a new author
+async function addNewAuthor() {
+  const name = document.getElementById("newAuthorName").value.trim();
+  if (!name) return alert("Vui lòng nhập tên tác giả");
+
+  try {
+    showLoading(true);
+    const res = await fetch(APP_ENV.UPLOAD_AUTHOR_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ten_tac_gia: name }),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    await fetchAuthors();
+    closeAuthorModal();
+    alert("Thêm tác giả thành công!");
+  } catch (error) {
+    alert("Lỗi thêm tác giả: " + error.message);
+  } finally {
+    showLoading(false);
+  }
+}
+
+// Function to add a new series
+async function addNewSeries() {
+  const name = document.getElementById("newSeriesName").value.trim();
+  if (!name) return alert("Vui lòng nhập tên bộ sách");
+
+  try {
+    showLoading(true);
+    const res = await fetch(APP_ENV.UPLOAD_SERIES_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ten_bo_sach: name }),
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
+    await fetchSeries();
+    closeSeriesModal();
+    alert("Thêm bộ sách thành công!");
+  } catch (error) {
+    alert("Lỗi thêm bộ sách: " + error.message);
+  } finally {
+    showLoading(false);
   }
 }
 
@@ -351,55 +547,73 @@ function logFormData() {
   alert("Dữ liệu sách đã được ghi vào console. Mở DevTools để xem.");
 }
 
-// Hàm thêm/cập nhật sách với API - cập nhật theo test.html
+// Hàm thêm/cập nhật sách với API
 async function submitBook() {
   try {
     // Lấy dữ liệu từ form
     const form = document.getElementById("bookForm");
     const formData = new FormData(form);
-    const bookData = Object.fromEntries(formData.entries());
-    
+
+    // Tạo đối tượng dữ liệu theo đúng format yêu cầu
+    const bookData = {
+      tieu_de: formData.get("tieu_de") || "",
+      gia_tien: formData.get("gia_tien") || "",
+      gioi_thieu: formData.get("gioi_thieu") || "",
+      tong_so_trang: parseInt(formData.get("tong_so_trang") || "0") || 1,
+      danh_gia: formData.get("danh_gia") || "",
+      ngay_xuat_ban: formData.get("ngay_xuat_ban") || "",
+      ma_nha_xuat_ban: parseInt(formData.get("ma_nha_xuat_ban") || "0") || 1,
+      ma_bo_sach: parseInt(formData.get("ma_bo_sach") || "0") || 1,
+      ma_tac_gia: parseInt(formData.get("ma_tac_gia") || "0") || 1,
+      ma_kieu_sach: parseInt(formData.get("ma_kieu_sach") || "0") || 1,
+      so_tap: parseFloat(formData.get("so_tap") || "0") || 1,
+      url_bia_chinh: formData.get("url_bia_chinh") || "",
+      url_bia_cover: formData.get("url_bia_cover") || "",
+      url_bia_phu: formData.get("url_bia_phu") || "",
+      url_bookmark: formData.get("url_bookmark") || "",
+    };
+
     // Kiểm tra dữ liệu cơ bản
     if (!bookData.tieu_de || !bookData.gia_tien || !bookData.gioi_thieu) {
-      alert("Vui lòng điền đầy đủ thông tin bắt buộc (Tiêu đề, Giá tiền, Giới thiệu)");
+      alert(
+        "Vui lòng điền đầy đủ thông tin bắt buộc (Tiêu đề, Giá tiền, Giới thiệu)"
+      );
       return;
     }
-    
-    // Chuyển đổi các trường số - theo cách làm trong test.html
-    if (bookData.so_tap) bookData.so_tap = parseFloat(bookData.so_tap);
-    if (bookData.tong_so_trang) bookData.tong_so_trang = parseInt(bookData.tong_so_trang);
-    if (bookData.ma_nha_xuat_ban) bookData.ma_nha_xuat_ban = parseInt(bookData.ma_nha_xuat_ban);
-    
+
     // Log ra để debug
     console.log("Dữ liệu sách gửi đi:", bookData);
-    
+
     showLoading(true);
-    
-    // Gọi API để tạo sách
-    const response = await fetch(`${API_BASE}/book`, {
+
+    // Gọi API để tạo sách - giữ nguyên endpoint từ APP_ENV nhưng đảm bảo đúng format của dữ liệu
+    const response = await fetch(APP_ENV.UPLOAD_BOOK_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookData),
     });
-    
+
     const result = await response.json();
-    
     showLoading(false);
-    
+
     if (response.ok) {
       // Thêm sách vào danh sách local
       const newBook = {
         id: result.ma_sach || Date.now(),
         title: bookData.tieu_de,
         price: bookData.gia_tien,
-        publisher: bookData.ma_nha_xuat_ban ? bookData.ma_nha_xuat_ban.toString() : "",
+        publisher: bookData.ma_nha_xuat_ban
+          ? bookData.ma_nha_xuat_ban.toString()
+          : "",
         description: bookData.gioi_thieu,
-        image: bookData.url_bia_chinh || "https://cdn.elysia-app.live/placeholder.jpg"
+        image:
+          bookData.url_bia_chinh ||
+          "https://cdn.elysia-app.live/placeholder.jpg",
       };
-      
+
       if (currentEditId !== null) {
         // Cập nhật sách hiện có
-        const index = books.findIndex(book => book.id === currentEditId);
+        const index = books.findIndex((book) => book.id === currentEditId);
         if (index !== -1) {
           books[index] = { ...books[index], ...newBook };
         }
@@ -409,7 +623,7 @@ async function submitBook() {
         books.push(newBook);
         alert("Thêm sách mới thành công!");
       }
-      
+
       // Cập nhật lại danh sách và đóng form
       filteredBooks = [...books];
       renderBooks();
@@ -493,21 +707,25 @@ function editBook(id) {
 }
 
 // Hàm xóa sách
-function deleteBook(id) {
-  if (confirm("Bạn có chắc chắn muốn xóa sách này?")) {
+async function deleteBook(id) {
+  if (!confirm("Bạn có chắc chắn muốn xóa sách này?")) return;
+
+  try {
+    showLoading(true);
+    const res = await fetch(`${APP_ENV.DELETE_BOOK_URL}${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) throw new Error(await res.text());
+
     books = books.filter((book) => book.id !== id);
     filteredBooks = [...books];
-
-    // Cập nhật lại trang hiện tại nếu cần
-    if (
-      currentPage > Math.ceil(books.length / itemsPerPage) &&
-      currentPage > 1
-    ) {
-      currentPage--;
-    }
-
     renderBooks();
     alert("Đã xóa sách thành công!");
+  } catch (error) {
+    alert("Lỗi xóa sách: " + error.message);
+  } finally {
+    showLoading(false);
   }
 }
 
@@ -559,7 +777,7 @@ function showBooks() {
   showLoading(true);
 
   // Fetch books from API
-  fetch("https://api.elysia-app.live/book/all")
+  fetch(APP_ENV.MASTER_URL)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -682,21 +900,205 @@ function showLoading(show) {
 function previewImage(inputId, previewId) {
   const url = document.getElementById(inputId).value;
   const preview = document.getElementById(previewId);
-  
+
   if (!url) {
-    alert('Vui lòng nhập URL hình ảnh');
+    alert("Vui lòng nhập URL hình ảnh");
     return;
   }
-  
-  preview.src = url;
-  preview.style.display = 'block';
-  
-  // Kiểm tra ảnh có tồn tại không
-  preview.onerror = function() {
-    alert('Không thể tải hình ảnh từ URL này');
-    preview.style.display = 'none';
-  };
+
+  if (preview) {
+    preview.src = url;
+    preview.style.display = "block";
+
+    // Kiểm tra ảnh có tồn tại không
+    preview.onerror = function () {
+      alert("Không thể tải hình ảnh từ URL này");
+      preview.style.display = "none";
+    };
+  } else {
+    console.error(`Element with id ${previewId} not found`);
+    alert("Không thể hiển thị preview, vui lòng kiểm tra lại ID");
+  }
 }
+
+// --- Inline Add Form Functions ---
+
+/**
+ * Toggles the visibility of the inline add form for a specific type.
+ * @param {'publisher' | 'author' | 'series'} type - The type of item to add (publisher, author, series).
+ */
+function toggleInlineAdd(type) {
+  // Construct the ID of the inline form div based on the type
+  const formId = `inlineAdd${type.charAt(0).toUpperCase() + type.slice(1)}`; // e.g., inlineAddPublisher
+  const formElement = document.getElementById(formId);
+
+  if (formElement) {
+    // Check current display state and toggle
+    if (
+      formElement.style.display === "none" ||
+      formElement.style.display === ""
+    ) {
+      formElement.style.display = "flex"; // Use 'flex' as defined in the CSS
+
+      // Optional: Focus the input field when showing
+      const inputId = `newInline${
+        type.charAt(0).toUpperCase() + type.slice(1)
+      }Name`; // e.g., newInlinePublisherName
+      const inputElement = document.getElementById(inputId);
+      if (inputElement) {
+        inputElement.focus();
+        inputElement.value = ""; // Clear previous input on show
+      }
+      // Optional: Clear status message
+      const statusElement = formElement.querySelector(".inline-add-status");
+      if (statusElement) {
+        statusElement.textContent = "";
+        statusElement.className = "inline-add-status"; // Reset class
+      }
+    } else {
+      formElement.style.display = "none";
+      // Optional: Clear input and status when hiding
+      const inputId = `newInline${
+        type.charAt(0).toUpperCase() + type.slice(1)
+      }Name`;
+      const inputElement = document.getElementById(inputId);
+      if (inputElement) inputElement.value = "";
+      const statusElement = formElement.querySelector(".inline-add-status");
+      if (statusElement) statusElement.textContent = "";
+    }
+  } else {
+    console.error(`Inline add form element with ID "${formId}" not found.`);
+  }
+}
+
+// --- Make functions globally accessible if using modules ---
+// If your main script is a module (`type="module"`), onclick handlers in HTML
+// cannot directly access functions defined inside the module scope.
+// You need to explicitly attach them to the window object.
+window.toggleInlineAdd = toggleInlineAdd;
+
+// You'll also need to expose other functions called by onclick handlers:
+// window.saveInlineItem = saveInlineItem; // Define this function if you haven't already
+// window.showDashboard = showDashboard;
+// window.showBooks = showBooks;
+// window.openSidePanel = openSidePanel;
+// window.closeSidePanel = closeSidePanel;
+// window.submitBook = submitBook;
+// window.filterBooks = filterBooks;
+// window.sortBooks = sortBooks;
+// window.changePage = changePage;
+// window.editBook = editBook;
+// window.confirmDeleteBook = confirmDeleteBook;
+// window.previewImage = previewImage;
+// ... and any others used directly in HTML onclick attributes.
+
+// NOTE: Define the saveInlineItem function as well, as it's called by the save button's onclick.
+// Example structure (implement the actual saving logic):
+async function saveInlineItem(type) {
+  const inputId = `newInline${
+    type.charAt(0).toUpperCase() + type.slice(1)
+  }Name`;
+  const formId = `inlineAdd${type.charAt(0).toUpperCase() + type.slice(1)}`;
+  const inputElement = document.getElementById(inputId);
+  const formElement = document.getElementById(formId);
+  const statusElement = formElement?.querySelector(".inline-add-status");
+  const name = inputElement?.value.trim();
+
+  if (!name) {
+    if (statusElement) {
+      statusElement.textContent = "Tên không được để trống!";
+      statusElement.className = "inline-add-status error";
+    }
+    inputElement?.focus();
+    return;
+  }
+
+  if (statusElement) {
+    statusElement.textContent = "Đang lưu...";
+    statusElement.className = "inline-add-status";
+  }
+
+  try {
+    let newItem;
+    // Replace with your actual API calls from api.js
+    if (type === "publisher") {
+      // newItem = await addPublisher({ ten_nha_xuat_ban: name }); // Example call
+      console.log(`Simulating adding publisher: ${name}`); // Placeholder
+      await new Promise((resolve) => setTimeout(resolve, 500)); // Simulate network delay
+      newItem = { id: Date.now(), ten_nha_xuat_ban: name }; // Simulate response
+      await loadPublishers(newItem.id); // Reload and select the new item
+    } else if (type === "author") {
+      // newItem = await addAuthor({ ten_tac_gia: name }); // Example call
+      console.log(`Simulating adding author: ${name}`); // Placeholder
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      newItem = { id: Date.now(), ten_tac_gia: name }; // Simulate response
+      await loadAuthors(newItem.id); // Reload and select
+    } else if (type === "series") {
+      // newItem = await addSeries({ ten_bo_sach: name }); // Example call
+      console.log(`Simulating adding series: ${name}`); // Placeholder
+      await new Promise((resolve) => setTimeout(resolve, 500));
+      newItem = { id: Date.now(), ten_bo_sach: name }; // Simulate response
+      await loadSeries(newItem.id); // Reload and select
+    }
+
+    if (statusElement) {
+      statusElement.textContent = "Đã lưu!";
+      statusElement.className = "inline-add-status success";
+    }
+    // Hide the form after a short delay
+    setTimeout(() => {
+      toggleInlineAdd(type); // Hide the form
+    }, 1000);
+  } catch (error) {
+    console.error(`Error adding ${type}:`, error);
+    if (statusElement) {
+      statusElement.textContent = "Lỗi khi lưu!";
+      statusElement.className = "inline-add-status error";
+    }
+  }
+}
+
+// Make saveInlineItem globally accessible
+window.saveInlineItem = saveInlineItem;
+
+// Make sure loadPublishers, loadAuthors, loadSeries are defined and accessible
+// Example placeholder definitions if they are not in the current scope
+async function loadPublishers(id) {
+  console.log(`Load publishers, select: ${id}`);
+}
+async function loadAuthors(id) {
+  console.log(`Load authors, select: ${id}`);
+}
+async function loadSeries(id) {
+  console.log(`Load series, select: ${id}`);
+}
+window.loadPublishers = loadPublishers; // Expose if needed elsewhere too
+window.loadAuthors = loadAuthors;
+window.loadSeries = loadSeries;
 
 // Gọi hàm khởi tạo khi trang được tải
 window.onload = init;
+
+// Make functions globally available
+window.openSidePanel = openSidePanel;
+window.closeSidePanel = closeSidePanel;
+// Add any other functions used in HTML here
+window.showBooks = showBooks;
+window.showDashboard = showDashboard;
+window.editBook = editBook;
+window.deleteBook = deleteBook;
+window.filterBooks = filterBooks;
+window.sortBooks = sortBooks;
+window.submitBook = submitBook;
+window.changePage = changePage;
+window.showPublisherForm = showPublisherForm;
+window.closePublisherModal = closePublisherModal;
+window.addNewPublisher = addNewPublisher;
+window.previewImage = previewImage; // Make previewImage function available globally
+// Add the new global functions
+window.showAuthorForm = showAuthorForm;
+window.closeAuthorModal = closeAuthorModal;
+window.addNewAuthor = addNewAuthor;
+window.showSeriesForm = showSeriesForm;
+window.closeSeriesModal = closeSeriesModal;
+window.addNewSeries = addNewSeries;
