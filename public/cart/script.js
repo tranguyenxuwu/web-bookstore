@@ -206,23 +206,28 @@ function removeItem(event) {
   }, 500);
 }
 
+// Modify the checkout function
 function checkout() {
-  // Check if user is logged in
-  const userLoggedIn = localStorage.getItem('token') !== null;
+  const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
   
-  if (!userLoggedIn) {
-    // Redirect to login with return URL
-    const returnUrl = encodeURIComponent(window.location.href);
-    window.location.href = `../login/login.html?returnUrl=${returnUrl}`;
+  if (cartItems.length === 0) {
+    alert('Giỏ hàng của bạn đang trống!');
     return;
   }
   
-  // In a real app, this would connect to a payment API
-  const success = confirm('Xác nhận thanh toán đơn hàng?');
+  // Check if user has entered address information
+  const addressData = JSON.parse(localStorage.getItem('shipping_address'));
   
-  if (success) {
-    alert('Thanh toán thành công! Cảm ơn bạn đã mua hàng.');
-    localStorage.removeItem('cart');
-    loadCartItems();
+  if (!addressData) {
+    // Redirect to address page if no address found
+    window.location.href = '../address.html';
+    return;
   }
+  
+  // Continue with checkout process if address exists
+  alert('Đặt hàng thành công! Cảm ơn bạn đã mua sắm.');
+  
+  // Clear cart after successful order
+  localStorage.removeItem('cart');
+  loadCartItems();
 }

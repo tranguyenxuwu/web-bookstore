@@ -90,7 +90,7 @@
   font-size: 15px;
   color: #333;
   outline: none;
-  font-family: inherit;
+  
 }
 
 .search-input::placeholder {
@@ -544,7 +544,7 @@ footer {
 }
 
 .footer-info p::before {
-  font-family: "Font Awesome 5 Free";
+  
   font-weight: 900;
   opacity: 0.7;
 }
