@@ -2,10 +2,14 @@
 <html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Assuming style.css is inside an 'address' folder -->
     <title>Thông tin địa chỉ | ReadOn Bookstore</title>
     <link rel="stylesheet" href="./address/style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
   </head>
   <body>
     <!-- Page transition -->
@@ -13,11 +17,13 @@
       <div class="loader"></div>
     </div>
 
-    <!-- Navbar - giống các trang khác -->
+    <!-- Navbar - Assuming paths are relative to the root -->
     <nav class="navbar">
       <div class="nav-container">
-        <a href="index.html" class="logo-container">
-          <img src="assets/image/logo.png" alt="ReadOn" class="logo" />
+        <a href="../index.html" class="logo-container">
+          <!-- Adjusted path -->
+          <img src="../assets/image/logo.png" alt="ReadOn" class="logo" />
+          <!-- Adjusted path -->
         </a>
         <form id="search-form" class="search-container">
           <input
@@ -27,15 +33,18 @@
             placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
           />
           <button type="submit" class="search-button">
-            <img src="assets/image/search.png" alt="Search" />
+            <img src="../assets/image/search.png" alt="Search" />
+            <!-- Adjusted path -->
           </button>
         </form>
         <div class="nav-icons">
-          <a href="cart/cart.html" class="nav-icon">
+          <a href="../cart/cart.html" class="nav-icon">
+            <!-- Adjusted path -->
             <i class="fas fa-shopping-cart"></i>
             <span>Giỏ Hàng</span>
           </a>
-          <a href="login/login.html" class="nav-icon">
+          <a href="../login/login.html" class="nav-icon">
+            <!-- Adjusted path -->
             <i class="fas fa-user"></i>
             <span>Tài khoản</span>
           </a>
@@ -51,103 +60,155 @@
             <h2>Thông tin địa chỉ</h2>
             <p class="subtitle">Vui lòng điền đầy đủ thông tin để tiếp tục</p>
           </div>
-          
-          <div id="error-message" class="error-message" style="display: none;"></div>
-          
+
+          <div
+            id="error-message"
+            class="error-message"
+            style="display: none"
+          ></div>
+
           <form id="addressForm">
             <div class="form-section">
               <h3>Thông tin người nhận</h3>
-              
+
               <div class="form-row">
                 <div class="form-group">
-                  <label for="fullName">Họ và tên <span class="required">*</span></label>
+                  <label for="fullName"
+                    >Họ và tên <span class="required">*</span></label
+                  >
                   <div class="input-wrapper">
                     <i class="fas fa-user icon"></i>
-                    <input type="text" id="fullName" name="fullName" placeholder="Họ và tên người nhận" required />
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="Họ và tên người nhận"
+                      required
+                    />
                   </div>
                 </div>
-                
+
                 <div class="form-group">
-                  <label for="phone">Số điện thoại <span class="required">*</span></label>
+                  <label for="phone"
+                    >Số điện thoại <span class="required">*</span></label
+                  >
                   <div class="input-wrapper">
                     <i class="fas fa-phone icon"></i>
-                    <input type="tel" id="phone" name="phone" placeholder="Số điện thoại liên hệ" required pattern="[0-9]{10}" />
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Số điện thoại liên hệ"
+                      required
+                      pattern="[0-9]{10}"
+                    />
                   </div>
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <label for="email">Email</label>
                 <div class="input-wrapper">
                   <i class="fas fa-envelope icon"></i>
-                  <input type="email" id="email" name="email" placeholder="Email liên hệ (không bắt buộc)" />
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email liên hệ (không bắt buộc)"
+                  />
                 </div>
               </div>
             </div>
-            
+
             <div class="form-section">
               <h3>Địa chỉ giao hàng</h3>
-              
+
               <div class="form-row triple">
                 <div class="form-group">
-                  <label for="province">Tỉnh/Thành phố <span class="required">*</span></label>
+                  <label for="province"
+                    >Tỉnh/Thành phố <span class="required">*</span></label
+                  >
                   <div class="select-wrapper">
                     <i class="fas fa-map-marker-alt icon"></i>
                     <select id="province" name="province" required>
-                      <option value="">Chọn Tỉnh/Thành phố</option>
-                      <option value="HCM">TP Hồ Chí Minh</option>
-                      <option value="HN">Hà Nội</option>
-                      <option value="DN">Đà Nẵng</option>
-                      <!-- Thêm các tỉnh thành khác -->
+                      <option value="" selected disabled>
+                        Chọn Tỉnh/Thành phố
+                      </option>
+                      <!-- Options will be loaded by JS -->
                     </select>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
-                  <label for="district">Quận/Huyện <span class="required">*</span></label>
+                  <label for="district"
+                    >Quận/Huyện <span class="required">*</span></label
+                  >
                   <div class="select-wrapper">
                     <i class="fas fa-map icon"></i>
                     <select id="district" name="district" required disabled>
-                      <option value="">Chọn Quận/Huyện</option>
+                      <option value="" selected disabled>
+                        Chọn Quận/Huyện
+                      </option>
+                      <!-- Options will be loaded by JS -->
                     </select>
                   </div>
                 </div>
-                
+
                 <div class="form-group">
-                  <label for="ward">Phường/Xã <span class="required">*</span></label>
+                  <label for="ward"
+                    >Phường/Xã <span class="required">*</span></label
+                  >
                   <div class="select-wrapper">
                     <i class="fas fa-map-pin icon"></i>
                     <select id="ward" name="ward" required disabled>
-                      <option value="">Chọn Phường/Xã</option>
+                      <option value="" selected disabled>Chọn Phường/Xã</option>
+                      <!-- Options will be loaded by JS -->
                     </select>
                   </div>
                 </div>
               </div>
-              
+
               <div class="form-group">
-                <label for="street">Địa chỉ chi tiết <span class="required">*</span></label>
+                <label for="street"
+                  >Địa chỉ chi tiết <span class="required">*</span></label
+                >
                 <div class="input-wrapper">
                   <i class="fas fa-home icon"></i>
-                  <input type="text" id="street" name="street" placeholder="Số nhà, tên đường" required />
+                  <input
+                    type="text"
+                    id="street"
+                    name="street"
+                    placeholder="Số nhà, tên đường"
+                    required
+                  />
                 </div>
               </div>
-              
+
               <div class="form-group">
                 <label for="notes">Ghi chú</label>
                 <div class="textarea-wrapper">
                   <i class="fas fa-sticky-note icon"></i>
-                  <textarea id="notes" name="notes" placeholder="Ghi chú về việc giao hàng (không bắt buộc)"></textarea>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    placeholder="Ghi chú về việc giao hàng (không bắt buộc)"
+                  ></textarea>
                 </div>
               </div>
-              
+
               <div class="checkbox-group">
-                <input type="checkbox" id="defaultAddress" name="defaultAddress" />
+                <input
+                  type="checkbox"
+                  id="defaultAddress"
+                  name="defaultAddress"
+                />
                 <label for="defaultAddress">Đặt làm địa chỉ mặc định</label>
               </div>
             </div>
-            
+
             <div class="form-actions">
-              <a href="javascript:history.back()" class="btn-secondary">Quay lại</a>
+              <!-- Adjusted path assuming address is inside an 'address' folder -->
+              <a href="../cart/cart.html" class="btn-secondary">Quay lại</a>
               <button type="submit" class="btn-primary">
                 <span>Lưu địa chỉ</span>
                 <i class="fas fa-check"></i>
@@ -157,12 +218,15 @@
         </div>
       </main>
 
-      <!-- Footer - giống các trang khác -->
+      <!-- Footer - Assuming paths are relative to the root -->
       <footer>
         <div class="footer-container">
           <div class="footer-info">
             <h3>ReadOn Bookstore</h3>
-            <p><i class="fas fa-map-marker-alt"></i> 123 Đường Sách, Quận 1, TP. Hồ Chí Minh</p>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> 123 Đường Sách, Quận 1, TP.
+              Hồ Chí Minh
+            </p>
             <p><i class="fas fa-phone"></i> (0123) 456-789</p>
             <p><i class="fas fa-envelope"></i> info@readon.com</p>
           </div>
@@ -182,41 +246,47 @@
           </div>
         </div>
         <div class="copyright">
-          <p>&copy; 2025 ReadOn Bookstore. All rights reserved.</p>
+          <p>© 2025 ReadOn Bookstore. All rights reserved.</p>
         </div>
       </footer>
     </div>
 
+    <!-- Make sure the script path is correct relative to address.html -->
     <script type="module" src="./address/script.js"></script>
     <script>
+      // --- Keep existing page loading and search setup ---
       // Page loading animation
-      document.addEventListener('DOMContentLoaded', function() {
-        const pageTransition = document.querySelector('.page-transition');
+      document.addEventListener("DOMContentLoaded", function () {
+        const pageTransition = document.querySelector(".page-transition");
         if (pageTransition) {
-          setTimeout(function() {
-            pageTransition.style.opacity = '0';
-            setTimeout(function() {
-              pageTransition.style.display = 'none';
+          setTimeout(function () {
+            pageTransition.style.opacity = "0";
+            setTimeout(function () {
+              pageTransition.style.display = "none";
             }, 500);
-          }, 800);
+          }, 800); // Adjust timing if needed
         }
-        
-        // Setup search
+
+        // Setup search (using the function defined below)
         setupSearch();
       });
-      
-      // Setup search
+
+      // Setup search function (keep as is, but ensure paths are correct)
       function setupSearch() {
         const searchForm = document.getElementById("search-form");
         if (searchForm) {
-          searchForm.addEventListener("submit", function(e) {
+          searchForm.addEventListener("submit", function (e) {
             e.preventDefault();
             const searchInput = document.getElementById("search-input");
             const searchTerm = searchInput ? searchInput.value.trim() : "";
-            window.location.href = `search.html?title=${encodeURIComponent(searchTerm || "")}`;
+            // Adjust path if search.html is not in the root
+            window.location.href = `../search.html?title=${encodeURIComponent(
+              searchTerm || ""
+            )}`;
           });
         }
       }
+      // --- End of existing setup ---
     </script>
   </body>
 </html>

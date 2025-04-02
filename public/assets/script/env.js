@@ -20,6 +20,11 @@ export const APP_ENV = {
   UPLOAD_PUBLISHER_URL: "https://api.elysia-app.live/upload/publisher",
   UPLOAD_SERIES_URL: "https://api.elysia-app.live/upload/series",
 
+  // customer endpoints
+  CREATE_CUSTOMER_URL: "https://api.elysia-app.live/customer/create",
+  //new order endpoints
+  CREATE_ORDER_URL: "https://api.elysia-app.live/customer/new-order",
+
   // Auth endpoints
   LOGIN_URL: "https://api.elysia-app.live/auth/login",
   REGISTER_URL: "https://api.elysia-app.live/auth/register",
@@ -57,6 +62,12 @@ export const APP_ENV = {
 //   UPLOAD_AUTHOR_URL: "http://localhost:3000/upload/author",
 //   UPLOAD_PUBLISHER_URL: "http://localhost:3000/upload/publishers",
 //   UPLOAD_SERIES_URL: "http://localhost:3000/upload/series",
+
+//   // customer endpoints
+//   CREATE_CUSTOMER_URL: "http://localhost:3000/customer/create",
+
+//   //new order endpoints
+//   CREATE_ORDER_URL: "http://localhost:3000/customer/new-order",
 
 //   // Auth endpoints
 //   LOGIN_URL: "http://localhost:3000/auth/login",
