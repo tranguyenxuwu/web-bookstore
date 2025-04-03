@@ -37,12 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const dots = dotsContainer.querySelectorAll(".dot"); // Select newly created dots
 
     function updateCarousel() {
-      // Calculate percentage based on 100% width per slide
       carousel.style.transform = `translateX(-${currentSlide * 100}%)`;
       dots.forEach((dot, index) => {
         dot.classList.toggle("active", index === currentSlide);
       });
-      // Optional: Disable buttons at ends
       prevBtn.disabled = currentSlide === 0;
       nextBtn.disabled = currentSlide === slideCount - 1;
     }
@@ -57,14 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCarousel();
     }
 
-    // Event listeners
     nextBtn.addEventListener("click", nextSlide);
     prevBtn.addEventListener("click", prevSlide);
-
-    // Auto-advance slides every 5 seconds
     let autoSlideInterval = setInterval(nextSlide, 5000);
-
-    // Pause auto-slide on hover (optional)
     const carouselContainer = document.querySelector(".carousel-container");
     carouselContainer.addEventListener("mouseenter", () =>
       clearInterval(autoSlideInterval)
@@ -73,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
       "mouseleave",
       () => (autoSlideInterval = setInterval(nextSlide, 5000))
     );
-
     updateCarousel(); // Initial setup
   } else {
     console.warn("Carousel elements not found.");
@@ -85,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sliderNextBtn = document.querySelector(".slider-button.next-button");
 
   if (sliderContainer && sliderPrevBtn && sliderNextBtn) {
-    const scrollAmount = sliderContainer.clientWidth * 0.8; // Scroll ~80% of visible width
+    const scrollAmount = sliderContainer.clientWidth * 0.8;
     let isDown = false;
     let startX;
     let scrollLeft;
@@ -93,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Mouse Drag Scrolling
     sliderContainer.addEventListener("mousedown", (e) => {
       isDown = true;
-      sliderContainer.classList.add("active"); // Optional: for styling when dragging
+      sliderContainer.classList.add("active");
       startX = e.pageX - sliderContainer.offsetLeft;
       scrollLeft = sliderContainer.scrollLeft;
       sliderContainer.style.cursor = "grabbing";
@@ -114,144 +106,159 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - sliderContainer.offsetLeft;
-      const walk = (x - startX) * 2; // Adjust multiplier for scroll speed
+      const walk = (x - startX) * 2;
       sliderContainer.scrollLeft = scrollLeft - walk;
-      toggleSliderButtons(); // Update button visibility while dragging
+      toggleSliderButtons();
     });
 
     // Button Controls
     sliderNextBtn.addEventListener("click", () => {
       sliderContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
     });
-
     sliderPrevBtn.addEventListener("click", () => {
       sliderContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
     });
 
-    // Show/hide buttons based on scroll position
+    // Show/hide buttons
     const toggleSliderButtons = () => {
       const maxScrollLeft =
         sliderContainer.scrollWidth - sliderContainer.clientWidth;
-      const currentScroll = Math.ceil(sliderContainer.scrollLeft); // Use ceil to handle precision issues
+      const currentScroll = Math.ceil(sliderContainer.scrollLeft);
 
-      // Show previous button if not at the beginning
-      if (currentScroll > 1) {
-        // Use a small threshold
-        sliderPrevBtn.style.opacity = "1";
-        sliderPrevBtn.style.visibility = "visible";
-      } else {
-        sliderPrevBtn.style.opacity = "0";
-        sliderPrevBtn.style.visibility = "hidden";
-      }
-
-      // Show next button if not at the end
-      if (currentScroll < maxScrollLeft - 1) {
-        // Use a small threshold
-        sliderNextBtn.style.opacity = "1";
-        sliderNextBtn.style.visibility = "visible";
-      } else {
-        sliderNextBtn.style.opacity = "0";
-        sliderNextBtn.style.visibility = "hidden";
-      }
+      sliderPrevBtn.style.opacity = currentScroll > 1 ? "1" : "0";
+      sliderPrevBtn.style.visibility = currentScroll > 1 ? "visible" : "hidden";
+      sliderNextBtn.style.opacity =
+        currentScroll < maxScrollLeft - 1 ? "1" : "0";
+      sliderNextBtn.style.visibility =
+        currentScroll < maxScrollLeft - 1 ? "visible" : "hidden";
     };
 
-    // Initial check and add listener for scroll events
     sliderContainer.addEventListener("scroll", toggleSliderButtons);
-    // Use ResizeObserver for better responsiveness if slider width changes
     new ResizeObserver(toggleSliderButtons).observe(sliderContainer);
-    // Initial call
-    toggleSliderButtons();
-
-    // Set initial cursor style
+    toggleSliderButtons(); // Initial call
     sliderContainer.style.cursor = "grab";
   } else {
     console.warn("Flash sale slider elements not found.");
   }
 
-  // --- Fetch and Display Featured Books ---
+  // --- Fetch and Display Featured Books (Sách Nổi Bật) ---
   const featuredContainer = document.querySelector(
-    ".featured-products-section .products-grid"
+    ".featured-products-section .products-grid" // Make sure this selector matches your HTML grid container
   );
+
+  // Function to create a product element with the required format
+  function createProductElement(book) {
+    const bookId = book.ma_sach;
+    const title = book.tieu_de || "Không có tiêu đề";
+    const imageUrl =
+      book.sach_bia_sach?.url_bia_chinh || APP_ENV.PLACEHOLDER_IMAGE;
+    const priceFormatted = book.gia_tien
+      ? parseFloat(book.gia_tien).toLocaleString("vi-VN") + "đ"
+      : "Liên hệ";
+    const authorName = book.tac_gia?.ten_tac_gia || ""; // Get author name if available
+
+    // Variables for the new structure
+    const detailUrl = `product.html?id=${bookId}`; // Use product.html as in the original code
+    const imageAlt = title;
+    const PLACEHOLDER_IMAGE = APP_ENV.PLACEHOLDER_IMAGE;
+
+    // --- Volume Logic ---
+    let volumeHTML = "";
+    if (book.so_tap && book.so_tap > 0) {
+      const bookTypeName = book.kieu_sach?.ten_kieu_sach;
+      const volumeLabel = bookTypeName === "Artbook" ? "Quyển" : "Tập";
+      volumeHTML = `<p class="volume">${volumeLabel} ${book.so_tap}</p>`;
+    }
+
+    // --- Price Logic ---
+    let priceHTML = "";
+    const priceValue = parseFloat(book.gia_tien);
+    if (!isNaN(priceValue)) {
+      priceHTML = `<p class="price">${new Intl.NumberFormat("vi-VN", {
+        style: "currency",
+        currency: "VND",
+      }).format(priceValue)}</p>`;
+    }
+
+    // Create the root element for the product
+    const productElement = document.createElement("div");
+    productElement.classList.add("product");
+
+    // Apply the new HTML format
+    productElement.innerHTML = `
+        <a href="${detailUrl}" class="product-image-link">
+            <img src="${imageUrl}"
+                 alt="${imageAlt}"
+                 loading="lazy"
+                 onerror="this.onerror=null; this.src='${PLACEHOLDER_IMAGE}'">
+        </a>
+        <div class="product-info">
+            <h3>
+               <a href="${detailUrl}" class="product-title-link">
+                   ${title}
+               </a>
+            </h3>
+            ${volumeHTML}
+            ${priceHTML}
+        </div>
+    `;
+    return productElement;
+  }
 
   function displayFeaturedBooks(books) {
     if (!featuredContainer) {
-      console.error("Featured products container not found.");
+      console.error("Featured products container (.products-grid) not found.");
       return;
     }
-    featuredContainer.innerHTML = ""; // Clear loading message
+    featuredContainer.innerHTML = ""; // Clear loading/previous content
 
     if (!books || books.length === 0) {
       featuredContainer.innerHTML =
-        '<p class="no-results">Không tìm thấy sách nổi bật nào.</p>';
+        '<p class="no-results">Không tìm thấy sách trong bộ sách này.</p>';
       return;
     }
 
-    // Determine how many books to show (e.g., first 8)
-    const booksToShow = books.slice(0, 8);
+    // Determine how many books to show (e.g., first 8 or all)
+    const booksToShow = books.slice(0, 8); // Show first 8, adjust as needed
 
     booksToShow.forEach((book) => {
-      // Use the placeholder if image is missing or invalid
-      const imageUrl =
-        book.image && book.image.trim() !== ""
-          ? book.image
-          : APP_ENV.PLACEHOLDER_IMAGE;
-
-      const productDiv = document.createElement("div");
-      productDiv.classList.add("product"); // Class from style_store.css
-
-      // Use the structure expected by style_store.css
-      productDiv.innerHTML = `
-            <a href="detail/detail.html?id=${book.id}" class="product-link">
-                <img src="${imageUrl}" alt="${
-        book.title || "Book cover"
-      }" loading="lazy" onerror="this.onerror=null; this.src='${
-        APP_ENV.PLACEHOLDER_IMAGE
-      }';">
-                <div class="product-info">
-                    <h3>${book.title || "Không có tiêu đề"}</h3>
-                    <p class="price">${
-                      book.price
-                        ? book.price.toLocaleString("vi-VN") + "đ"
-                        : "Liên hệ"
-                    }</p>
-                    <p class="volume">${book.author || "Không rõ tác giả"}</p>
-                     ${
-                       book.rating
-                         ? `<div class="product-rating" style="font-size:13px; margin: 4px 0;">${"★".repeat(
-                             Math.round(book.rating)
-                           )}${"☆".repeat(5 - Math.round(book.rating))}</div>`
-                         : ""
-                     }
-                </div>
-            </a>
-        `;
-      featuredContainer.appendChild(productDiv);
+      const productElement = createProductElement(book);
+      featuredContainer.appendChild(productElement);
     });
   }
 
   async function fetchAndDisplayBooks() {
     if (!featuredContainer) return; // Don't fetch if container doesn't exist
 
+    // Add a loading indicator
+    featuredContainer.innerHTML =
+      '<p class="loading-message">Đang tải sách...</p>';
+
+    // Updated API URL
+    const apiUrl = "https://api.elysia-app.live/book/in-series/3";
+
     try {
-      const response = await fetch(APP_ENV.MASTER_URL);
+      const response = await fetch(apiUrl);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
 
-      // Adjust based on the actual structure of your JSON (e.g., data.books, data.data, or just data)
-      const books =
-        data.data || data.books || (Array.isArray(data) ? data : []);
+      // Check if the API returns an object with a 'sach' array inside, or just the array directly
+      const books = data.sach || (Array.isArray(data) ? data : []); // Prioritize data.sach
 
       if (Array.isArray(books)) {
         displayFeaturedBooks(books);
       } else {
-        console.warn("Fetched data is not an array of books:", books);
+        console.warn(
+          "Fetched data for series 3 is not an array or doesn't contain a 'sach' array:",
+          data
+        );
         featuredContainer.innerHTML =
           '<p class="error-message">Định dạng dữ liệu sách không hợp lệ.</p>';
       }
     } catch (error) {
-      console.error("Error fetching featured books:", error);
+      console.error("Error fetching featured books for series 3:", error);
       featuredContainer.innerHTML =
         '<p class="error-message">Đã xảy ra lỗi khi tải sách. Vui lòng thử lại sau.</p>';
     }
@@ -266,28 +273,21 @@ document.addEventListener("DOMContentLoaded", () => {
   function performSearch() {
     const keyword = searchInput.value.trim();
     if (keyword) {
-      // Redirect to a dedicated search results page (store.html or a new search.html)
-      // Pass the keyword as a query parameter
       window.location.href = `./store.html?search=${encodeURIComponent(
         keyword
       )}`;
     } else {
-      // Optional: Provide feedback if the search box is empty
       searchInput.focus();
-      // alert("Vui lòng nhập từ khóa tìm kiếm.");
     }
   }
 
   if (searchInput && searchButton) {
-    // Search on Enter key press
     searchInput.addEventListener("keypress", (event) => {
       if (event.key === "Enter") {
-        event.preventDefault(); // Prevent default form submission if it's inside a form
+        event.preventDefault();
         performSearch();
       }
     });
-
-    // Search on button click
     searchButton.addEventListener("click", performSearch);
   } else {
     console.warn("Search input or button not found.");

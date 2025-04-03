@@ -4,7 +4,9 @@
 .page-container {
   /* Styles previously inline or specific needs */
   /* Example: */
-  /* background-color: #fafafa; */
+  background-color: #fafafa;
+  margin-left: 15vw;
+  margin-right: 15vw;
 }
 
 /* --- Hero Banner / Carousel --- */
@@ -249,6 +251,21 @@
   border-radius: 3px;
 }
 
+/* --- ADDED/MODIFIED FOR HORIZONTAL LAYOUT --- */
+/* Target the container holding the product cards within the featured section */
+/* Assuming it has the class 'products-grid', adjust if your HTML uses a different class */
+.featured-products-section .products-grid {
+  display: grid; /* Use Grid layout */
+  /* Adjust minmax(200px, 1fr) as needed for product card width */
+  /* - minmax(MIN_WIDTH, MAX_WIDTH)
+     - 200px: Minimum width of a product card
+     - 1fr: Allow cards to grow equally to fill remaining space */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px; /* Space between product cards (adjust as needed) */
+  margin-top: 20px; /* Optional: Add space between title and grid */
+}
+/* --- END OF ADDED/MODIFIED SECTION --- */
+
 /* Loading/Error messages within the grid */
 .products-grid .loading-message,
 .products-grid .error-message,
@@ -340,6 +357,13 @@
   .product-in-series .product img {
     height: 160px;
   }
+
+  /* Adjust grid for featured products on smaller screens */
+  .featured-products-section .products-grid {
+    /* Example: Fewer columns or smaller min width */
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -378,6 +402,13 @@
   .product-in-series .product-info h3 {
     font-size: 13px;
     height: 34px;
+  }
+
+  /* Adjust grid further for very small screens */
+  .featured-products-section .products-grid {
+    /* Example: Maybe 2 columns fixed or smaller min width */
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
   }
 }
 
