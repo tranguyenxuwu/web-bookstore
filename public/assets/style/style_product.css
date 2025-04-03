@@ -73,12 +73,26 @@ body {
   line-height: 1.7;
 }
 
-.price {
+.product-price {
   font-size: 1.8em;
   color: #e60f1e;
   font-weight: bold;
   margin: 25px 0;
   display: block;
+}
+
+/* Style for product price paragraph with ID */
+#product-price {
+  font-size: 1.8em;
+  color: #e60f1e;
+  font-weight: bold;
+  margin: 25px 0;
+  display: block;
+}
+
+/* Style for price span inside */
+#price {
+  display: inline-block;
 }
 
 .product-description-container,

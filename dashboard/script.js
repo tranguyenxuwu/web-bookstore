@@ -7,9 +7,10 @@ let books = []; // Holds the master list fetched from API
 let publishers = [];
 let authors = [];
 let series = [];
+let bookTypes = []; // *** NEW: Store book types ***
 let filteredBooks = []; // Holds the currently displayed/filtered list
 let currentPage = 1;
-const itemsPerPage = 10; // Or your preferred number
+const itemsPerPage = 10;
 let totalPages = 0;
 let currentEditId = null; // Holds the ma_sach of the book being edited, or null for new book
 
@@ -22,6 +23,7 @@ const formTitle = document.getElementById("formTitle");
 const publisherSelect = document.getElementById("publisherId");
 const authorSelect = document.getElementById("authorId");
 const seriesSelect = document.getElementById("seriesId");
+const bookTypeSelect = document.getElementById("bookTypeId"); // *** NEW: Book type select element ***
 const paginationNumbers = document.getElementById("pageNumbers");
 const prevPageBtn = document.getElementById("prevPage");
 const nextPageBtn = document.getElementById("nextPage");
@@ -108,6 +110,7 @@ function init() {
   fetchPublishers();
   fetchAuthors();
   fetchSeries();
+  fetchBookTypes(); // *** NEW: Fetch book types ***
 }
 
 // --- Chart (Keep existing implementation) ---
@@ -117,52 +120,190 @@ function initChart() {
     console.warn("Revenue chart canvas not found");
     return;
   }
-  // ... (Rest of chart initialization code from previous versions) ...
-  const chart = new Chart(ctx, {
-    /* ... chart config ... */
+  // Sample data (replace with actual data fetching logic if needed)
+  const chartData = {
+    labels: [
+      "Thg 1",
+      "Thg 2",
+      "Thg 3",
+      "Thg 4",
+      "Thg 5",
+      "Thg 6",
+      "Thg 7",
+      "Thg 8",
+      "Thg 9",
+      "Thg 10",
+      "Thg 11",
+      "Thg 12",
+    ],
+    datasets: [
+      {
+        label: "Doanh thu (₫)",
+        data: [120, 190, 300, 500, 210, 300, 450, 600, 550, 700, 800, 950].map(
+          (x) => x * 100000
+        ), // Example data
+        borderColor: "#3498db",
+        backgroundColor: "rgba(52, 152, 219, 0.1)",
+        tension: 0.4,
+        fill: true,
+      },
+    ],
+  };
+  const chartConfig = {
+    type: "line",
+    data: chartData,
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      scales: {
+        y: {
+          beginAtZero: true,
+          ticks: {
+            callback: function (value) {
+              return value.toLocaleString("vi-VN") + " ₫";
+            },
+          },
+        },
+      },
+      plugins: {
+        legend: {
+          display: false,
+        },
+        tooltip: {
+          callbacks: {
+            label: function (context) {
+              let label = context.dataset.label || "";
+              if (label) {
+                label += ": ";
+              }
+              if (context.parsed.y !== null) {
+                label += context.parsed.y.toLocaleString("vi-VN") + " ₫";
+              }
+              return label;
+            },
+          },
+        },
+      },
+    },
+  };
+  const revenueChart = new Chart(ctx, chartConfig);
+
+  // Sample data for orders
+  const orderData = [20, 35, 40, 60, 30, 45, 55, 70, 65, 80, 90, 110];
+
+  document.querySelectorAll(".chart-btn").forEach((button) => {
+    button.addEventListener("click", () => {
+      document
+        .querySelectorAll(".chart-btn")
+        .forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
+
+      const type = button.dataset.type;
+      const currentDataset = revenueChart.data.datasets[0];
+
+      if (type === "revenue") {
+        currentDataset.label = "Doanh thu (₫)";
+        currentDataset.data = chartData.datasets[0].data; // Use original revenue data
+        revenueChart.options.scales.y.ticks.callback = function (value) {
+          return value.toLocaleString("vi-VN") + " ₫";
+        };
+        revenueChart.options.plugins.tooltip.callbacks.label = function (
+          context
+        ) {
+          let label = context.dataset.label || "";
+          if (label) label += ": ";
+          if (context.parsed.y !== null) {
+            label += context.parsed.y.toLocaleString("vi-VN") + " ₫";
+          }
+          return label;
+        };
+      } else if (type === "orders") {
+        currentDataset.label = "Số lượng đơn hàng";
+        currentDataset.data = orderData; // Use order data
+        revenueChart.options.scales.y.ticks.callback = function (value) {
+          // Ensure integer ticks for orders if needed
+          if (Number.isInteger(value)) return value;
+          return ""; // Avoid showing float ticks for count data
+        };
+        revenueChart.options.plugins.tooltip.callbacks.label = function (
+          context
+        ) {
+          let label = context.dataset.label || "";
+          if (label) label += ": ";
+          if (context.parsed.y !== null) {
+            label += context.parsed.y;
+          }
+          return label;
+        };
+      }
+      revenueChart.update();
+    });
   });
-  // ... (chart button listeners) ...
 }
 
 // --- Form Tabs and File Upload Setup (Keep existing) ---
 function setupFormTabs() {
   document.querySelectorAll(".form-tabs .tab").forEach((tab) => {
     tab.addEventListener("click", () => {
+      // Deactivate all tabs and content
       document
         .querySelectorAll(".form-tabs .tab")
         .forEach((t) => t.classList.remove("active"));
       document
         .querySelectorAll(".tab-content")
         .forEach((c) => c.classList.remove("active"));
+
+      // Activate clicked tab and corresponding content
       tab.classList.add("active");
       const tabName = tab.dataset.tab;
       const contentTab = document.getElementById(`${tabName}-tab`);
       if (contentTab) contentTab.classList.add("active");
     });
   });
-  // Activate first tab initially
-  document.querySelector(".form-tabs .tab")?.click();
+
+  // Ensure initial state: Activate the first tab and its content
+  const firstTab = document.querySelector(".form-tabs .tab");
+  if (firstTab) {
+    // Deactivate others first to be safe
+    document
+      .querySelectorAll(".form-tabs .tab")
+      .forEach((t) => t.classList.remove("active"));
+    document
+      .querySelectorAll(".tab-content")
+      .forEach((c) => c.classList.remove("active"));
+    // Activate first
+    firstTab.classList.add("active");
+    const firstTabName = firstTab.dataset.tab;
+    const firstContentTab = document.getElementById(`${firstTabName}-tab`);
+    if (firstContentTab) firstContentTab.classList.add("active");
+  }
 }
 
 function setupFileUploads() {
   document.querySelectorAll('input[type="file"]').forEach((input) => {
     input.addEventListener("change", async (e) => {
       const file = e.target.files[0];
-      if (!file) return;
-
       const fieldName = input.dataset.field; // e.g., "url_bia_chinh"
       const statusElementId = `status_${fieldName.replace("url_", "")}`;
       const previewElementId = `${fieldName.replace("url_", "")}Preview`;
       const statusElement = document.getElementById(statusElementId);
       const previewElement = document.getElementById(previewElementId);
-      const inputField = document.getElementById(fieldName); // Text input for URL
+      const urlInputField = document.getElementById(fieldName); // Text input for URL
+
+      // If a file is selected, clear the corresponding URL input and its preview
+      if (file && urlInputField) {
+        urlInputField.value = "";
+        // Preview from URL input is handled by previewImage, no need to clear here
+      }
+      // If no file selected (e.g., user cancels), do nothing
+      if (!file) return;
 
       if (statusElement) {
         statusElement.innerHTML = "Đang tải ảnh lên...";
         statusElement.className = "upload-status loading";
       }
-      if (inputField) inputField.value = ""; // Clear URL on new file select
 
+      // Preview the selected file locally
       const reader = new FileReader();
       reader.onload = (event) => {
         if (previewElement) {
@@ -172,10 +313,12 @@ function setupFileUploads() {
       };
       reader.readAsDataURL(file);
 
+      // Start the upload process
       try {
         showLoading(true);
         const publicUrl = await uploadImage(file);
-        if (inputField) inputField.value = publicUrl;
+        // Set the URL input field with the result from upload
+        if (urlInputField) urlInputField.value = publicUrl;
         if (statusElement) {
           statusElement.innerHTML = "Tải lên thành công!";
           statusElement.className = "upload-status success";
@@ -188,6 +331,11 @@ function setupFileUploads() {
           }`;
           statusElement.className = "upload-status error";
         }
+        // Clear preview on upload error? Optional.
+        // if (previewElement) {
+        //   previewElement.src = "";
+        //   previewElement.style.display = "none";
+        // }
       } finally {
         showLoading(false);
       }
@@ -198,6 +346,10 @@ function setupFileUploads() {
 // Upload image function (Keep existing)
 async function uploadImage(file) {
   const presignedUrlEndpoint = APP_ENV.IMAGE_PRESIGNED_URL; // Get URL once
+  if (!presignedUrlEndpoint) {
+    throw new Error("Lỗi cấu hình: IMAGE_PRESIGNED_URL chưa được định nghĩa.");
+  }
+
   console.log(`Attempting to get presigned URL from: ${presignedUrlEndpoint}`);
   console.log(`Requesting for file: ${file.name}, type: ${file.type}`);
 
@@ -207,7 +359,7 @@ async function uploadImage(file) {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // Add any required Authorization headers here if needed, e.g.:
+        // Add Authorization header if your endpoint requires it
         // 'Authorization': `Bearer ${your_auth_token}`
       },
       body: JSON.stringify({
@@ -216,7 +368,6 @@ async function uploadImage(file) {
       }),
     });
 
-    // Log status immediately for debugging
     console.log(
       `Presigned URL fetch status: ${presignedRes.status} ${presignedRes.statusText}`
     );
@@ -224,22 +375,25 @@ async function uploadImage(file) {
     if (!presignedRes.ok) {
       let errorBody = "Could not read error response body.";
       try {
-        // Attempt to read the response body for more detailed errors
         errorBody = await presignedRes.text();
       } catch (readError) {
         console.error("Error reading the error response body:", readError);
       }
-      // Log detailed error before throwing
       console.error(
         `Failed to get presigned URL. Status: ${presignedRes.status}. Response:`,
         errorBody
       );
-      // Throw a more informative error
-      throw new Error(`Lỗi lấy presigned URL (Status: ${presignedRes.status})`);
+      throw new Error(
+        `Lỗi lấy presigned URL (Status: ${presignedRes.status}) - ${errorBody}`
+      );
     }
 
-    // If fetch was okay, proceed to parse JSON
     const { url, publicUrl } = await presignedRes.json();
+    if (!url || !publicUrl) {
+      throw new Error(
+        "Phản hồi API presigned URL không hợp lệ (thiếu url hoặc publicUrl)."
+      );
+    }
     console.log("Successfully got presigned URL:", url);
     console.log("Public URL:", publicUrl);
 
@@ -271,16 +425,17 @@ async function uploadImage(file) {
         `Upload to R2 failed. Status: ${uploadRes.status}. Response:`,
         uploadErrorBody
       );
-      throw new Error(`Upload ảnh thất bại (Status: ${uploadRes.status})`);
+      throw new Error(
+        `Upload ảnh thất bại (Status: ${uploadRes.status}) - ${uploadErrorBody}`
+      );
     }
 
     console.log("Upload thành công, public URL:", publicUrl);
     return publicUrl; // Return the public URL on success
   } catch (error) {
-    // Catches errors from either fetch call or JSON parsing
     console.error("Chi tiết lỗi trong quá trình upload:", error);
-    // Re-throw the error so the calling function knows something went wrong
-    throw error;
+    // Re-throw a potentially more user-friendly error or the original
+    throw new Error(`Lỗi upload ảnh: ${error.message}`);
   }
 }
 
@@ -288,47 +443,72 @@ async function uploadImage(file) {
 
 async function fetchPublishers(selectId = null) {
   try {
+    if (!APP_ENV.PUBLISHER_URL)
+      throw new Error("Lỗi cấu hình: PUBLISHER_URL chưa định nghĩa.");
     const res = await fetch(APP_ENV.PUBLISHER_URL);
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-    publishers = await res.json(); // Expects array like [{ma_nha_xuat_ban: 1, ten_nha_xuat_ban: '...'}, ...]
+    publishers = await res.json();
     updatePublisherDropdown(selectId);
   } catch (error) {
     console.error("Lỗi tải NXB:", error);
     if (publisherSelect)
-      publisherSelect.innerHTML = '<option value="">Lỗi tải NXB</option>';
+      publisherSelect.innerHTML = `<option value="">Lỗi tải NXB: ${error.message}</option>`;
   }
 }
 
 async function fetchAuthors(selectId = null) {
   try {
+    if (!APP_ENV.AUTHOR_URL)
+      throw new Error("Lỗi cấu hình: AUTHOR_URL chưa định nghĩa.");
     const res = await fetch(APP_ENV.AUTHOR_URL);
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-    authors = await res.json(); // Expects array like [{ma_tac_gia: 1, ten_tac_gia: '...'}, ...]
+    authors = await res.json();
     updateAuthorDropdown(selectId);
   } catch (error) {
     console.error("Lỗi tải tác giả:", error);
     if (authorSelect)
-      authorSelect.innerHTML = '<option value="">Lỗi tải tác giả</option>';
+      authorSelect.innerHTML = `<option value="">Lỗi tải tác giả: ${error.message}</option>`;
   }
 }
 
 async function fetchSeries(selectId = null) {
   try {
-    // Ensure this URL fetches *all* series for the dropdown
+    if (!APP_ENV.FETCH_BY_SERIES_URL)
+      throw new Error("Lỗi cấu hình: FETCH_BY_SERIES_URL chưa định nghĩa.");
     const res = await fetch(APP_ENV.FETCH_BY_SERIES_URL);
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
-    series = await res.json(); // Expects array like [{ma_bo_sach: 1, ten_bo_sach: '...'}, ...]
+    series = await res.json();
     updateSeriesDropdown(selectId);
   } catch (error) {
     console.error("Lỗi tải bộ sách:", error);
     if (seriesSelect)
-      seriesSelect.innerHTML = '<option value="">Lỗi tải bộ sách</option>';
+      seriesSelect.innerHTML = `<option value="">Lỗi tải bộ sách: ${error.message}</option>`;
+  }
+}
+
+// *** NEW: Fetch Book Types ***
+async function fetchBookTypes(selectId = null) {
+  try {
+    // Make sure APP_ENV.BOOK_TYPE_URL is defined in your env.js
+    if (!APP_ENV.BOOK_TYPE_URL) {
+      console.warn("APP_ENV.BOOK_TYPE_URL is not defined.");
+      if (bookTypeSelect)
+        bookTypeSelect.innerHTML = '<option value="">Lỗi cấu hình URL</option>';
+      return;
+    }
+    const res = await fetch(APP_ENV.BOOK_TYPE_URL);
+    if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
+    bookTypes = await res.json(); // Expects [{ma_kieu_sach: 1, ten_kieu_sach: '...'}, ...]
+    updateBookTypeDropdown(selectId);
+  } catch (error) {
+    console.error("Lỗi tải kiểu sách:", error);
+    if (bookTypeSelect)
+      bookTypeSelect.innerHTML = `<option value="">Lỗi tải kiểu sách: ${error.message}</option>`;
   }
 }
 
 function updatePublisherDropdown(selectId = null) {
   if (!publisherSelect) return;
-  // ID from API (ma_nha_xuat_ban) is number, value in select should match for selection
   const currentVal = selectId !== null ? Number(selectId) : null;
   publisherSelect.innerHTML = '<option value="">-- Chọn NXB --</option>';
   publishers.forEach((pub) => {
@@ -370,6 +550,29 @@ function updateSeriesDropdown(selectId = null) {
     }
     seriesSelect.appendChild(option);
   });
+}
+
+// *** NEW: Update Book Type Dropdown ***
+function updateBookTypeDropdown(selectId = null) {
+  if (!bookTypeSelect) return;
+  const currentVal = selectId !== null ? Number(selectId) : null;
+  bookTypeSelect.innerHTML = '<option value="">-- Chọn kiểu sách --</option>';
+  // Ensure bookTypes is an array before iterating
+  if (Array.isArray(bookTypes)) {
+    bookTypes.forEach((type) => {
+      const option = document.createElement("option");
+      option.value = type.ma_kieu_sach; // Use the ID field from API
+      option.textContent = type.ten_kieu_sach; // Use the name field from API
+      if (currentVal !== null && type.ma_kieu_sach === currentVal) {
+        option.selected = true;
+      }
+      bookTypeSelect.appendChild(option);
+    });
+  } else {
+    console.warn("Dữ liệu kiểu sách không phải là mảng:", bookTypes);
+    bookTypeSelect.innerHTML =
+      '<option value="">Lỗi dữ liệu kiểu sách</option>';
+  }
 }
 
 // --- Inline Add Functionality (Keep existing logic) ---
@@ -433,24 +636,34 @@ async function saveInlineItem(type) {
     let fetchUrl = "";
     let idField = ""; // Field name of the ID in the response (e.g., 'ma_nha_xuat_ban')
     let fetchFunction; // Function to reload the list (e.g., fetchPublishers)
+    let configError = false;
 
     if (type === "publisher") {
+      if (!APP_ENV.UPLOAD_PUBLISHER_URL) configError = true;
       fetchUrl = APP_ENV.UPLOAD_PUBLISHER_URL;
       payload = { ten_nha_xuat_ban: name };
       idField = "ma_nha_xuat_ban";
       fetchFunction = fetchPublishers;
     } else if (type === "author") {
+      if (!APP_ENV.UPLOAD_AUTHOR_URL) configError = true;
       fetchUrl = APP_ENV.UPLOAD_AUTHOR_URL;
       payload = { ten_tac_gia: name };
       idField = "ma_tac_gia";
       fetchFunction = fetchAuthors;
     } else if (type === "series") {
+      if (!APP_ENV.UPLOAD_SERIES_URL) configError = true;
       fetchUrl = APP_ENV.UPLOAD_SERIES_URL;
       payload = { ten_bo_sach: name };
       idField = "ma_bo_sach";
       fetchFunction = fetchSeries;
     } else {
-      throw new Error("Invalid type for inline add");
+      throw new Error("Loại không hợp lệ để thêm inline");
+    }
+
+    if (configError) {
+      throw new Error(
+        `Lỗi cấu hình: URL upload cho '${type}' chưa được định nghĩa.`
+      );
     }
 
     const response = await fetch(fetchUrl, {
@@ -458,20 +671,34 @@ async function saveInlineItem(type) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     });
+
+    const responseText = await response.text(); // Read text first
+
     if (!response.ok) {
-      const errorData = await response.text();
-      throw new Error(`Lỗi API (${response.status}): ${errorData}`);
+      let errorDetail = responseText;
+      try {
+        const errorJson = JSON.parse(responseText);
+        errorDetail =
+          errorJson.detail || errorJson.message || JSON.stringify(errorJson);
+      } catch (e) {
+        /* Ignore if not JSON */
+      }
+      throw new Error(`Lỗi API (${response.status}): ${errorDetail}`);
     }
 
-    const newItem = await response.json(); // Expects object like { ma_nha_xuat_ban: 123, ... }
-    const newId = newItem?.[idField]; // Extract the numeric ID
+    let newItem;
+    try {
+      newItem = JSON.parse(responseText); // Parse JSON now we know it's OK
+    } catch (e) {
+      throw new Error(`Lỗi phân tích phản hồi JSON thành công: ${e.message}`);
+    }
+
+    const newId = newItem?.[idField];
 
     if (newId === undefined) {
-      console.warn(
-        "API did not return the expected ID field:",
-        idField,
-        newItem
-      );
+      console.warn("API không trả về trường ID mong đợi:", idField, newItem);
+      // Optionally throw an error or proceed cautiously
+      // throw new Error("Phản hồi API không chứa ID mong đợi.");
     }
 
     // Reload the dropdown data and select the new item (passing the numeric ID)
@@ -482,10 +709,10 @@ async function saveInlineItem(type) {
       statusElement.className = "inline-add-status success";
     }
     setTimeout(() => {
-      toggleInlineAdd(type);
-    }, 1200); // Hide form
+      toggleInlineAdd(type); // Hide form after a short delay
+    }, 1200);
   } catch (error) {
-    console.error(`Error adding ${type}:`, error);
+    console.error(`Lỗi thêm ${type}:`, error);
     if (statusElement) {
       statusElement.textContent = `Lỗi: ${error.message}`;
       statusElement.className = "inline-add-status error";
@@ -501,15 +728,17 @@ async function saveInlineItem(type) {
 async function fetchAndRenderBooks() {
   showLoading(true);
   try {
-    const response = await fetch(APP_ENV.MASTER_URL); // Fetch all books
+    if (!APP_ENV.MASTER_URL)
+      throw new Error("Lỗi cấu hình: MASTER_URL chưa định nghĩa.");
+    const response = await fetch(APP_ENV.MASTER_URL);
     if (!response.ok)
       throw new Error(`HTTP ${response.status}: ${await response.text()}`);
     const data = await response.json();
-    books = Array.isArray(data) ? data : []; // Replace local data; Assume data matches schema type-wise
-    applyFiltersAndSort(); // Apply current filters/sort to the new data
-    renderBooks(); // Render the potentially updated list
+    books = Array.isArray(data) ? data : [];
+    applyFiltersAndSort();
+    renderBooks();
   } catch (error) {
-    console.error("Error fetching books:", error);
+    console.error("Lỗi tải danh sách sách:", error);
     alert("Không thể tải danh sách sách: " + error.message);
     books = []; // Clear books on error
     applyFiltersAndSort();
@@ -521,26 +750,34 @@ async function fetchAndRenderBooks() {
 
 // Applies current search and sort criteria
 function applyFiltersAndSort() {
-  const searchTerm = searchInput ? searchInput.value.toLowerCase() : "";
-  const sortType = document.getElementById("sortBooks")?.value || "title-asc"; // Get current sort
+  const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : "";
+  const sortType = document.getElementById("sortBooks")?.value || "title-asc";
 
   // Filter
   filteredBooks = books.filter((book) => {
-    const title = (book.tieu_de || "").toLowerCase();
-    // Assuming publisher name is nested like book.nha_xuat_ban.ten_nha_xuat_ban
+    // Check if book and its properties exist before accessing
+    const title = (book?.tieu_de || "").toLowerCase();
     const publisherName = (
-      book.nha_xuat_ban?.ten_nha_xuat_ban || ""
+      book?.nha_xuat_ban?.ten_nha_xuat_ban || ""
     ).toLowerCase();
-    return title.includes(searchTerm) || publisherName.includes(searchTerm);
+    // Add more fields to search if needed
+    // const authorName = (book?.tac_gia?.ten_tac_gia || "").toLowerCase();
+
+    // Match if search term is empty or found in title or publisher name
+    return (
+      !searchTerm ||
+      title.includes(searchTerm) ||
+      publisherName.includes(searchTerm)
+    );
   });
 
   // Sort
   filteredBooks.sort((a, b) => {
-    const titleA = a.tieu_de || "";
-    const titleB = b.tieu_de || "";
-    // Use parseFloat for price comparison, even though it comes as string
-    const priceA = parseFloat(a.gia_tien) || 0;
-    const priceB = parseFloat(b.gia_tien) || 0;
+    // Provide default values for robust comparison
+    const titleA = a?.tieu_de || "";
+    const titleB = b?.tieu_de || "";
+    const priceA = parseFloat(a?.gia_tien) || 0;
+    const priceB = parseFloat(b?.gia_tien) || 0;
 
     switch (sortType) {
       case "title-asc":
@@ -552,15 +789,17 @@ function applyFiltersAndSort() {
       case "price-desc":
         return priceB - priceA;
       default:
-        return 0;
+        return 0; // No sorting or unknown type
     }
   });
 
   // Recalculate total pages after filtering/sorting
   totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
   // Adjust current page if it's now out of bounds
-  if (currentPage > totalPages) {
-    currentPage = Math.max(1, totalPages);
+  if (currentPage > totalPages && totalPages > 0) {
+    currentPage = totalPages;
+  } else if (totalPages === 0) {
+    currentPage = 1; // Reset to 1 if no results
   }
 }
 
@@ -568,81 +807,95 @@ function applyFiltersAndSort() {
 function renderBooks() {
   if (!bookListTableBody) return;
 
+  // Ensure currentPage is valid before slicing
+  if (currentPage < 1) currentPage = 1;
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
   const paginatedBooks = filteredBooks.slice(startIndex, endIndex);
 
-  if (paginatedBooks.length === 0) {
-    bookListTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center;">Không có sách nào khớp.</td></tr>`;
+  if (paginatedBooks.length === 0 && books.length > 0) {
+    // Show message only if master list has items but filter yields none
+    bookListTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center;">Không tìm thấy sách nào khớp với tìm kiếm/bộ lọc.</td></tr>`;
+  } else if (books.length === 0) {
+    // Initial load or fetch error
+    bookListTableBody.innerHTML = `<tr><td colspan="5" style="text-align: center;">Chưa có sách nào trong hệ thống.</td></tr>`;
   } else {
     bookListTableBody.innerHTML = paginatedBooks
       .map((book) => {
-        // Ensure data types are handled correctly for display
+        // Defensive coding: check for book existence and properties
+        if (!book) return ""; // Skip rendering if book is somehow null/undefined
+
         const imageUrl =
           book.sach_bia_sach?.url_bia_chinh ||
-          book.image ||
-          "https://cdn.elysia-app.live/placeholder.jpg";
+          book.image || // Fallback 1
+          "https://cdn.elysia-app.live/placeholder.jpg"; // Fallback 2
         const title = book.tieu_de || "N/A";
-        const priceDisplay = formatCurrency(book.gia_tien); // Format string price for display
+        const priceDisplay = formatCurrency(book.gia_tien); // formatCurrency handles NaN
         const publisherName = book.nha_xuat_ban?.ten_nha_xuat_ban || "N/A";
-        const bookId = book.ma_sach; // Use the primary key from API
+        const bookId = book.ma_sach;
 
         if (bookId === undefined || bookId === null) {
-          console.warn("Book data missing 'ma_sach':", book);
+          console.warn("Dữ liệu sách thiếu 'ma_sach':", book);
           return ""; // Skip rendering if essential ID is missing
         }
 
         return `
                 <tr>
-                  <td><img src="${imageUrl}" width="50" style="border-radius: 4px; aspect-ratio: 2/3; object-fit: cover;" alt="${title}" loading="lazy"></td>
-                  <td>${title}</td>
+                  <td><img src="${imageUrl}" width="50" style="border-radius: 4px; aspect-ratio: 2/3; object-fit: cover;" alt="${title}" loading="lazy" onerror="this.onerror=null; this.src='https://cdn.elysia-app.live/placeholder.jpg';"></td>
+                  <td title="${title}">${title}</td>
                   <td>${priceDisplay}</td>
-                  <td>${publisherName}</td>
+                  <td title="${publisherName}">${publisherName}</td>
                   <td class="book-actions">
-                    <button class="action-btn edit" title="Sửa" onclick="editBook(${bookId})"><i class="fas fa-edit"></i></button>
-                    <button class="action-btn delete" title="Xóa" onclick="confirmDeleteBook(${bookId})"><i class="fas fa-trash"></i></button>
+                    <button class="action-btn edit" title="Sửa sách" onclick="editBook(${bookId})"><i class="fas fa-edit"></i></button>
+                    <button class="action-btn delete" title="Xóa sách" onclick="confirmDeleteBook(${bookId})"><i class="fas fa-trash"></i></button>
                   </td>
                 </tr>`;
       })
       .join("");
   }
-  updatePaginationControls(); // Update buttons and page info
+  updatePaginationControls(); // Update buttons and page info regardless of content
 }
 
 // Updates pagination controls (Prev/Next buttons, page info)
 function updatePaginationControls() {
   if (!paginationNumbers || !prevPageBtn || !nextPageBtn) return;
 
-  totalPages = Math.ceil(filteredBooks.length / itemsPerPage);
+  totalPages = Math.ceil(filteredBooks.length / itemsPerPage); // Recalculate based on filtered list
 
   if (totalPages <= 0) {
-    paginationNumbers.textContent = "";
+    paginationNumbers.textContent = "Không có kết quả";
     prevPageBtn.disabled = true;
     nextPageBtn.disabled = true;
-    return;
+    prevPageBtn.style.visibility = "hidden"; // Hide buttons if no pages
+    nextPageBtn.style.visibility = "hidden";
+  } else {
+    paginationNumbers.textContent = `Trang ${currentPage} / ${totalPages}`;
+    prevPageBtn.disabled = currentPage === 1;
+    nextPageBtn.disabled = currentPage === totalPages;
+    prevPageBtn.style.visibility = "visible"; // Show buttons if pages exist
+    nextPageBtn.style.visibility = "visible";
   }
-
-  paginationNumbers.textContent = `Trang ${currentPage} / ${totalPages}`;
-  prevPageBtn.disabled = currentPage === 1;
-  nextPageBtn.disabled = currentPage === totalPages;
 }
 
 // --- Event Handlers for Table Controls ---
 
-function handleSearchInput() {
+// Renamed original functions to avoid conflicts with global scope assignments
+function handleSearchInputInternal() {
   currentPage = 1; // Reset to first page on search
   applyFiltersAndSort();
   renderBooks();
 }
 
-function handleSortChange(selectElement) {
+function handleSortChangeInternal() {
+  // No need for selectElement param if reading directly
   currentPage = 1; // Reset to first page on sort change
   applyFiltersAndSort(); // applyFiltersAndSort reads the select value internally
   renderBooks();
 }
 
-function handlePageChange(direction) {
+function handlePageChangeInternal(direction) {
   const newPage = currentPage + direction;
+  // Check bounds against totalPages based on filtered results
   if (newPage >= 1 && newPage <= totalPages) {
     currentPage = newPage;
     renderBooks(); // Only re-render, no need to re-filter/sort
@@ -655,71 +908,131 @@ function handlePageChange(direction) {
 async function submitBook() {
   try {
     const form = document.getElementById("bookForm");
+    if (!form) throw new Error("Không tìm thấy form sách.");
+
     const formData = new FormData(form);
     const bookData = {}; // Object to be sent
 
     // --- Prepare data according to the exact schema ---
-    bookData.tieu_de = formData.get("tieu_de") || ""; // required string
-    bookData.gia_tien = formData.get("gia_tien") || ""; // required string
-    bookData.gioi_thieu = formData.get("gioi_thieu") || ""; // required string
-
-    const danh_gia = formData.get("danh_gia");
-    if (danh_gia) bookData.danh_gia = danh_gia; // optional string
-    const ngay_xuat_ban = formData.get("ngay_xuat_ban");
-    if (ngay_xuat_ban) bookData.ngay_xuat_ban = ngay_xuat_ban; // optional string date
-
-    const tong_so_trang = parseOptionalInt(formData.get("tong_so_trang"));
-    if (tong_so_trang !== null) bookData.tong_so_trang = tong_so_trang; // optional number
+    // Required fields
+    bookData.tieu_de = formData.get("tieu_de")?.trim() || "";
+    bookData.gia_tien = formData.get("gia_tien")?.trim() || "";
+    bookData.gioi_thieu = formData.get("gioi_thieu")?.trim() || "";
     const ma_nha_xuat_ban = parseOptionalInt(formData.get("ma_nha_xuat_ban"));
-    if (ma_nha_xuat_ban !== null) bookData.ma_nha_xuat_ban = ma_nha_xuat_ban; // number (effectively required)
-    const ma_bo_sach = parseOptionalInt(formData.get("ma_bo_sach"));
-    if (ma_bo_sach !== null) bookData.ma_bo_sach = ma_bo_sach; // optional number
-    const ma_tac_gia = parseOptionalInt(formData.get("ma_tac_gia"));
-    if (ma_tac_gia !== null) bookData.ma_tac_gia = ma_tac_gia; // optional number
-    const ma_kieu_sach = parseOptionalInt(formData.get("ma_kieu_sach"));
-    if (ma_kieu_sach !== null) bookData.ma_kieu_sach = ma_kieu_sach; // optional number
-    const so_tap = parseOptionalFloat(formData.get("so_tap"));
-    if (so_tap !== null) bookData.so_tap = so_tap; // optional number
-
-    const url_bia_chinh = formData.get("url_bia_chinh");
-    if (url_bia_chinh) bookData.url_bia_chinh = url_bia_chinh; // optional string url
-    const url_bia_cover = formData.get("url_bia_cover");
-    if (url_bia_cover) bookData.url_bia_cover = url_bia_cover; // optional string url
-    const url_bia_phu = formData.get("url_bia_phu");
-    if (url_bia_phu) bookData.url_bia_phu = url_bia_phu; // optional string url
-    const url_bookmark = formData.get("url_bookmark");
-    if (url_bookmark) bookData.url_bookmark = url_bookmark; // optional string url
-
-    // --- Validation ---
-    if (
-      !bookData.tieu_de ||
-      !bookData.gia_tien ||
-      !bookData.gioi_thieu ||
-      bookData.ma_nha_xuat_ban === undefined
-    ) {
-      alert(
-        "Vui lòng điền đầy đủ thông tin bắt buộc:\n- Tiêu đề\n- Giá tiền\n- Giới thiệu\n- Nhà xuất bản"
-      );
+    // Treat publisher as required for this logic
+    if (ma_nha_xuat_ban === null) {
+      alert("Vui lòng chọn Nhà xuất bản.");
+      // Optionally focus the element: document.getElementById('publisherId')?.focus();
       return;
     }
-    // Add pattern validation if needed, e.g., for gia_tien, danh_gia
+    bookData.ma_nha_xuat_ban = ma_nha_xuat_ban;
+
+    // Optional fields
+    const danh_gia = formData.get("danh_gia")?.trim();
+    if (danh_gia) bookData.danh_gia = danh_gia;
+
+    const ngay_xuat_ban = formData.get("ngay_xuat_ban");
+    if (ngay_xuat_ban) {
+      // Validate date format if necessary
+      if (/^\d{4}-\d{2}-\d{2}$/.test(ngay_xuat_ban)) {
+        bookData.ngay_xuat_ban = ngay_xuat_ban;
+      } else {
+        alert("Định dạng Ngày xuất bản không hợp lệ (YYYY-MM-DD).");
+        document.getElementById("publishDate")?.focus();
+        return;
+      }
+    }
+
+    const tong_so_trang = parseOptionalInt(formData.get("tong_so_trang"));
+    if (tong_so_trang !== null) {
+      if (tong_so_trang < 0) {
+        alert("Tổng số trang không được âm.");
+        return;
+      }
+      bookData.tong_so_trang = tong_so_trang;
+    }
+
+    const ma_bo_sach = parseOptionalInt(formData.get("ma_bo_sach"));
+    if (ma_bo_sach !== null) bookData.ma_bo_sach = ma_bo_sach;
+
+    const ma_tac_gia = parseOptionalInt(formData.get("ma_tac_gia"));
+    if (ma_tac_gia !== null) bookData.ma_tac_gia = ma_tac_gia;
+
+    // *** NEW: Get Book Type ID ***
+    const ma_kieu_sach = parseOptionalInt(formData.get("ma_kieu_sach"));
+    if (ma_kieu_sach !== null) bookData.ma_kieu_sach = ma_kieu_sach;
+
+    const so_tap = parseOptionalFloat(formData.get("so_tap"));
+    if (so_tap !== null) {
+      if (so_tap < 0) {
+        alert("Số tập không được âm.");
+        return;
+      }
+      bookData.so_tap = so_tap;
+    }
+
+    // Image URLs (get from URL fields only, file uploads handle URL setting)
+    const url_bia_chinh = formData.get("url_bia_chinh")?.trim();
+    if (url_bia_chinh) bookData.url_bia_chinh = url_bia_chinh;
+    const url_bia_cover = formData.get("url_bia_cover")?.trim();
+    if (url_bia_cover) bookData.url_bia_cover = url_bia_cover;
+    const url_bia_phu = formData.get("url_bia_phu")?.trim();
+    if (url_bia_phu) bookData.url_bia_phu = url_bia_phu;
+    const url_bookmark = formData.get("url_bookmark")?.trim();
+    if (url_bookmark) bookData.url_bookmark = url_bookmark;
+
+    // --- Validation ---
+    if (!bookData.tieu_de || !bookData.gia_tien || !bookData.gioi_thieu) {
+      alert(
+        "Vui lòng điền đầy đủ thông tin bắt buộc:\n- Tiêu đề\n- Giá tiền\n- Giới thiệu"
+      );
+      // Highlight missing fields visually (optional enhancement)
+      if (!bookData.tieu_de) document.getElementById("title")?.focus();
+      else if (!bookData.gia_tien) document.getElementById("price")?.focus();
+      else if (!bookData.gioi_thieu)
+        document.getElementById("description")?.focus();
+      return;
+    }
+    // Validate price format/value
+    const priceValue = parseFloat(bookData.gia_tien);
+    if (isNaN(priceValue) || priceValue < 0) {
+      alert("Giá tiền không hợp lệ hoặc là số âm.");
+      document.getElementById("price")?.focus();
+      return;
+    }
+    bookData.gia_tien = priceValue.toString(); // Send as string if API expects string
 
     console.log("Dữ liệu sách gửi đi (SCHEMA MATCHED):", bookData);
     showLoading(true);
 
     let response;
-    let apiUrl = currentEditId
-      ? `${APP_ENV.UPDATE_BOOK_URL}${currentEditId}`
-      : APP_ENV.UPLOAD_BOOK_URL;
-    let method = currentEditId ? "PUT" : "POST"; // Or PATCH for update
+    let apiUrl;
+    let method;
+
+    if (currentEditId) {
+      // Update existing book
+      if (!APP_ENV.UPDATE_BOOK_URL)
+        throw new Error("Lỗi cấu hình: UPDATE_BOOK_URL chưa định nghĩa.");
+      apiUrl = APP_ENV.UPDATE_BOOK_URL.endsWith("/")
+        ? `${APP_ENV.UPDATE_BOOK_URL}${currentEditId}`
+        : `${APP_ENV.UPDATE_BOOK_URL}/${currentEditId}`;
+      method = "PUT"; // Or PATCH if appropriate
+    } else {
+      // Create new book
+      if (!APP_ENV.UPLOAD_BOOK_URL)
+        throw new Error("Lỗi cấu hình: UPLOAD_BOOK_URL chưa định nghĩa.");
+      apiUrl = APP_ENV.UPLOAD_BOOK_URL;
+      method = "POST";
+    }
 
     response = await fetch(apiUrl, {
       method,
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(bookData),
     });
-    const resultText = await response.text();
-    showLoading(false);
+
+    const resultText = await response.text(); // Get text regardless of status
+    showLoading(false); // Hide loading indicator
 
     if (response.ok) {
       alert(
@@ -728,25 +1041,26 @@ async function submitBook() {
           : "Thêm sách mới thành công!"
       );
       await fetchAndRenderBooks(); // Refresh the list
-      closeSidePanel();
+      closeSidePanel(); // Close the panel on success
     } else {
-      let errorMessage = `Lỗi ${response.status}: `;
+      // Handle API error
+      let errorMessage = `Lỗi ${response.status} (${method} ${apiUrl}): `;
       try {
         const errorJson = JSON.parse(resultText);
         errorMessage +=
-          errorJson.detail ||
+          errorJson.detail || // FastAPI common error field
           errorJson.message ||
           errorJson.error ||
-          JSON.stringify(errorJson);
+          JSON.stringify(errorJson); // Fallback to stringified JSON
       } catch (e) {
-        errorMessage += resultText;
+        errorMessage += resultText; // Fallback to raw text if not JSON
       }
-      console.error("API Error:", errorMessage);
-      alert(errorMessage);
+      console.error("API Error Response:", resultText);
+      alert(`Lưu sách thất bại: ${errorMessage}`);
     }
   } catch (error) {
     showLoading(false);
-    console.error("Error submitting book:", error);
+    console.error("Lỗi hệ thống khi submit sách:", error);
     alert(`Lỗi hệ thống: ${error.message}`);
   }
 }
@@ -756,40 +1070,66 @@ function editBook(id) {
   // id is ma_sach (number)
   const book = books.find((b) => b.ma_sach === id);
   if (!book) {
-    alert("Không tìm thấy sách để sửa.");
+    alert(
+      "Không tìm thấy sách để sửa (ID: " + id + "). Có thể sách đã bị xóa?"
+    );
     return;
   }
 
+  console.log("Editing book:", book); // Log the book data being edited
   currentEditId = id;
   formTitle.textContent = "Sửa Thông Tin Sách";
 
   // Populate form fields, ensuring types match form input expectations (mostly strings)
   document.getElementById("title").value = book.tieu_de || "";
-  document.getElementById("price").value = book.gia_tien || ""; // Keep as string for form
+  document.getElementById("price").value = book.gia_tien || ""; // Keep as string for form input type=number works ok
   document.getElementById("description").value = book.gioi_thieu || "";
   document.getElementById("rating").value = book.danh_gia || ""; // Keep as string
 
   // Select dropdowns - value should match the option's value (which we set as number)
-  document.getElementById("publisherId").value = book.ma_nha_xuat_ban ?? ""; // Use number ID for selection
+  document.getElementById("publisherId").value = book.ma_nha_xuat_ban ?? ""; // Use number ID for selection, fallback to ""
   document.getElementById("authorId").value = book.ma_tac_gia ?? "";
   document.getElementById("seriesId").value = book.ma_bo_sach ?? "";
-  // document.getElementById("bookTypeId").value = book.ma_kieu_sach ?? ''; // If field exists
+  document.getElementById("bookTypeId").value = book.ma_kieu_sach ?? ""; // *** NEW: Set Book Type ***
 
   // Numeric fields for form
   document.getElementById("totalPages").value = book.tong_so_trang ?? "";
   document.getElementById("volume").value = book.so_tap ?? "";
 
-  // Date field
-  let publishDate = book.ngay_xuat_ban; // Comes as string YYYY-MM-DD
+  // Date field (ensure format matches YYYY-MM-DD if API provides it)
+  let publishDate = book.ngay_xuat_ban; // Comes as string YYYY-MM-DD or potentially other formats
+  if (publishDate) {
+    try {
+      // Attempt to parse and reformat to ensure YYYY-MM-DD
+      const dateObj = new Date(publishDate);
+      // Check if the date is valid before formatting
+      if (!isNaN(dateObj.getTime())) {
+        // Pad month and day with leading zeros if necessary
+        const year = dateObj.getFullYear();
+        const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+        const day = String(dateObj.getDate()).padStart(2, "0");
+        publishDate = `${year}-${month}-${day}`;
+      } else {
+        console.warn(
+          "Invalid date format received for ngay_xuat_ban:",
+          book.ngay_xuat_ban
+        );
+        publishDate = ""; // Clear if invalid
+      }
+    } catch (e) {
+      console.error("Error parsing date:", e);
+      publishDate = ""; // Clear on error
+    }
+  }
   document.getElementById("publishDate").value = publishDate || "";
 
-  // Image fields
-  const biaSach = book.sach_bia_sach || {}; // Handle potential null
+  // Image fields - Use the specific URLs from sach_bia_sach if available
+  const biaSach = book.sach_bia_sach || {}; // Handle potential null relation
   setImageField(
     "url_bia_chinh",
     "mainCoverPreview",
-    biaSach.url_bia_chinh || book.image
-  ); // Use fallback book.image if needed
+    biaSach.url_bia_chinh || book.image // Use fallback book.image if bia_chinh is missing
+  );
   setImageField("url_bia_cover", "coverImagePreview", biaSach.url_bia_cover);
   setImageField("url_bia_phu", "backCoverPreview", biaSach.url_bia_phu);
   setImageField("url_bookmark", "bookmarkPreview", biaSach.url_bookmark);
@@ -800,11 +1140,11 @@ function editBook(id) {
 // Prompts user before deleting a book
 function confirmDeleteBook(id) {
   // id is ma_sach (number)
-  const book = filteredBooks.find((b) => b.ma_sach === id);
+  const book = books.find((b) => b.ma_sach === id); // Find in the master list
   const bookTitle = book ? book.tieu_de : `ID ${id}`;
   if (
     confirm(
-      `Bạn có chắc chắn muốn xóa sách "${bookTitle}"? Thao tác này không thể hoàn tác.`
+      `Bạn có chắc chắn muốn xóa sách "${bookTitle}" (ID: ${id})? Thao tác này không thể hoàn tác.`
     )
   ) {
     deleteBookApiCall(id);
@@ -816,13 +1156,24 @@ async function deleteBookApiCall(id) {
   // id is ma_sach (number)
   try {
     showLoading(true);
-    const res = await fetch(`${APP_ENV.DELETE_BOOK_URL}${id}`, {
+    if (!APP_ENV.DELETE_BOOK_URL)
+      throw new Error("Lỗi cấu hình: DELETE_BOOK_URL chưa định nghĩa.");
+
+    // Ensure URL construction is correct (handles trailing slash)
+    const deleteUrl = APP_ENV.DELETE_BOOK_URL.endsWith("/")
+      ? `${APP_ENV.DELETE_BOOK_URL}${id}`
+      : `${APP_ENV.DELETE_BOOK_URL}/${id}`;
+
+    const res = await fetch(deleteUrl, {
       method: "DELETE",
+      // Add headers if required by your API (e.g., Authorization)
+      // headers: { 'Authorization': `Bearer ${your_token}` }
     });
-    const resultText = await res.text();
+
+    const resultText = await res.text(); // Get text for detailed error reporting
 
     if (!res.ok) {
-      let errorMessage = `Lỗi xóa sách (${res.status}): `;
+      let errorMessage = `Lỗi xóa sách (ID: ${id}, Status: ${res.status}): `;
       try {
         const errorJson = JSON.parse(resultText);
         errorMessage +=
@@ -831,16 +1182,17 @@ async function deleteBookApiCall(id) {
           errorJson.error ||
           JSON.stringify(errorJson);
       } catch (e) {
-        errorMessage += resultText;
+        errorMessage += resultText || res.statusText; // Fallback if response not JSON
       }
       throw new Error(errorMessage);
     }
 
-    alert("Đã xóa sách thành công!");
-    await fetchAndRenderBooks(); // Refresh the list
+    alert(`Đã xóa sách (ID: ${id}) thành công!`);
+    // Refresh the book list FROM THE SERVER after successful deletion
+    await fetchAndRenderBooks();
   } catch (error) {
     console.error("Lỗi xóa sách:", error);
-    alert(`Lỗi xóa sách: ${error.message}`);
+    alert(`${error.message}`); // Display the detailed error message
   } finally {
     showLoading(false);
   }
@@ -849,10 +1201,11 @@ async function deleteBookApiCall(id) {
 // --- Form Panel Visibility and Reset ---
 
 function resetForm() {
-  if (bookForm) bookForm.reset();
+  if (bookForm) bookForm.reset(); // Resets most standard input fields
   formTitle.textContent = "Thêm Sách Mới";
   currentEditId = null;
 
+  // Manually clear/reset fields not handled by form.reset() or needing specific state
   // Reset image previews and statuses
   document.querySelectorAll(".image-preview img").forEach((img) => {
     img.src = "";
@@ -862,45 +1215,69 @@ function resetForm() {
     status.textContent = "";
     status.className = "upload-status";
   });
+  // Reset file input values visually (though actual file list is read-only)
+  document.querySelectorAll('input[type="file"]').forEach((input) => {
+    input.value = ""; // Attempts to clear the visual selection
+  });
 
   // Close any open inline forms and reset their state
   ["publisher", "author", "series"].forEach((type) => {
     const formId = `inlineAdd${type.charAt(0).toUpperCase() + type.slice(1)}`;
     const formElement = document.getElementById(formId);
     if (formElement && formElement.style.display !== "none") {
-      toggleInlineAdd(type); // Call toggle to hide and potentially clear
+      toggleInlineAdd(type); // Call toggle to hide and potentially clear input
     }
-    // Ensure hidden just in case
+    // Ensure hidden just in case toggle logic failed
     if (formElement) formElement.style.display = "none";
   });
 
-  // Set default tab
-  document.querySelector(".form-tabs .tab")?.click();
+  // *** NEW: Reset Book Type Select ***
+  if (bookTypeSelect) bookTypeSelect.value = ""; // Reset selection to default "-- Chọn kiểu sách --"
+
+  // Set default tab active visually
+  setupFormTabs(); // Re-run to ensure correct tab state
 }
 
 function openSidePanel(doReset = true) {
-  if (doReset) resetForm();
+  if (doReset) {
+    resetForm();
+  } else if (currentEditId) {
+    // If editing, ensure dropdowns reflect the data (in case they were fetched AFTER editBook ran)
+    const book = books.find((b) => b.ma_sach === currentEditId);
+    if (book) {
+      updatePublisherDropdown(book.ma_nha_xuat_ban);
+      updateAuthorDropdown(book.ma_tac_gia);
+      updateSeriesDropdown(book.ma_bo_sach);
+      updateBookTypeDropdown(book.ma_kieu_sach); // *** NEW ***
+    }
+  }
   sidePanel?.classList.add("open");
-  // Optional: Re-fetch dropdowns if data might change frequently
-  // fetchPublishers(document.getElementById("publisherId").value);
+  // Optionally focus the first input field
+  document.getElementById("title")?.focus();
 }
 
 function closeSidePanel() {
   sidePanel?.classList.remove("open");
-  resetForm(); // Always reset when closing
+  resetForm(); // Always reset when closing to clear state
 }
 
 // --- Section Visibility Control ---
 
 function showBooks() {
-  document.getElementById("dashboardSection").style.display = "none";
-  document.getElementById("booksSection").style.display = "block";
-  fetchAndRenderBooks(); // Load books when section is shown
+  const dashboard = document.getElementById("dashboardSection");
+  const booksSection = document.getElementById("booksSection"); // Changed variable name for clarity
+  if (dashboard) dashboard.style.display = "none";
+  if (booksSection) booksSection.style.display = "block";
+  fetchAndRenderBooks(); // Load/refresh books when section is shown
 }
 
 function showDashboard() {
-  document.getElementById("dashboardSection").style.display = "block";
-  document.getElementById("booksSection").style.display = "none";
+  const dashboard = document.getElementById("dashboardSection");
+  const booksSection = document.getElementById("booksSection"); // Changed variable name for clarity
+  if (dashboard) dashboard.style.display = "block";
+  if (booksSection) booksSection.style.display = "none";
+  // Optional: Refresh dashboard data if needed
+  // initChart(); // Re-init or update chart data if it can change
 }
 
 // --- Preview Image from URL Input ---
@@ -908,32 +1285,56 @@ function previewImage(inputId, previewId) {
   const urlInput = document.getElementById(inputId);
   const preview = document.getElementById(previewId);
   if (!urlInput || !preview) return;
+
   const url = urlInput.value.trim();
+  const statusElementId = `status_${inputId.replace("url_", "")}`;
+  const statusElement = document.getElementById(statusElementId);
+  const fileInputId = inputId.replace("url_", "file_");
+  const fileInput = document.getElementById(fileInputId);
+
+  // If URL is entered, clear the corresponding file input and its status
+  if (url && fileInput) {
+    fileInput.value = ""; // Clear file selection
+    if (statusElement) {
+      statusElement.textContent = "";
+      statusElement.className = "upload-status";
+    }
+  }
 
   if (!url) {
     preview.src = "";
     preview.style.display = "none";
     return;
   }
-  if (!url.toLowerCase().startsWith("http")) {
-    alert("URL không hợp lệ.");
+  // Basic URL validation (can be improved)
+  if (
+    !url.toLowerCase().startsWith("http://") &&
+    !url.toLowerCase().startsWith("https://")
+  ) {
+    alert("URL không hợp lệ. Phải bắt đầu bằng http:// hoặc https://");
+    preview.src = "";
+    preview.style.display = "none";
     return;
   }
 
+  // Set up handlers *before* setting src
+  preview.onload = () => {
+    preview.style.display = "block"; // Show only on successful load
+  };
   preview.onerror = () => {
-    alert("Không thể tải ảnh từ URL.");
+    // alert("Không thể tải ảnh từ URL được cung cấp. Vui lòng kiểm tra lại URL."); // đang lỗi nên comment outout
     preview.src = "";
     preview.style.display = "none";
+    urlInput.focus(); // Focus back on the input
   };
-  preview.onload = () => {
-    preview.style.display = "block";
-  };
-  preview.src = url;
-  preview.style.display = "block"; // Show pending load/error
+
+  preview.src = url; // Set src triggers load/error
+  preview.style.display = "block"; // Show immediately (or a placeholder) to indicate loading attempt
 }
 
 // --- Global Function Exposure ---
-// Assign functions called by HTML onclick to window object
+// Assign functions called by HTML onclick/oninput/onchange to window object
+// This makes them accessible directly from the HTML attributes
 window.showDashboard = showDashboard;
 window.showBooks = showBooks;
 window.openSidePanel = openSidePanel;
@@ -941,14 +1342,15 @@ window.closeSidePanel = closeSidePanel;
 window.submitBook = submitBook;
 window.editBook = editBook;
 window.confirmDeleteBook = confirmDeleteBook;
-window.handleSearchInput = handleSearchInput; // Assuming oninput="handleSearchInput()"
-window.handleSortChange = handleSortChange; // Assuming onchange="handleSortChange(this)"
-window.handlePageChange = handlePageChange; // Assuming onclick="handlePageChange(1/-1)"
+window.handleSearchInput = handleSearchInputInternal; // Use internal name for HTML oninput
+window.handleSortChange = handleSortChangeInternal; // Use internal name for HTML onchange
+window.handlePageChange = handlePageChangeInternal; // Use internal name for HTML onclick
 window.previewImage = previewImage;
 window.toggleInlineAdd = toggleInlineAdd;
 window.saveInlineItem = saveInlineItem;
 
 // --- Initial Load ---
+// Use DOMContentLoaded to ensure the HTML is fully parsed before running scripts
 document.addEventListener("DOMContentLoaded", init);
 
 // --- END OF FILE script.js ---
