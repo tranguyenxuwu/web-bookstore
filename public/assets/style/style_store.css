@@ -323,12 +323,28 @@ body {
   margin: 5px 0;
 }
 
-.product-info .volume, /* Combining author/volume style */
 .product-info .author {
   color: #666;
   font-size: 14px;
+  /* margin-top: auto; Removed as volume might be below it now */
+  margin-bottom: 8px; /* Keep consistent bottom margin */
+}
+
+.product-info .volume {
+  color: #444; /* Slightly darker text for contrast */
+  font-size: 14px;
+  font-weight: 500; /* Slightly bolder */
   margin-top: auto; /* Push to bottom */
   margin-bottom: 8px; /* Keep consistent bottom margin */
+
+  /* --- Highlight Styles Start --- */
+  background-color: #f0f0f0; /* Light grey background */
+  padding: 3px 6px; /* Small padding */
+  border-radius: 4px; /* Rounded corners */
+  display: inline-block; /* Ensure padding and background apply correctly */
+  width: fit-content; /* Make background only as wide as the text */
+  border: 1px solid #e0e0e0; /* Subtle border */
+  /* --- Highlight Styles End --- */
 }
 
 /* Pagination - Consolidated */

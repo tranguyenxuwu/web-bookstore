@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+  <!-- Changed lang to Vietnamese -->
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Product Detail</title>
+    <!-- Update Title Dynamically with JS if needed, otherwise make it generic -->
+    <title>Chi tiết sản phẩm - ReadOn</title>
     <link rel="stylesheet" href="./assets/style/style_product.css" />
+    <!-- Add favicon links here if you have them -->
+    <!-- <link rel="stylesheet" href="./assets/css/product-card-styles.css" /> -->
   </head>
   <body>
     <!-- navigation bar -->
@@ -12,31 +16,41 @@
       <nav class="navbar">
         <div class="nav-container">
           <a href="./index.html">
-            <img src="#" alt="ReadOn" class="logo" />
+            <!-- Make sure this path is correct -->
+            <img src="./assets/image/logo.png" alt="ReadOn Logo" class="logo" />
           </a>
           <div class="search-container">
             <input
               type="text"
               class="search-input"
               placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
+              aria-label="Search Box"
             />
-            <button class="search-button" onclick="searchBooks()">
-              <img src="./assets/image/search.png" alt="Search" />
+            <!-- REMOVED onclick attribute -->
+            <button class="search-button" aria-label="Search">
+              <!-- Make sure this path is correct -->
+              <img src="./assets/image/search.png" alt="Search Icon" />
             </button>
           </div>
           <div class="nav-icons">
-            <a href="cart/cart.html" class="nav-icon">
+            <!-- Consider making cart path relative from root if structure varies -->
+            <a href="./cart/cart.html" class="nav-icon">
               <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6'%3E%3C/path%3E%3C/svg%3E"
-                alt="Cart"
+                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='9' cy='21' r='1'%3E%3C/circle%3E%3Ccircle cx='20' cy='21' r='1'%3E%3C/circle%3E%3Cpath d='M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6'%3E%3C/path%3E%3C/svg%3E"
+                alt=""
+                aria-hidden="true"
               />
+              <!-- Alt empty for decorative icon if text is present -->
               <span>Giỏ Hàng</span>
             </a>
-            <a href="login/login.html" class="nav-icon">
+            <!-- Consider making login path relative from root -->
+            <a href="./login/login.html" class="nav-icon">
               <img
                 src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'%3E%3C/path%3E%3Ccircle cx='12' cy='7' r='4'%3E%3C/circle%3E%3C/svg%3E"
-                alt="Account"
+                alt=""
+                aria-hidden="true"
               />
+              <!-- Alt empty for decorative icon if text is present -->
               <span>Tài khoản</span>
             </a>
           </div>
@@ -45,38 +59,81 @@
     </div>
 
     <!-- product detail -->
-    <div class="product-detail-container">
+    <!-- ADDED class="product-details-container" -->
+    <div class="product-detail-container product-details-container">
       <div class="product-image">
-        <img id="product-img" src="#" alt="Product Image" />
+        <!-- Placeholder source, JS will replace -->
+        <img id="product-img" src="#" alt="Bìa sách" />
       </div>
       <div class="product-info">
-        <h1 id="product-title">Tiêu đề sản phẩm</h1>
-        <p id="product-author">Tác giả: <span></span></p>
-        <p id="product-publisher">Nhà xuất bản: <span></span></p>
-        <p id="product-price"><span id="price"></span></p>
-        <button id="add-to-cart">Thêm vào giỏ hàng</button>
-        <button id="buy-now">Mua ngay</button>
+        <h1 id="product-title">Đang tải tiêu đề...</h1>
+        <div class="product-meta-inline">
+          <span id="product-volume-display" class="meta-tag"></span>
+          <span id="product-type-display" class="meta-tag"></span>
+        </div>
+        <p id="product-author">Tác giả: <span>Đang tải...</span></p>
+        <p id="product-publisher">
+          Nhà xuất bản: <span id="product-publisher-value">Đang tải...</span>
+        </p>
+        <p id="product-total-pages">
+          Số trang: <span id="product-total-pages-value">Đang tải...</span>
+        </p>
+        <p id="product-publish-date">
+          Ngày xuất bản:
+          <span id="product-publish-date-value">Đang tải...</span>
+        </p>
+        <!-- REMOVED id="price" from span -->
+        <p id="product-price"><span>Đang tải giá...</span></p>
+        <div class="product-actions">
+          <!-- Optional: Wrap buttons -->
+          <button id="add-to-cart">Thêm vào giỏ hàng</button>
+          <button id="buy-now">Mua ngay</button>
+        </div>
       </div>
     </div>
 
     <!-- phần mô tả của sách -->
     <div class="product-description-container">
       <h2>Giới thiệu sách</h2>
-      <p id="product-description"><span></span></p>
+      <!-- JS looks for the span inside this P -->
+      <p id="product-description"><span>Đang tải mô tả...</span></p>
     </div>
 
     <!-- sách cùng bộ -->
-    <div class="product-series-container">
-      <h2>Xem thêm</h2>
+    <!-- ADDED class="related-products-section" -->
+    <div class="product-series-container related-products-section">
+      <h2>Sách cùng bộ</h2>
+      <!-- Changed heading -->
       <div class="slider-wrapper">
-        <button class="slider-button prev-button" aria-label="Previous">
-          <img src="./arrow_back.png" alt="Previous" class="arrow-icon" />
+        <!-- Ensure button images have correct relative paths -->
+        <button
+          class="slider-button prev-button"
+          aria-label="Previous"
+          style="display: none"
+        >
+          <!-- Initially hidden by JS -->
+          <img
+            src="./assets/image/arrow_back.png"
+            alt="Previous"
+            class="arrow-icon"
+          />
         </button>
         <div class="product-in-series">
-          <!-- Products here -->
+          <!-- Products will be loaded here by JS -->
+          <p class="loading">Đang tải...</p>
+          <!-- Initial loading message -->
         </div>
-        <button class="slider-button next-button" aria-label="Next">
-          <img src="./right-arrow.png" alt="Next" class="arrow-icon" />
+        <button
+          class="slider-button next-button"
+          aria-label="Next"
+          style="display: none"
+        >
+          <!-- Initially hidden by JS -->
+          <img
+            src="./assets/image/right-arrow.png"
+            alt="Next"
+            class="arrow-icon"
+          />
         </button>
       </div>
     </div>
@@ -85,35 +142,40 @@
     <footer>
       <div class="footer-container">
         <div class="footer-info">
-          <h3>Book Store</h3>
+          <h3>ReadOn Book Store</h3>
+          <!-- Example name -->
           <p>Địa chỉ: 123 Đường Sách, Quận 1, TP. Hồ Chí Minh</p>
           <p>Điện thoại: (0123) 456-789</p>
-          <p>Email: info@bookstore.com</p>
+          <p>Email: support@readon.example.com</p>
+          <!-- Example email -->
         </div>
         <div class="footer-social">
           <h3>Kết nối với chúng tôi</h3>
-          <a href="#" target="_blank">
+          <!-- Add actual links -->
+          <!-- <a href="#" target="_blank" aria-label="Twitter">
             <img
               src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
               alt="Twitter"
               class="social-icon"
-              width="32"
-              height="32"
             />
           </a>
-          <a href="#" target="_blank">
+          <a href="#" target="_blank" aria-label="Facebook">
             <img
               src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
               alt="Facebook"
               class="social-icon"
-              width="32"
-              height="32"
             />
-          </a>
+          </a> -->
+          <!-- Add more social links if needed -->
         </div>
       </div>
-      <p>&copy; 2023 Book Store. All rights reserved.</p>
+      <div class="footer-copyright">
+        <!-- Added container for copyright -->
+        <p>© 2024 ReadOn Book Store. Bảo lưu mọi quyền.</p>
+      </div>
     </footer>
+
+    <!-- UPDATED script path -->
     <script type="module" src="./assets/script/script_product.js"></script>
   </body>
 </html>
