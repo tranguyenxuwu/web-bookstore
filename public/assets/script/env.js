@@ -8,7 +8,7 @@ export const APP_ENV = {
   SEARCH_URL: "https://api.elysia-app.live/book/search",
   MASTER_URL: "https://api.elysia-app.live/book/all",
   FETCH_BY_ID_URL: "https://api.elysia-app.live/book/id/",
-  FETCH_BY_SERIES_URL: "https://api.elysia-app.live/book/series/",
+  FETCH_BY_SERIES_URL: "https://api.elysia-app.live/book/in-series/",
   BOOK_TYPE_URL: "https://api.elysia-app.live/book/types/",
   PUBLISHER_URL: "https://api.elysia-app.live/book/publishers/",
   AUTHOR_URL: "https://api.elysia-app.live/book/authors/",
