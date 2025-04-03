@@ -1,6 +1,6 @@
 // --- START OF FILE script.js ---
 
-import { APP_ENV } from "../public/assets/script/env.js";
+import { APP_ENV } from "../assets/script/env.js";
 
 // --- Global State ---
 let books = []; // Holds the master list fetched from API
