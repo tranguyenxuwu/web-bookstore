@@ -1,35 +1,166 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sign Up</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Đăng ký | ReadOn Bookstore</title>
+    <link rel="stylesheet" href="../sign_up/style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   </head>
   <body>
-    <a href="../index.html">
-      <img src="#" alt="ReadOn" class="logo" />
-    </a>
-
-    <a href="../cart/cart.html" class="nav-icon">
-      <!-- Cart icon content -->
-    </a>
-
-    <img src="../assets/image/search.png" alt="Search" />
-
-    <div class="signup-container">
-      <h2>Đăng ký tài khoản</h2>
-      <form id="signupForm">
-        <input type="text" id="newUsername" placeholder="Tên đăng nhập" />
-        <input type="email" id="email" placeholder="Email" />
-        <input type="password" id="newPassword" placeholder="Mật khẩu" />
-        <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" />
-        <button type="submit">Đăng ký</button>
-        <div class="links">
-          <a href="../login/login.html">Đăng nhập</a>
-        </div>
-      </form>
+    <!-- Page transition -->
+    <div class="page-transition">
+      <div class="loader"></div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Navbar - cập nhật giống các trang khác -->
+    <div class="navbar-container">
+      <nav class="navbar">
+        <div class="nav-container">
+          <a href="../index.html" class="logo-container">
+            <img src="../assets/image/logo.png" alt="ReadOn" class="logo" />
+          </a>
+
+          <form id="search-form" class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              class="search-input"
+              placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
+            />
+            <button type="submit" class="search-button">
+              <img src="../assets/image/search.png" alt="Search" />
+            </button>
+          </form>
+
+          <div class="nav-icons">
+            <a href="../cart/cart.html" class="nav-icon">
+              <i class="fas fa-shopping-cart"></i>
+              <span>Giỏ Hàng</span>
+            </a>
+            <a href="../login/login.html" class="nav-icon">
+              <i class="fas fa-user"></i>
+              <span>Tài khoản</span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Phần đăng ký -->
+    <div class="page-wrapper">
+      <main class="main-content">
+        <div class="login-container">
+          <h2>Đăng ký tài khoản</h2>
+          <div id="error-message" class="error-message" style="display: none;"></div>
+          <form id="signupForm">
+            <div class="input-group">
+              <i class="fas fa-user"></i>
+              <input type="text" id="newUsername" placeholder="Tên đăng nhập" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-envelope"></i>
+              <input type="email" id="email" placeholder="Email" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="newPassword" placeholder="Mật khẩu" required />
+            </div>
+            <div class="input-group">
+              <i class="fas fa-lock"></i>
+              <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required />
+            </div>
+            <button type="submit">Đăng ký</button>
+            <div class="links">
+              <a href="../login/login.html">Đã có tài khoản? Đăng nhập</a>
+            </div>
+            <a href="../index.html" class="back-button">Trở về trang chủ</a>
+          </form>
+        </div>
+
+        <!-- Sidebar ưu đãi giống login -->
+        <div class="login-sidebar">
+          <div class="promo-section">
+            <h3>Đăng ký để nhận ưu đãi</h3>
+            <div class="benefit">
+              <i class="fas fa-tags"></i>
+              <span>Giảm giá độc quyền</span>
+            </div>
+            <div class="benefit">
+              <i class="fas fa-truck"></i>
+              <span>Miễn phí vận chuyển</span>
+            </div>
+            <div class="benefit">
+              <i class="fas fa-history"></i>
+              <span>Lịch sử đơn hàng</span>
+            </div>
+            <div class="benefit">
+              <i class="fas fa-gift"></i>
+              <span>Quà tặng đặc biệt</span>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- Footer đồng bộ -->
+      <footer>
+        <div class="footer-container">
+          <div class="footer-info">
+            <h3>Book Store</h3>
+            <p><i class="fas fa-map-marker-alt"></i> 123 Đường Sách, Quận 1, TP. Hồ Chí Minh</p>
+            <p><i class="fas fa-phone"></i> (0123) 456-789</p>
+            <p><i class="fas fa-envelope"></i> info@bookstore.com</p>
+          </div>
+          <div class="footer-social">
+            <h3>Kết nối với chúng tôi</h3>
+            <div class="social-links">
+              <a href="https://twitter.com/yourprofile" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://facebook.com/yourprofile" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://instagram.com/yourprofile" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <p>&copy; 2025 Book Store. All rights reserved.</p>
+      </footer>
+    </div>
+
+    <script type="module" src="script.js"></script>
+    <script>
+      // Page loading animation
+      document.addEventListener('DOMContentLoaded', function () {
+        const pageTransition = document.querySelector('.page-transition');
+        if (pageTransition) {
+          setTimeout(function () {
+            pageTransition.style.opacity = '0';
+            setTimeout(function () {
+              pageTransition.style.display = 'none';
+            }, 500);
+          }, 800);
+        }
+
+        // Setup search
+        setupSearch();
+      });
+
+      // Setup search
+      function setupSearch() {
+        const searchForm = document.getElementById('search-form');
+        if (searchForm) {
+          searchForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const searchInput = document.getElementById('search-input');
+            const searchTerm = searchInput ? searchInput.value.trim() : '';
+            window.location.href = `../search.html?title=${encodeURIComponent(searchTerm || '')}`;
+          });
+        }
+      }
+    </script>
   </body>
 </html>

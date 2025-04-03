@@ -4,20 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Quản lý Sách</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
     <link rel="stylesheet" href="./style.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
   <body>
-    <!-- Phần cấu trúc HTML giữ nguyên -->
     <!-- SIDEBAR -->
     <div class="sidebar">
-      <div class="logo">Control Panel</div>
+      <div class="logo"><i class="fas fa-book"></i> Book Admin</div>
       <nav>
         <ul>
-          <li onclick="showDashboard()">Dashboard</li>
-          <li onclick="showBooks()">Tất cả sách</li>
-          <li onclick="openSidePanel()">Thêm sách mới</li>
+          <li onclick="showDashboard()">
+            <i class="fas fa-home"></i> Dashboard
+          </li>
+          <li onclick="showBooks()">
+            <i class="fas fa-book-open"></i> Tất cả sách
+          </li>
+          <li onclick="openSidePanel()">
+            <i class="fas fa-plus-circle"></i> Thêm sách mới
+          </li>
+          <li><i class="fas fa-users"></i> Khách hàng</li>
+          <li><i class="fas fa-chart-line"></i> Báo cáo</li>
+          <li><i class="fas fa-cog"></i> Cài đặt</li>
         </ul>
       </nav>
+      <div class="sidebar-footer">
+        <div class="user-info">
+          <div class="avatar"><i class="fas fa-user"></i></div>
+          <div class="user-details">
+            <div class="username">Admin</div>
+            <div class="role">Quản trị viên</div>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- MAIN CONTENT -->
@@ -25,45 +47,213 @@
       <!-- TOPBAR -->
       <div class="topbar">
         <div class="search">
-          <input type="text" placeholder="Search here..." />
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Tìm kiếm..." />
         </div>
         <div class="user-area">
-          <div class="notification">🔔</div>
-          <div class="avatar"></div>
+          <div class="notification">
+            <i class="fas fa-bell"></i>
+            <span class="badge">3</span>
+          </div>
+          <div class="avatar">
+            <i class="fas fa-user"></i>
+          </div>
         </div>
       </div>
 
       <!-- PHẦN DASHBOARD (stats + chart) -->
       <div id="dashboardSection">
-        <div class="cards">
-          <div class="card">
-            <h3>Total Income</h3>
-            <div class="value">$ 579,000</div>
-            <small>Saved 22%</small>
-          </div>
-          <div class="card">
-            <h3>Total Expenses</h3>
-            <div class="value">$ 79,000</div>
-            <small>Saved 20%</small>
-          </div>
-          <div class="card">
-            <h3>Cash on Hand</h3>
-            <div class="value">$ 92,000</div>
-            <small>Saved 25%</small>
-          </div>
-          <div class="card">
-            <h3>Net Profit Margin</h3>
-            <div class="value">$ 179,000</div>
-            <small>Saved 18%</small>
+        <div class="section-header">
+          <h1>Dashboard</h1>
+          <div class="date-filter">
+            <select id="periodFilter">
+              <option value="today">Hôm nay</option>
+              <option value="week" selected>Tuần này</option>
+              <option value="month">Tháng này</option>
+              <option value="year">Năm nay</option>
+            </select>
           </div>
         </div>
-        <div class="chart-area">
-          <div class="chart-placeholder">[Biểu đồ doanh thu / chi phí]</div>
+
+        <div class="cards">
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background-color: rgba(52, 152, 219, 0.2)"
+            >
+              <i class="fas fa-shopping-cart" style="color: #3498db"></i>
+            </div>
+            <div class="card-content">
+              <h3>Tổng Đơn Hàng</h3>
+              <div class="value">1,254</div>
+              <div class="change positive">
+                <i class="fas fa-arrow-up"></i> 16% so với tuần trước
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background-color: rgba(46, 204, 113, 0.2)"
+            >
+              <i class="fas fa-money-bill-wave" style="color: #2ecc71"></i>
+            </div>
+            <div class="card-content">
+              <h3>Doanh Thu</h3>
+              <div class="value">79,000,000 ₫</div>
+              <div class="change positive">
+                <i class="fas fa-arrow-up"></i> 8% so với tuần trước
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background-color: rgba(155, 89, 182, 0.2)"
+            >
+              <i class="fas fa-users" style="color: #9b59b6"></i>
+            </div>
+            <div class="card-content">
+              <h3>Khách Hàng</h3>
+              <div class="value">892</div>
+              <div class="change positive">
+                <i class="fas fa-arrow-up"></i> 12% so với tuần trước
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div
+              class="card-icon"
+              style="background-color: rgba(231, 76, 60, 0.2)"
+            >
+              <i class="fas fa-book" style="color: #e74c3c"></i>
+            </div>
+            <div class="card-content">
+              <h3>Sách Đã Bán</h3>
+              <div class="value">3,450</div>
+              <div class="change negative">
+                <i class="fas fa-arrow-down"></i> 5% so với tuần trước
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dashboard-content">
+          <div class="chart-container">
+            <div class="chart-header">
+              <h2>Doanh thu theo tháng</h2>
+              <div class="chart-actions">
+                <button class="chart-btn active" data-type="revenue">
+                  Doanh thu
+                </button>
+                <button class="chart-btn" data-type="orders">Đơn hàng</button>
+              </div>
+            </div>
+            <div class="chart-area">
+              <canvas id="revenueChart"></canvas>
+            </div>
+          </div>
+          <div class="side-stats">
+            <div class="recent-activity">
+              <h2>Hoạt Động Gần Đây</h2>
+              <div class="activity-list">
+                <div class="activity-item">
+                  <div class="activity-icon green">
+                    <i class="fas fa-shopping-cart"></i>
+                  </div>
+                  <div class="activity-details">
+                    <div class="activity-text">Đơn hàng mới: #2458</div>
+                    <div class="activity-time">15 phút trước</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon blue">
+                    <i class="fas fa-user-plus"></i>
+                  </div>
+                  <div class="activity-details">
+                    <div class="activity-text">Khách hàng mới đăng ký</div>
+                    <div class="activity-time">1 giờ trước</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon red">
+                    <i class="fas fa-exclamation-circle"></i>
+                  </div>
+                  <div class="activity-details">
+                    <div class="activity-text">Đơn hàng #2455 bị hủy</div>
+                    <div class="activity-time">2 giờ trước</div>
+                  </div>
+                </div>
+                <div class="activity-item">
+                  <div class="activity-icon purple">
+                    <i class="fas fa-comment"></i>
+                  </div>
+                  <div class="activity-details">
+                    <div class="activity-text">Đánh giá mới: 5 sao</div>
+                    <div class="activity-time">3 giờ trước</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="top-selling">
+              <h2>Sách Bán Chạy</h2>
+              <div class="top-items">
+                <div class="top-item">
+                  <img
+                    src="https://cdn.elysia-app.live/placeholder.jpg"
+                    alt="Top book"
+                  />
+                  <div class="top-item-info">
+                    <div class="top-item-title">Mẫu sách 1</div>
+                    <div class="top-item-sales">150 bán ra</div>
+                  </div>
+                  <div class="top-item-price">150,000 ₫</div>
+                </div>
+                <div class="top-item">
+                  <img
+                    src="https://cdn.elysia-app.live/placeholder.jpg"
+                    alt="Top book"
+                  />
+                  <div class="top-item-info">
+                    <div class="top-item-title">Mẫu sách 2</div>
+                    <div class="top-item-sales">120 bán ra</div>
+                  </div>
+                  <div class="top-item-price">120,000 ₫</div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- PHẦN DANH SÁCH SÁCH -->
       <div id="booksSection" style="display: none">
+        <div class="section-header">
+          <h1>Quản lý sách</h1>
+          <button class="add-button" onclick="openSidePanel()">
+            <i class="fas fa-plus"></i> Thêm sách mới
+          </button>
+        </div>
+
+        <div class="table-tools">
+          <div class="search-filter">
+            <input
+              type="text"
+              id="tableSearch"
+              placeholder="Tìm kiếm sách..."
+              oninput="filterBooks()"
+            />
+          </div>
+          <div class="table-actions">
+            <select id="sortBooks" onchange="sortBooks(this.value)">
+              <option value="title-asc">Tên A-Z</option>
+              <option value="title-desc">Tên Z-A</option>
+              <option value="price-asc">Giá tăng dần</option>
+              <option value="price-desc">Giá giảm dần</option>
+            </select>
+          </div>
+        </div>
+
         <div class="table-area">
           <table>
             <thead>
@@ -72,26 +262,455 @@
                 <th>Tiêu đề</th>
                 <th>Giá</th>
                 <th>NXB</th>
+                <th>Thao tác</th>
               </tr>
             </thead>
             <tbody id="bookList"></tbody>
           </table>
         </div>
+
+        <div class="pagination">
+          <button id="prevPage" onclick="changePage(-1)">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <div id="pageNumbers"></div>
+          <button id="nextPage" onclick="changePage(1)">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
       </div>
     </div>
 
-    <!-- SIDE PANEL: FORM THÊM SÁCH -->
+    <!-- SIDE PANEL: FORM THÊM/SỬA SÁCH -->
     <div id="sidePanel" class="side-panel">
-      <h2>Thêm Sách Mới</h2>
-      <button class="close-btn" onclick="closeSidePanel()">Đóng</button>
+      <div class="side-panel-header">
+        <h2 id="formTitle">Thêm Sách Mới</h2>
+        <button class="close-btn" onclick="closeSidePanel()">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
       <form id="bookForm">
-        <input type="file" id="fileInput" />
-        <input type="text" id="title" placeholder="Tiêu đề" required />
-        <input type="number" id="price" placeholder="Giá tiền" required />
-        <input type="text" id="publisher" placeholder="Nhà xuất bản" />
-        <button type="button" onclick="submitBook()">Lưu</button>
+        <input type="hidden" id="bookId" />
+
+        <div class="form-tabs">
+          <div class="tab active" data-tab="basic">Thông tin cơ bản</div>
+          <div class="tab" data-tab="additional">Thông tin thêm</div>
+          <div class="tab" data-tab="images">Hình ảnh</div>
+        </div>
+
+        <!-- Tab thông tin cơ bản -->
+        <div class="tab-content active" id="basic-tab">
+          <div class="form-group">
+            <label for="title">Tiêu đề</label>
+            <input
+              type="text"
+              id="title"
+              name="tieu_de"
+              placeholder="Tiêu đề sách"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="price">Giá tiền</label>
+            <input
+              type="number"
+              id="price"
+              name="gia_tien"
+              placeholder="Giá tiền"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Giới thiệu</label>
+            <textarea
+              id="description"
+              name="gioi_thieu"
+              placeholder="Mô tả sách"
+              required
+            ></textarea>
+          </div>
+
+          <!-- Publisher -->
+          <div class="form-group">
+            <label for="publisherId">Nhà xuất bản</label>
+            <div class="select-wrapper">
+              <select id="publisherId" name="ma_nha_xuat_ban" required>
+                <option value="">Đang tải NXB...</option>
+              </select>
+              <button
+                type="button"
+                onclick="toggleInlineAdd('publisher')"
+                class="icon-btn"
+              >
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+            <!-- Inline Add Form for Publisher -->
+            <div
+              id="inlineAddPublisher"
+              class="inline-add-form"
+              style="display: none"
+            >
+              <input
+                type="text"
+                id="newInlinePublisherName"
+                placeholder="Tên NXB mới"
+                class="inline-add-input"
+              />
+              <button
+                type="button"
+                onclick="saveInlineItem('publisher')"
+                class="inline-add-btn save"
+              >
+                <i class="fas fa-check"></i>
+              </button>
+              <button
+                type="button"
+                onclick="toggleInlineAdd('publisher')"
+                class="inline-add-btn cancel"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+              <span class="inline-add-status"></span>
+            </div>
+          </div>
+
+          <!-- Author -->
+          <div class="form-group">
+            <label for="authorId">Tác giả</label>
+            <div class="select-wrapper">
+              <select id="authorId" name="ma_tac_gia">
+                <option value="">Đang tải tác giả...</option>
+              </select>
+              <button
+                type="button"
+                onclick="toggleInlineAdd('author')"
+                class="icon-btn"
+              >
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+            <!-- Inline Add Form for Author -->
+            <div
+              id="inlineAddAuthor"
+              class="inline-add-form"
+              style="display: none"
+            >
+              <input
+                type="text"
+                id="newInlineAuthorName"
+                placeholder="Tên tác giả mới"
+                class="inline-add-input"
+              />
+              <button
+                type="button"
+                onclick="saveInlineItem('author')"
+                class="inline-add-btn save"
+              >
+                <i class="fas fa-check"></i>
+              </button>
+              <button
+                type="button"
+                onclick="toggleInlineAdd('author')"
+                class="inline-add-btn cancel"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+              <span class="inline-add-status"></span>
+            </div>
+          </div>
+
+          <!-- Series -->
+          <div class="form-group">
+            <label for="seriesId">Thuộc bộ sách</label>
+            <div class="select-wrapper">
+              <select id="seriesId" name="ma_bo_sach">
+                <option value="">Đang tải bộ sách...</option>
+              </select>
+              <button
+                type="button"
+                onclick="toggleInlineAdd('series')"
+                class="icon-btn"
+              >
+                <i class="fas fa-plus-circle"></i>
+              </button>
+            </div>
+            <!-- Inline Add Form for Series -->
+            <div
+              id="inlineAddSeries"
+              class="inline-add-form"
+              style="display: none"
+            >
+              <input
+                type="text"
+                id="newInlineSeriesName"
+                placeholder="Tên bộ sách mới"
+                class="inline-add-input"
+              />
+              <button
+                type="button"
+                onclick="saveInlineItem('series')"
+                class="inline-add-btn save"
+              >
+                <i class="fas fa-check"></i>
+              </button>
+              <button
+                type="button"
+                onclick="toggleInlineAdd('series')"
+                class="inline-add-btn cancel"
+              >
+                <i class="fas fa-times"></i>
+              </button>
+              <span class="inline-add-status"></span>
+            </div>
+          </div>
+
+          <!-- *** NEW: Book Type *** -->
+          <div class="form-group">
+            <label for="bookTypeId">Kiểu sách</label>
+            <div class="select-wrapper">
+              <select id="bookTypeId" name="ma_kieu_sach">
+                <option value="">Đang tải kiểu sách...</option>
+              </select>
+              <!-- Không có nút "+" ở đây -->
+            </div>
+            <!-- Không có inline add form ở đây -->
+          </div>
+          <!-- *** END NEW: Book Type *** -->
+        </div>
+
+        <!-- Tab thông tin thêm -->
+        <div class="tab-content" id="additional-tab">
+          <div class="form-group">
+            <label for="totalPages">Tổng số trang</label>
+            <input
+              type="number"
+              id="totalPages"
+              name="tong_so_trang"
+              placeholder="Tổng số trang"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="rating">Đánh giá</label>
+            <input
+              type="text"
+              id="rating"
+              name="danh_gia"
+              placeholder="Đánh giá (ví dụ: 4.5)"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="publishDate">Ngày xuất bản</label>
+            <input type="date" id="publishDate" name="ngay_xuat_ban" />
+          </div>
+
+          <div class="form-group">
+            <label for="volume">Số tập</label>
+            <input
+              type="number"
+              step="0.1"
+              id="volume"
+              name="so_tap"
+              placeholder="Số tập"
+            />
+          </div>
+        </div>
+
+        <!-- Tab hình ảnh - Thêm khả năng upload trực tiếp -->
+        <div class="tab-content" id="images-tab">
+          <div class="form-group">
+            <label for="mainCover">Bìa chính</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input
+                  type="text"
+                  id="url_bia_chinh"
+                  name="url_bia_chinh"
+                  placeholder="Nhập URL hình ảnh bìa chính"
+                />
+                <button
+                  type="button"
+                  class="preview-btn"
+                  onclick="previewImage('url_bia_chinh', 'mainCoverPreview')"
+                >
+                  Xem trước
+                </button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input
+                  type="file"
+                  id="file_bia_chinh"
+                  accept="image/*"
+                  data-field="url_bia_chinh"
+                />
+                <label for="file_bia_chinh" class="upload-btn"
+                  ><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label
+                >
+              </div>
+            </div>
+            <div class="image-preview">
+              <img
+                id="mainCoverPreview"
+                src=""
+                alt="Preview"
+                style="display: none"
+              />
+              <div class="upload-status" id="status_bia_chinh"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="coverImage">Ảnh bìa cover</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input
+                  type="text"
+                  id="url_bia_cover"
+                  name="url_bia_cover"
+                  placeholder="Nhập URL hình ảnh bìa cover"
+                />
+                <button
+                  type="button"
+                  class="preview-btn"
+                  onclick="previewImage('url_bia_cover', 'coverImagePreview')"
+                >
+                  Xem trước
+                </button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input
+                  type="file"
+                  id="file_bia_cover"
+                  accept="image/*"
+                  data-field="url_bia_cover"
+                />
+                <label for="file_bia_cover" class="upload-btn"
+                  ><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label
+                >
+              </div>
+            </div>
+            <div class="image-preview">
+              <img
+                id="coverImagePreview"
+                src=""
+                alt="Preview"
+                style="display: none"
+              />
+              <div class="upload-status" id="status_bia_cover"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="backCover">Bìa phụ</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input
+                  type="text"
+                  id="url_bia_phu"
+                  name="url_bia_phu"
+                  placeholder="Nhập URL hình ảnh bìa phụ"
+                />
+                <button
+                  type="button"
+                  class="preview-btn"
+                  onclick="previewImage('url_bia_phu', 'backCoverPreview')"
+                >
+                  Xem trước
+                </button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input
+                  type="file"
+                  id="file_bia_phu"
+                  accept="image/*"
+                  data-field="url_bia_phu"
+                />
+                <label for="file_bia_phu" class="upload-btn"
+                  ><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label
+                >
+              </div>
+            </div>
+            <div class="image-preview">
+              <img
+                id="backCoverPreview"
+                src=""
+                alt="Preview"
+                style="display: none"
+              />
+              <div class="upload-status" id="status_bia_phu"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="bookmark">Bookmark</label>
+            <div class="upload-options">
+              <div class="url-input">
+                <input
+                  type="text"
+                  id="url_bookmark"
+                  name="url_bookmark"
+                  placeholder="Nhập URL hình ảnh bookmark"
+                />
+                <button
+                  type="button"
+                  class="preview-btn"
+                  onclick="previewImage('url_bookmark', 'bookmarkPreview')"
+                >
+                  Xem trước
+                </button>
+              </div>
+              <div class="divider">HOẶC</div>
+              <div class="file-upload">
+                <input
+                  type="file"
+                  id="file_bookmark"
+                  accept="image/*"
+                  data-field="url_bookmark"
+                />
+                <label for="file_bookmark" class="upload-btn"
+                  ><i class="fas fa-cloud-upload-alt"></i> Tải ảnh lên</label
+                >
+              </div>
+            </div>
+            <div class="image-preview">
+              <img
+                id="bookmarkPreview"
+                src=""
+                alt="Preview"
+                style="display: none"
+              />
+              <div class="upload-status" id="status_bookmark"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" onclick="closeSidePanel()" class="cancel-btn">
+            Hủy
+          </button>
+          <button type="button" onclick="submitBook()" class="submit-btn">
+            Lưu
+          </button>
+        </div>
+
+        <!-- Removed Modal Divs -->
       </form>
+      <!-- End of bookForm -->
     </div>
-    <script src="./script.js"></script>
+    <!-- End of sidePanel -->
+
+    <div class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
   </body>
 </html>

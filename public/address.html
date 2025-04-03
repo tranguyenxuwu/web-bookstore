@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Assuming style.css is inside an 'address' folder -->
+    <title>Thông tin địa chỉ | ReadOn Bookstore</title>
+    <link rel="stylesheet" href="./address/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <!-- Page transition -->
+    <div class="page-transition">
+      <div class="loader"></div>
+    </div>
+
+    <!-- Navbar - Assuming paths are relative to the root -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="../index.html" class="logo-container">
+          <!-- Adjusted path -->
+          <img src="../assets/image/logo.png" alt="ReadOn" class="logo" />
+          <!-- Adjusted path -->
+        </a>
+        <form id="search-form" class="search-container">
+          <input
+            type="text"
+            id="search-input"
+            class="search-input"
+            placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
+          />
+          <button type="submit" class="search-button">
+            <img src="../assets/image/search.png" alt="Search" />
+            <!-- Adjusted path -->
+          </button>
+        </form>
+        <div class="nav-icons">
+          <a href="../cart/cart.html" class="nav-icon">
+            <!-- Adjusted path -->
+            <i class="fas fa-shopping-cart"></i>
+            <span>Giỏ Hàng</span>
+          </a>
+          <a href="../login/login.html" class="nav-icon">
+            <!-- Adjusted path -->
+            <i class="fas fa-user"></i>
+            <span>Tài khoản</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="page-wrapper">
+      <main class="main-content">
+        <div class="address-container">
+          <div class="address-header">
+            <h2>Thông tin địa chỉ</h2>
+            <p class="subtitle">Vui lòng điền đầy đủ thông tin để tiếp tục</p>
+          </div>
+
+          <div
+            id="error-message"
+            class="error-message"
+            style="display: none"
+          ></div>
+
+          <form id="addressForm">
+            <div class="form-section">
+              <h3>Thông tin người nhận</h3>
+
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="fullName"
+                    >Họ và tên <span class="required">*</span></label
+                  >
+                  <div class="input-wrapper">
+                    <i class="fas fa-user icon"></i>
+                    <input
+                      type="text"
+                      id="fullName"
+                      name="fullName"
+                      placeholder="Họ và tên người nhận"
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone"
+                    >Số điện thoại <span class="required">*</span></label
+                  >
+                  <div class="input-wrapper">
+                    <i class="fas fa-phone icon"></i>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      placeholder="Số điện thoại liên hệ"
+                      required
+                      pattern="[0-9]{10}"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-wrapper">
+                  <i class="fas fa-envelope icon"></i>
+                  <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Email liên hệ (không bắt buộc)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="form-section">
+              <h3>Địa chỉ giao hàng</h3>
+
+              <div class="form-row triple">
+                <div class="form-group">
+                  <label for="province"
+                    >Tỉnh/Thành phố <span class="required">*</span></label
+                  >
+                  <div class="select-wrapper">
+                    <i class="fas fa-map-marker-alt icon"></i>
+                    <select id="province" name="province" required>
+                      <option value="" selected disabled>
+                        Chọn Tỉnh/Thành phố
+                      </option>
+                      <!-- Options will be loaded by JS -->
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="district"
+                    >Quận/Huyện <span class="required">*</span></label
+                  >
+                  <div class="select-wrapper">
+                    <i class="fas fa-map icon"></i>
+                    <select id="district" name="district" required disabled>
+                      <option value="" selected disabled>
+                        Chọn Quận/Huyện
+                      </option>
+                      <!-- Options will be loaded by JS -->
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label for="ward"
+                    >Phường/Xã <span class="required">*</span></label
+                  >
+                  <div class="select-wrapper">
+                    <i class="fas fa-map-pin icon"></i>
+                    <select id="ward" name="ward" required disabled>
+                      <option value="" selected disabled>Chọn Phường/Xã</option>
+                      <!-- Options will be loaded by JS -->
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="street"
+                  >Địa chỉ chi tiết <span class="required">*</span></label
+                >
+                <div class="input-wrapper">
+                  <i class="fas fa-home icon"></i>
+                  <input
+                    type="text"
+                    id="street"
+                    name="street"
+                    placeholder="Số nhà, tên đường"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="notes">Ghi chú</label>
+                <div class="textarea-wrapper">
+                  <i class="fas fa-sticky-note icon"></i>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    placeholder="Ghi chú về việc giao hàng (không bắt buộc)"
+                  ></textarea>
+                </div>
+              </div>
+
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="defaultAddress"
+                  name="defaultAddress"
+                />
+                <label for="defaultAddress">Đặt làm địa chỉ mặc định</label>
+              </div>
+            </div>
+
+            <div class="form-actions">
+              <!-- Adjusted path assuming address is inside an 'address' folder -->
+              <a href="../cart/cart.html" class="btn-secondary">Quay lại</a>
+              <button type="submit" class="btn-primary">
+                <span>Lưu địa chỉ</span>
+                <i class="fas fa-check"></i>
+              </button>
+            </div>
+          </form>
+        </div>
+      </main>
+
+      <!-- Footer - Assuming paths are relative to the root -->
+      <footer>
+        <div class="footer-container">
+          <div class="footer-info">
+            <h3>ReadOn Bookstore</h3>
+            <p>
+              <i class="fas fa-map-marker-alt"></i> 123 Đường Sách, Quận 1, TP.
+              Hồ Chí Minh
+            </p>
+            <p><i class="fas fa-phone"></i> (0123) 456-789</p>
+            <p><i class="fas fa-envelope"></i> info@readon.com</p>
+          </div>
+          <div class="footer-social">
+            <h3>Kết nối với chúng tôi</h3>
+            <div class="social-links">
+              <a href="https://facebook.com/yourprofile" target="_blank">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a href="https://twitter.com/yourprofile" target="_blank">
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a href="https://instagram.com/yourprofile" target="_blank">
+                <i class="fab fa-instagram"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <p>© 2025 ReadOn Bookstore. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Make sure the script path is correct relative to address.html -->
+    <script type="module" src="./address/script.js"></script>
+    <script>
+      // --- Keep existing page loading and search setup ---
+      // Page loading animation
+      document.addEventListener("DOMContentLoaded", function () {
+        const pageTransition = document.querySelector(".page-transition");
+        if (pageTransition) {
+          setTimeout(function () {
+            pageTransition.style.opacity = "0";
+            setTimeout(function () {
+              pageTransition.style.display = "none";
+            }, 500);
+          }, 800); // Adjust timing if needed
+        }
+
+        // Setup search (using the function defined below)
+        setupSearch();
+      });
+
+      // Setup search function (keep as is, but ensure paths are correct)
+      function setupSearch() {
+        const searchForm = document.getElementById("search-form");
+        if (searchForm) {
+          searchForm.addEventListener("submit", function (e) {
+            e.preventDefault();
+            const searchInput = document.getElementById("search-input");
+            const searchTerm = searchInput ? searchInput.value.trim() : "";
+            // Adjust path if search.html is not in the root
+            window.location.href = `../search.html?title=${encodeURIComponent(
+              searchTerm || ""
+            )}`;
+          });
+        }
+      }
+      // --- End of existing setup ---
+    </script>
+  </body>
+</html>

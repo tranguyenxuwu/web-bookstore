@@ -1,184 +1,314 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ReadOn - Trang chủ</title>
+    <!-- Link to the STORE stylesheet FIRST -->
+    <link rel="stylesheet" href="./assets/style/style_store.css" />
+    <!-- Link to the INDEX specific stylesheet SECOND (for overrides) -->
     <link rel="stylesheet" href="./assets/style/index_style.css" />
-    <script src="./assets/script/env.js"></script>
+    <script src="./assets/script/env.js" type="module"></script>
   </head>
   <body>
     <!-- navigation bar -->
-    <div class="navbar-container">
-      <nav class="navbar">
-        <div class="nav-container">
-          <!-- Logo link -->
-          <a href="./index.html">
-            <img src="#" alt="ReadOn" class="logo" />
+    <!-- Structure matches store.html and style_store.css -->
+    <nav class="navbar">
+      <div class="nav-container">
+        <a href="./index.html">
+          <img src="#" alt="ReadOn" class="logo" id="site-logo" />
+        </a>
+
+        <div class="search-container">
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Tìm kiếm sách, tác giả..."
+          />
+          <button class="search-button">
+            <!-- onclick removed, handled by script_index.js -->
+            <img src="./assets/image/search.png" alt="Search" />
+          </button>
+        </div>
+
+        <div class="nav-icons">
+          <!-- Cart Icon -->
+          <a href="cart/cart.html" class="nav-icon">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path
+                d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
+              ></path>
+            </svg>
+            <span>Giỏ Hàng</span>
           </a>
-
-          <div class="search-container">
-            <input
-              type="text"
-              class="search-input"
-              placeholder="Tìm kiếm sách, tác giả, nhà xuất bản..."
-            />
-            <button class="search-button" onclick="searchBooks()">
-              <!-- Search image -->
-              <img src="./assets/image/search.png" alt="Search" />
-            </button>
-          </div>
-
-          <div class="nav-icons">
-            <a href="#" class="nav-icon">
-              <img
-                src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9'%3E%3C/path%3E%3Cpath d='M13.73 21a2 2 0 0 1-3.46 0'%3E%3C/path%3E%3E%3C/svg%3E"
-                alt="Notifications"
-              />
-              <span>Thông Báo</span>
-            </a>
-            <!-- Cart icon -->
-            <a href="cart/cart.html" class="nav-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="9" cy="21" r="1"></circle>
-                <circle cx="20" cy="21" r="1"></circle>
-                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
-              </svg>
-              <span>Giỏ Hàng</span>
-            </a>
-            <!-- Account icon -->
-            <a href="login/login.html" class="nav-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                <circle cx="12" cy="7" r="4"></circle>
-              </svg>
-              <span>Tài khoản</span>
-            </a>
-            <div id="accountPopup" class="popup">
-              <a href="../login/login.html" class="popup-item"
-                >Quản lý tài khoản</a
+          
+          <!-- Account Icon with Popup -->
+          <!-- Using .nav-icon class for base styling -->
+          <div class="nav-icon account-icon-container">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+            <span>Tài khoản</span>
+            <!-- Popup styled by index_style.css -->
+            <div id="accountPopup" class="popup" style="display: none">
+              <a href="./login/login.html" class="popup-item"
+                >Đăng nhập / Đăng ký</a
               >
+              <a href="#" class="popup-item">Quản lý tài khoản</a>
               <a href="#" id="logoutButton" class="popup-item">Đăng xuất</a>
             </div>
           </div>
         </div>
-      </nav>
-    </div>
-
-    <!-- image slider -->
-    <div class="header-banner-container">
-      <div class="carousel-container">
-        <div class="carousel">
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/NotebookcollectionT1024_Slidebanner_840x320_v2.png"
-              alt="Banner 1"
-            />
-          </div>
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/TrangCTT11_1124_Mainbanner_840x320.jpg"
-              alt="Banner 2"
-            />
-          </div>
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/Diamond_1124_MCBooks_Resize_Slide_840x320.jpg"
-              alt="Banner 3"
-            />
-          </div>
-          <div class="slide">
-            <img
-              src="https://cdn0.fahasa.com/media/magentothem/banner7/Partnership_T11_840x320.jpg"
-              alt="Banner 4"
-            />
-          </div>
-        </div>
-
-        <button class="carousel-btn prev">←</button>
-        <button class="carousel-btn next">→</button>
-
-        <div class="dots">
-          <div class="dot active"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-          <div class="dot"></div>
-        </div>
       </div>
-    </div>
+    </nav>
 
-    <!-- flash sale container -->
-    <div class="flash-sale-container">
-      <div class="timer">
-        <span id="timer">00:00:00</span>
-        <a href="./store.html">Xem tất cả</a>
-      </div>
-      <div class="product-series-container">
-        <div class="slider-wrapper">
-          <button class="slider-button prev-button" aria-label="Previous">
-            <img
-              src="./assets/image/arrow_back.png"
-              alt="Previous"
-              class="arrow-icon"
-            />
+    <!-- Main Page Container -->
+    <div class="page-container">
+      <!-- image slider -->
+      <section class="hero-banner-section">
+        <div class="carousel-container">
+          <div class="carousel">
+            <div class="slide">
+              <img
+                src="https://cdn0.fahasa.com/media/magentothem/banner7/NotebookcollectionT1024_Slidebanner_840x320_v2.png"
+                alt="Banner 1"
+              />
+            </div>
+            <div class="slide">
+              <img
+                src="https://cdn0.fahasa.com/media/magentothem/banner7/TrangCTT11_1124_Mainbanner_840x320.jpg"
+                alt="Banner 2"
+              />
+            </div>
+            <div class="slide">
+              <img
+                src="https://cdn0.fahasa.com/media/magentothem/banner7/Diamond_1124_MCBooks_Resize_Slide_840x320.jpg"
+                alt="Banner 3"
+              />
+            </div>
+            <div class="slide">
+              <img
+                src="https://cdn0.fahasa.com/media/magentothem/banner7/Partnership_T11_840x320.jpg"
+                alt="Banner 4"
+              />
+            </div>
+          </div>
+          <button class="carousel-btn prev" aria-label="Previous slide">
+            <
           </button>
-          <div class="product-in-series">
-            <!-- Products here -->
+          <button class="carousel-btn next" aria-label="Next slide">></button>
+          <div class="dots">
+            <!-- Dots generated by JS -->
           </div>
-          <button class="slider-button next-button" aria-label="Next">
-            <img
-              src="./assets/image/right-arrow.png"
-              alt="Next"
-              class="arrow-icon"
-            />
-          </button>
         </div>
-      </div>
-    </div>
+      </section>
 
-    <!-- Thêm vào phần body -->
-    <div class="featured-products-section">
-      <h2 class="section-title">Sách Nổi Bật</h2>
-      <div class="featured-products-container">
-        <!-- Sách sẽ được thêm vào đây bằng JavaScript -->
-      </div>
-    </div>
+      <!-- flash sale container -->
+      <section class="flash-sale-container">
+        <div class="timer">
+          <span id="timer-display">FLASH SALE</span>
+          <a href="./store.html">Xem tất cả</a>
+        </div>
+        <div class="product-series-container">
+          <div class="slider-wrapper">
+            <button class="slider-button prev-button" aria-label="Previous">
+              <img
+                src="./assets/image/arrow_back.png"
+                alt="Previous"
+                class="arrow-icon"
+              />
+            </button>
+            <div class="product-in-series">
+              <!-- Static Example Products using .product structure -->
+              <div class="product">
+                <a href="#" class="product-link">
+                  <img
+                    src="https://via.placeholder.com/200x180.png?text=Sale+Book+1"
+                    alt="Flash Sale Book 1"
+                    onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg';"
+                  />
+                  <div class="product-info">
+                    <h3>Tiêu đề sách Flash Sale Rất Dài</h3>
+                    <p class="price">150.000đ</p>
+                    <p class="volume">Tác giả ABC</p>
+                  </div>
+                </a>
+              </div>
+              <div class="product">
+                <a href="#" class="product-link">
+                  <img
+                    src="https://via.placeholder.com/200x180.png?text=Sale+Book+2"
+                    alt="Flash Sale Book 2"
+                    onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg';"
+                  />
+                  <div class="product-info">
+                    <h3>Một cuốn sách khác đang giảm giá</h3>
+                    <p class="price">99.000đ</p>
+                    <p class="volume">NXB XYZ</p>
+                  </div>
+                </a>
+              </div>
+              <div class="product">
+                <a href="#" class="product-link">
+                  <img
+                    src="https://via.placeholder.com/200x180.png?text=Sale+Book+3"
+                    alt="Flash Sale Book 3"
+                    onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg';"
+                  />
+                  <div class="product-info">
+                    <h3>Sách Sale Thứ Ba</h3>
+                    <p class="price">75.000đ</p>
+                    <p class="volume">Tác giả DEF</p>
+                  </div>
+                </a>
+              </div>
+              <div class="product">
+                <a href="#" class="product-link">
+                  <img
+                    src="https://via.placeholder.com/200x180.png?text=Sale+Book+4"
+                    alt="Flash Sale Book 4"
+                    onerror="this.src='https://cdn.elysia-app.live/placeholder.jpg';"
+                  />
+                  <div class="product-info">
+                    <h3>Ưu đãi đặc biệt</h3>
+                    <p class="price">120.000đ</p>
+                    <p class="volume">NXB 123</p>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <button class="slider-button next-button" aria-label="Next">
+              <img
+                src="./assets/image/right-arrow.png"
+                alt="Next"
+                class="arrow-icon"
+              />
+            </button>
+          </div>
+        </div>
+      </section>
 
-    <script src="./assets/script/script_index.js"></script>
-    <!-- Search function -->
-    <script>
-      function searchBooks() {
-        const query = document.querySelector(".search-input").value;
-        window.location.href = `search.html?query=${encodeURIComponent(query)}`;
-      }
-    </script>
+      <!-- Featured Products Section -->
+      <section class="featured-products-section">
+        <h2 class="section-title">Sách Nổi Bật</h2>
+        <div class="products-grid featured-products-container">
+          <p class="loading-message">Đang tải sách nổi bật...</p>
+          <!-- Books added by JS here -->
+        </div>
+      </section>
+    </div>
+    <!-- End of page-container -->
+
+    <!-- Footer -->
+    <!-- Structure matches store.html and style_store.css -->
     <footer>
       <div class="footer-container">
         <div class="footer-info">
-          <h3>Book Store</h3>
+          <!-- Updated content to match store.html example, but kept brand name -->
+          <h3>ReadOn Book Store</h3>
           <p>Địa chỉ: 123 Đường Sách, Quận 1, TP. Hồ Chí Minh</p>
           <p>Điện thoại: (0123) 456-789</p>
-          <p>Email: info@bookstore.com</p>
+          <p>Email: info@readon.com</p>
+          <!-- Updated email -->
         </div>
         <div class="footer-social">
           <h3>Kết nối với chúng tôi</h3>
-          <a href="https://twitter.com/yourprofile" target="_blank">
+          <!-- Kept placeholder links, structure matches -->
+          <a href="#" target="_blank" aria-label="Twitter">
             <img
               src="https://cdn-icons-png.flaticon.com/512/733/733579.png"
               alt="Twitter"
               class="social-icon"
             />
           </a>
-          <a href="https://facebook.com/yourprofile" target="_blank">
+          <a href="#" target="_blank" aria-label="Facebook">
             <img
               src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
               alt="Facebook"
               class="social-icon"
             />
           </a>
+          <a href="#" target="_blank" aria-label="Instagram">
+            <img
+              src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
+              alt="Instagram"
+              class="social-icon"
+            />
+          </a>
         </div>
       </div>
-      <p>&copy; 2023 Book Store. All rights reserved.</p>
+      <!-- Removed .copyright class, updated year -->
+      <p>© 2024 ReadOn. All rights reserved.</p>
     </footer>
+
+    <script src="./assets/script/script_index.js" type="module"></script>
+
+    <!-- Popup toggle script -->
+    <script>
+      const accountIconContainer = document.querySelector(
+        ".account-icon-container"
+      );
+      const accountPopup = document.getElementById("accountPopup");
+
+      if (accountIconContainer && accountPopup) {
+        accountIconContainer.addEventListener("click", (event) => {
+          event.stopPropagation();
+          const isDisplayed = accountPopup.style.display === "block";
+          accountPopup.style.display = isDisplayed ? "none" : "block";
+        });
+
+        document.addEventListener("click", (event) => {
+          if (
+            !accountIconContainer.contains(event.target) &&
+            accountPopup.style.display === "block"
+          ) {
+            accountPopup.style.display = "none";
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (
+            event.key === "Escape" &&
+            accountPopup.style.display === "block"
+          ) {
+            accountPopup.style.display = "none";
+          }
+        });
+      }
+
+      const logoutButton = document.getElementById("logoutButton");
+      if (logoutButton) {
+        logoutButton.addEventListener("click", (event) => {
+          event.preventDefault();
+          console.log("Logout clicked");
+          alert("Bạn đã đăng xuất!");
+          accountPopup.style.display = "none";
+          // Add real logout logic here
+        });
+      }
+    </script>
   </body>
 </html>

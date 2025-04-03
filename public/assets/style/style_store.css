@@ -3,7 +3,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Segoe UI", Roboto, "Helvetica Neue", sans-serif; /* Consistent font */
 }
 
 body {
@@ -28,6 +28,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap; /* Added for responsiveness */
 }
 
 .logo {
@@ -135,6 +136,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
   height: fit-content;
   transition: box-shadow 0.3s ease;
+  flex-shrink: 0; /* Prevent sidebar from shrinking too much */
 }
 
 .sidebar:hover {
@@ -191,6 +193,7 @@ body {
   border-radius: 12px;
   padding: 25px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  min-width: 0; /* Allow content to shrink */
 }
 
 .results-info {
@@ -200,11 +203,14 @@ body {
   margin-bottom: 25px;
   padding-bottom: 15px;
   border-bottom: 1px solid #eee;
+  flex-wrap: wrap; /* Allow wrapping on small screens */
+  gap: 10px; /* Add gap for wrapped items */
 }
 
 .results-info p {
   font-size: 1.1em;
   color: #666;
+  margin: 0; /* Remove default margin */
 }
 
 .sort-container {
@@ -237,133 +243,136 @@ body {
 /* Products */
 .product-container {
   display: grid;
-  grid-template-columns: repeat(4, minmax(220px, 1fr));
-  gap: 25px;
-  justify-content: space-between;
+  /* Using auto-fill for better flexibility across various container widths */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+/* Specific states within the product container */
+.product-container .no-results,
+.product-container .loading {
+  grid-column: 1 / -1; /* Span all columns */
+  text-align: center;
+  padding: 30px;
+  font-size: 16px;
+  color: #666;
 }
 
 .product {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  overflow: hidden;
-  transition: transform 0.4s ease, box-shadow 0.4s ease;
-  position: relative;
   display: flex;
   flex-direction: column;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: white;
+  height: 100%; /* Ensure cards in a row have same height potential */
 }
 
 .product:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Link wrapping the product */
+.product-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex; /* Make link take up the flex container space */
+  flex-direction: column; /* Stack image and info vertically */
+  height: 100%;
+}
+
+.product-image {
+  position: relative;
+  overflow: hidden;
+  /* border-radius applied to .product already handles top corners */
 }
 
 .product img {
+  display: block; /* Remove potential bottom space */
   width: 100%;
-  height: 270px;
+  height: 340px; /* Consolidated height */
   object-fit: cover;
-  object-position: center;
-  transition: transform 0.5s ease;
-}
-
-.product:hover img {
-  transform: scale(1.05);
 }
 
 .product-info {
-  padding: 18px;
-  flex-grow: 1;
+  padding: 18px; /* Consolidated padding */
+  flex-grow: 1; /* Allow info to take remaining space */
   display: flex;
   flex-direction: column;
 }
 
 .product-info h3 {
-  margin: 0 0 12px;
-  font-size: 1.1em;
-  color: #222;
-  line-height: 1.4;
+  margin: 0 0 10px;
+  font-size: 16px;
+  line-height: 1.3;
+  height: calc(1.3em * 2); /* Calculate height for 2 lines */
   overflow: hidden;
   display: -webkit-box;
-  /* -webkit-line-clamp: 2; */
+
   -webkit-box-orient: vertical;
+  /* font-family: inherit; Inherited by default */
 }
 
-.product-info .author {
-  color: #777;
-  font-size: 0.9em;
-  margin-bottom: 6px;
-}
-
-.price {
-  margin-top: auto;
-  padding-top: 12px;
-  border-top: 1px solid #f0f0f0;
-  display: flex;
-  align-items: center;
-}
-
-.sale-price {
+.product-info .price {
   font-weight: bold;
-  font-size: 1.2em;
   color: #e60f1e;
+  margin: 5px 0;
 }
 
-.original-price {
-  text-decoration: line-through;
-  color: #999;
-  margin-left: 10px;
-  font-size: 0.9em;
+.product-info .volume, /* Combining author/volume style */
+.product-info .author {
+  color: #666;
+  font-size: 14px;
+  margin-top: auto; /* Push to bottom */
+  margin-bottom: 8px; /* Keep consistent bottom margin */
 }
 
-.favorite-button {
-  margin-top: 12px;
-  padding: 10px;
-  background-color: #e60f1e;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  font-weight: 500;
-  text-transform: uppercase;
-  font-size: 0.85em;
-  letter-spacing: 0.5px;
-}
-
-.favorite-button:hover {
-  background-color: #d00a19;
-  box-shadow: 0 3px 8px rgba(230, 15, 30, 0.3);
-}
-
-/* Pagination */
+/* Pagination - Consolidated */
 .pagination {
   display: flex;
   justify-content: center;
-  margin-top: 40px;
-  gap: 5px;
+  align-items: center; /* Vertically align buttons */
+  gap: 10px;
+  margin: 40px 0 30px; /* Combine margins */
 }
 
 .page-button {
-  padding: 10px 15px;
-  border: 1px solid #e0e0e0;
-  background-color: #fff;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border-radius: 6px;
-  font-weight: 500;
   min-width: 40px;
+  height: 40px;
+  padding: 0 10px; /* Adjusted padding for flex centering */
+  border: 1px solid #ddd;
+  background-color: white;
+  border-radius: 6px; /* Consistent radius */
+  display: inline-flex; /* Use inline-flex */
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 14px; /* Match other font sizes */
+  color: #333; /* Default text color */
   text-align: center;
+  transition: all 0.2s ease;
 }
 
-.page-button:hover {
-  background-color: #f5f5f7;
-  border-color: #ddd;
+.page-button:hover:not(.disabled) {
+  background-color: #f5f5f5;
+  border-color: #ccc;
 }
 
 .page-button.active {
   background-color: #e60f1e;
-  color: #fff;
+  color: white;
   border-color: #e60f1e;
+}
+
+.page-button.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #f9f9f9; /* Slightly different disabled background */
 }
 
 /* Footer */
@@ -437,13 +446,7 @@ footer > p {
   font-size: 0.9em;
 }
 
-/* Responsive styles */
-@media (max-width: 1200px) {
-  .product-container {
-    grid-template-columns: repeat(3, minmax(220px, 1fr));
-  }
-}
-
+/* Responsive styles - Consolidated */
 @media (max-width: 992px) {
   .content-container {
     flex-direction: column;
@@ -453,37 +456,48 @@ footer > p {
     width: 100%;
     margin-bottom: 20px;
   }
-
+  /* Product container already uses auto-fill, so specific column counts might not be needed
+     unless a precise layout (like exactly 2 columns) is required at this breakpoint.
+     If needed, uncomment and adjust:
   .product-container {
-    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
   }
+  */
 }
 
 @media (max-width: 768px) {
-  .search-container {
-    max-width: 100%;
-    margin: 15px 0;
+  .nav-container {
+    /* flex-wrap: wrap; already added above */
+    justify-content: center; /* Center items when wrapped */
+    gap: 15px; /* Add gap between logo/search/icons when wrapped */
   }
 
-  .nav-container {
-    flex-wrap: wrap;
-    justify-content: center;
+  .search-container {
+    max-width: 100%;
+    margin: 0; /* Remove side margin */
+    order: 3; /* Place search below logo and icons on wrap */
+    width: 100%; /* Take full width when wrapped */
   }
 
   .nav-icons {
-    width: 100%;
-    justify-content: space-evenly;
-    margin-top: 15px;
+    order: 2; /* Place icons after logo */
+    width: auto; /* Don't force full width */
+    /* justify-content: space-evenly; -> using gap is often better */
+    margin-top: 0; /* Reset margin */
   }
 
+  .logo {
+    order: 1; /* Logo first */
+  }
+
+  /* Product container already uses auto-fill, adapting automatically.
+     You might want 1 column specifically here: */
   .product-container {
     grid-template-columns: 1fr;
     gap: 15px;
   }
 
-  .product img {
-    height: 200px;
-  }
+  /* Product image height is already 300px, no need to repeat */
 }
 
 /* Animation */
@@ -498,56 +512,17 @@ footer > p {
   }
 }
 
+/* Apply animation to products - can be applied via JS for dynamically loaded items */
 .product {
+  /* Consider adding animation class dynamically if content loads async */
   animation: fadeIn 0.5s ease forwards;
 }
 
-.product:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.product:nth-child(3) {
-  animation-delay: 0.2s;
-}
-.product:nth-child(4) {
-  animation-delay: 0.3s;
-}
-.product:nth-child(n + 5) {
-  animation-delay: 0.4s;
-}
-/* Thêm vào cuối file */
-
-/* Tùy chỉnh chung cho cả 2 trang */
-.product-link {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  height: 100%;
-}
-
-.product-image {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px 12px 0 0;
-}
-
-/* Đảm bảo nhất quán font chữ */
-.product-info h3 {
-  font-family: inherit;
-}
-
-/* Điều chỉnh khoảng cách cho volume */
-.author {
-  margin-bottom: 8px !important;
-}
-
-/* Responsive hình ảnh */
-@media (max-width: 768px) {
-  .product img {
-    height: 200px !important;
-  }
-}
-
-/* Loại bỏ padding thừa */
-.product-info {
-  padding: 18px !important;
-}
+/* Stagger animation if products load simultaneously (optional) */
+/*
+.product:nth-child(1) { animation-delay: 0s; }
+.product:nth-child(2) { animation-delay: 0.1s; }
+.product:nth-child(3) { animation-delay: 0.2s; }
+.product:nth-child(4) { animation-delay: 0.3s; }
+.product:nth-child(n + 5) { animation-delay: 0.4s; }
+*/
