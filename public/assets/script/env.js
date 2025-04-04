@@ -12,6 +12,7 @@ export const APP_ENV = {
   BOOK_TYPE_URL: "https://api.elysia-app.live/book/types/",
   PUBLISHER_URL: "https://api.elysia-app.live/book/publishers/",
   AUTHOR_URL: "https://api.elysia-app.live/book/authors/",
+  SERIES_URL: "https://api.elysia-app.live/book/series/",
 
   // POST ENDPOINTS
   IMAGE_PRESIGNED_URL: "https://api.elysia-app.live/upload/presigned",

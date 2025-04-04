@@ -473,9 +473,9 @@ async function fetchAuthors(selectId = null) {
 
 async function fetchSeries(selectId = null) {
   try {
-    if (!APP_ENV.FETCH_BY_SERIES_URL)
+    if (!APP_ENV.SERIES_URL)
       throw new Error("Lỗi cấu hình: FETCH_BY_SERIES_URL chưa định nghĩa.");
-    const res = await fetch(APP_ENV.FETCH_BY_SERIES_URL);
+    const res = await fetch(APP_ENV.SERIES_URL);
     if (!res.ok) throw new Error(`HTTP ${res.status}: ${await res.text()}`);
     series = await res.json();
     updateSeriesDropdown(selectId);
